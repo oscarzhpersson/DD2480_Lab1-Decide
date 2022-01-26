@@ -26,7 +26,8 @@ class CMV:
             # Read the coordinates from the array into a tuple.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + 1], self.coordinates[i + 2])
 
-            
+            # Calculates the area of the triangle using the determinant method.
+            area = 0.5 * np.abs( (c1[0] * (c2[1] - c3[1]) + c2[0] * (c3[1] - c1[1]) + c3[0] * (c1[1] - c2[1])) )
 
         return 0
 
