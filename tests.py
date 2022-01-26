@@ -43,7 +43,7 @@ class TestLIC(unittest.TestCase):
         parameters.area1 = 5 # Set the target area to an arbitrary value: 5.
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
 
-        # Test: There exists a triangle with an area larger than area1.
+        # Test 1: There exists a triangle with an area larger than area1.
 
         coordinates[0] = [0, 0] # Creates a triangle with area 7.5.
         coordinates[1] = [5, 3]
@@ -55,7 +55,20 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertTrue(CMV.LIC_3) # Run the test.
 
-        # Test: There does not exist a triangle with an area larger than area1.
+        # Test 2: There does not exist a triangle with an area larger than area1.
+
+        coordinates = np.zeros((5, 2)) # Reset the coordinate array.
+
+        coordinates[0] = [0, 0] # Creates a triangle with area 1.
+        coordinates[1] = [2, 1]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
+        self.assertFalse(CMV.LIC_3) # Run the test.
+
+        # Test 3: Test 1 but with negative coordinates.
+
+        # Test 4: No actual triangle exists (Straight line, should not have any area).
 
 if __name__ == '__main__':
     unittest.main()
