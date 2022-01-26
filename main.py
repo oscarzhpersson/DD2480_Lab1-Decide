@@ -50,7 +50,7 @@ class PARAMETERS_T:
     radius2: float # Maximum radius in LIC 13.
     area2: float # Maximum area in LIC 14.
 
-parameters = PARAMETERS_T()
+#parameters = PARAMETERS_T()
 
 # TODO Import PUM
 # TODO Import CMV
