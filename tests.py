@@ -49,9 +49,6 @@ class TestLIC(unittest.TestCase):
         coordinates[1] = [5, 3]
         coordinates[2] = [5, 0]
 
-        #for i in range(len(coordinates)): # Populate the coordinate array with arbitrary values.
-        #    coordinates[i] = [i,i+1]
-
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertTrue(CMV.LIC_3) # Run the test.
 
@@ -64,7 +61,7 @@ class TestLIC(unittest.TestCase):
         coordinates[2] = [2, 0]
 
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
-        self.assertFalse(CMV.LIC_3) # Run the test.
+        self.assertFalse(CMV.LIC_3) # Run the test."""
 
         # Test 3: Test 1 but with negative coordinates.
 
@@ -78,6 +75,14 @@ class TestLIC(unittest.TestCase):
         self.assertTrue(CMV.LIC_3) # Run the test.
 
         # Test 4: No actual triangle exists (Straight line, should not have any area).
+
+        coordinates = np.zeros((5, 2)) # Reset the coordinate array.
+
+        for i in range(len(coordinates)): # Adds coordinates for a linear line.
+            coordinates[i] = [i, i]
+
+        CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
+        self.assertFalse(CMV.LIC_3) # Run the test.
 
 if __name__ == '__main__':
     unittest.main()
