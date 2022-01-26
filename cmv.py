@@ -21,6 +21,10 @@ class CMV:
     # Output: True if there exists three consecutive datapoints
     #         making up the area of a triangle with an area larger than AREA1.
     def LIC_3(self):
+        for i in range( len(self.coordinates) - 2 ): # Iterate all coordinates, leaving an offset to pair triplets.
+
+            # Read the coordinates from the array into a tuple.
+            c1, c2, c3 = (self.coordinates[i], self.coordinates[i + 1], self.coordinates[i + 2])
 
 
         return 0
