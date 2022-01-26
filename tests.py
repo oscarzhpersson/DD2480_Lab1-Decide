@@ -68,6 +68,15 @@ class TestLIC(unittest.TestCase):
 
         # Test 3: Test 1 but with negative coordinates.
 
+        coordinates = np.zeros((5, 2)) # Reset the coordinate array.
+
+        coordinates[0] = [0, 0] # Creates a triangle with area 7.5.
+        coordinates[1] = [-5, 3]
+        coordinates[2] = [-5, 0]
+
+        CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
+        self.assertTrue(CMV.LIC_3) # Run the test.
+
         # Test 4: No actual triangle exists (Straight line, should not have any area).
 
 if __name__ == '__main__':
