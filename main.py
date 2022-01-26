@@ -36,15 +36,15 @@ class PARAMETERS_T:
     q_Pts: int # No. of consecutive points in LIC 4.
     quads: int # No. of quadrants in LIC 4.
     dist: float # Distance in LIC 6.
-    n_Pts = int # No. of consecutive points in LIC 6.
-    k_Pts = int # No. of int. points in LICs 7, 12.
-    a_Pts = int # No. of int. points in LICs 8, 13.
-    b_Pts = int # No. of int. points in LICs 8, 13.
-    c_Pts = int # No. of int. points in LIC 9.
-    d_Pts = int # No. of int. points in LIC 9.
-    e_Pts = int # No. of int. points in LICs 10, 14.
-    f_Pts = int # No. of int. points in LICs 10, 14.
-    g_Pts = int # No. of int. points in LIC 11.
+    n_Pts: int # No. of consecutive points in LIC 6.
+    k_Pts: int # No. of int. points in LICs 7, 12.
+    a_Pts: int # No. of int. points in LICs 8, 13.
+    b_Pts: int # No. of int. points in LICs 8, 13.
+    c_Pts: int # No. of int. points in LIC 9.
+    d_Pts: int # No. of int. points in LIC 9.
+    e_Pts: int # No. of int. points in LICs 10, 14.
+    f_Pts: int # No. of int. points in LICs 10, 14.
+    g_Pts: int # No. of int. points in LIC 11.
     length2: float # Maximum length in LIC 12.
     radius2: float # Maximum radius in LIC 13.
     area2: float # Maximum area in LIC 14.
