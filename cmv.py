@@ -1,5 +1,5 @@
 import numpy as np
-class CMV:
+class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
@@ -18,7 +18,17 @@ class CMV:
             y_left = self.coordinates[i, 1]
             x_right = self.coordinates[i+2, 0]
             y_right = self.coordinates[i+2, 0]
+            radius = self.PARAMS.radius1
             
+            # Checks if left adjacent point is outside radius
+            if (x_left - x_center)**2 + (y_left - y_center)**2 > radius**2:
+                return True
+
+            # Checks if right adjacent point is outside radius
+            if (x_right - x_center)**2 + (y_right - y_center)**2 > radius**2:
+                return True
+
+        # All sets of 3-consecutive points are within a circle with set radius
         return False
     
 

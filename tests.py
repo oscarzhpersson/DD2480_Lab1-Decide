@@ -27,16 +27,6 @@ class PARAMETERS_T:
 
 class TestLIC(unittest.TestCase):
     
-    def test_LIC0(self):
-        parameters = PARAMETERS_T()
-        parameters.length1 = 1
-        coordinates = np.zeros((5, 2))
-        for i in range(len(coordinates)):
-            coordinates[i] = [i,i+1]
-            
-        CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_0())
-
     def test_LIC1(self):
         # False: If all 3-sets of consecutive datapoints
         # can be contained within the radius
