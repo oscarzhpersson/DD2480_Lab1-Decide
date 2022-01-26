@@ -1,69 +1,69 @@
 import numpy as np
 class CMV:
-    def __init__(self, PARAMS, coordinates)
+    def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
         self.CondVector = np.array(15, dtype=bool)
 
     # Set Condvector[0]
-    def LIC_0():
+    def LIC_0(self):
+        return 0
     
-        # Set Condvector[1]
-    def LIC_1():
+    # Set Condvector[1]
+    def LIC_1(self):
         return 0
 
     # Set Condvector[2]
-    def LIC_2():
+    def LIC_2(self):
         return 0
     
     # Set Condvector[3]
-    def LIC_3():
+    def LIC_3(self):
         return 0
 
     # Set Condvector[4]
-    def LIC_4():
+    def LIC_4(self):
         return 0
     
     # Set Condvector[5]
-    def LIC_5():
+    def LIC_5(self):
         return 0
 
     # Set Condvector[6]
-    def LIC_6():
+    def LIC_6(self):
         return 0
 
     # Set Condvector[7]
-    def LIC_7():
+    def LIC_7(self):
         return 0
 
     # Set Condvector[8]
-    def LIC_8():
+    def LIC_8(self):
         return 0
 
     # Set Condvector[9]
-    def LIC_9():
+    def LIC_9(self):
         return 0
 
     # Set Condvector[10]
-    def LIC_10():
+    def LIC_10(self):
         return 0
 
     # Set Condvector[11]
-    def LIC_11():
+    def LIC_11(self):
         return 0
 
     # Set Condvector[12]
-    def LIC_12():
+    def LIC_12(self):
         return 0
 
     # Set Condvector[13]
-    def LIC_13():
+    def LIC_13(self):
         return 0
 
     # Set Condvector[14]
-    def LIC_14():
+    def LIC_14(self):
         return 0
 
-
-    def return_cond_vector():
-        return self.CondVector
+    def return_cond_vector(self):
+        return 0
