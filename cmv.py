@@ -11,7 +11,16 @@ class CMV:
     
     # Set Condvector[1]
     def LIC_1(self):
-        return 0
+        for i in range(len(self.coordinates)-2): 
+            x_center = self.coordinates[i+1, 0]
+            y_center = self.coordinates[i+1, 1]
+            x_left = self.coordinates[i, 0]
+            y_left = self.coordinates[i, 1]
+            x_right = self.coordinates[i+2, 0]
+            y_right = self.coordinates[i+2, 0]
+            
+        return False
+    
 
     # Set Condvector[2]
     def LIC_2(self):
