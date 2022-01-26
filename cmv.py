@@ -7,6 +7,7 @@ class CMV:
 
     # Set Condvector[0]
     def LIC_0():
+        return 0
     
         # Set Condvector[1]
     def LIC_1():
