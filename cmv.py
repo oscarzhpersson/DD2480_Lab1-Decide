@@ -11,8 +11,8 @@ class cmv:
             x = self.coordinates[i, 0] - self.coordinates[i+1, 0]
             y = self.coordinates[i, 1] - self.coordinates[i+1, 1]
             if np.sqrt(x ** 2 + y ** 2) > self.PARAMS.length1:
-                self.CondVector[0] = True
-        self.CondVector[0] = False
+                return True
+        return False
     
         # Set Condvector[1]
     def LIC_1(self):
@@ -72,4 +72,4 @@ class cmv:
 
 
     def return_cond_vector(self):
-        return self.CondVector
+        return 0

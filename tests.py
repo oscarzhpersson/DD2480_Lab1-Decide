@@ -33,10 +33,9 @@ class TestLIC(unittest.TestCase):
         coordinates = np.zeros((5, 2))
         for i in range(len(coordinates)):
             coordinates[i] = [i,i+1]
-
+            
         CMV = cmv(parameters, coordinates)
-        CMV.LIC_0()
-        self.assertTrue(CMV.return_cond_vector()[0])
+        self.assertTrue(CMV.LIC_0())
 
 if __name__ == '__main__':
     unittest.main()
