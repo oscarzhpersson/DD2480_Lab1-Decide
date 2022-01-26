@@ -37,6 +37,18 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_0())
 
+    # Tests the LIC3 function of the CMV component.
+    def test_LIC3(self):
+        parameters = PARAMETERS_T() # Import parameters
+        parameters.area1 = 1 # Set the target area to an arbitrary value - 1.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        for i in range(len(coordinates)): # Populate the coordinate array with arbitrary values.
+            coordinates[i] = [i,i+1]
+
+        CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
+        self.assertTrue(CMV.LIC_3) # Run the test.
+
 if __name__ == '__main__':
     unittest.main()
         
