@@ -28,14 +28,29 @@ class PARAMETERS_T:
 class TestLIC(unittest.TestCase):
     
     def test_LIC0(self):
+        ## Test if coordinates that are sqrt(2) are accepted if length1 = 1.
         parameters = PARAMETERS_T()
         parameters.length1 = 1
-        coordinates = np.zeros((5, 2))
+        coordinates = np.zeros((3, 2))
         for i in range(len(coordinates)):
             coordinates[i] = [i,i+1]
             
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_0())
+
+        ## Test for when the points greater than length1 are not consecutive. 
+        parameters = PARAMETERS_T()
+        parameters.length1 = 1
+        coordinates = np.zeros((3, 2))
+        
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+        coordinates[2] = [0, 2]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_0())
+
+
 
 if __name__ == '__main__':
     unittest.main()
