@@ -1,9 +1,9 @@
 import numpy as np
 class CMV:
-    def __init__(self, PARAMS, coordinates)
+    def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
-        self.CondVector = np.array(15, dtype=bool)
+        self.CondVector = np.zeros(15, dtype=bool)
 
     # Set Condvector[0]
     def LIC_0():
@@ -17,7 +17,12 @@ class CMV:
         return 0
     
     # Set Condvector[3]
-    def LIC_3():
+    # Input: Array of coordinates.
+    # Output: True if there exists three consecutive datapoints
+    #         making up the area of a triangle with an area larger than AREA1.
+    def LIC_3(self):
+
+
         return 0
 
     # Set Condvector[4]
