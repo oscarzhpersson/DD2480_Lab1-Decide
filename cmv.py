@@ -29,7 +29,10 @@ class CMV:
             # Calculates the area of the triangle using the determinant method.
             area = 0.5 * np.abs( (c1[0] * (c2[1] - c3[1]) + c2[0] * (c3[1] - c1[1]) + c3[0] * (c1[1] - c2[1])) )
 
-        return 0
+            if area > self.PARAMS.area1:
+                return True
+
+        return False
 
     # Set Condvector[4]
     def LIC_4():
