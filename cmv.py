@@ -1,5 +1,5 @@
 import numpy as np
-class CMV:
+class cmv:
     def __init__(self, PARAMS, coordinates)
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
@@ -7,6 +7,12 @@ class CMV:
 
     # Set Condvector[0]
     def LIC_0():
+        for i in range(len(self.coordinates)-1):
+            x = self.coordinate[i, 0] - self.coordinate[i+1, 0]
+            y = self.coordinate[i, 1] - self.coordinate[i+1, 1]
+            if np.sqrt(x ** 2 + y ** 2) > self.PARAMS.length1
+                return True
+        return False
     
         # Set Condvector[1]
     def LIC_1():

@@ -1,6 +1,7 @@
 import numpy as np
 import enum
 from dataclasses import dataclass
+import cmv
 
 ##### CONSTANT #####
 
@@ -58,5 +59,5 @@ parameters = PARAMETERS_T()
 #? Function you must write:
 
 def decide():
-    #Do something.
-    print("")
+    CMV = cmv(coordinates, parameters)
+    cond_vector = CMV.return_cond_vector()
