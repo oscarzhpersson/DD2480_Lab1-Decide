@@ -26,6 +26,7 @@ class CMV:
             # Read the coordinates from the array into a tuple.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + 1], self.coordinates[i + 2])
 
+            
 
         return 0
 
