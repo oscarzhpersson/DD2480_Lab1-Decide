@@ -1,5 +1,5 @@
 import numpy as np
-class CMV:
+class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
