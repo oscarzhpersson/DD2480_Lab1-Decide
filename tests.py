@@ -27,15 +27,12 @@ class PARAMETERS_T:
 
 class TestLIC(unittest.TestCase):
     
+    # Tests the LIC1 function of the CMV component.
     def test_LIC1(self):
-        # False: If all 3-sets of consecutive datapoints
-        # can be contained within the radius
-        # True: If there exists at least one 3-set of 
-        # consecutive datapoints that cannot be contained
 
-        # The set of 3 datapoints should be able to be contained 
-        # within the set radius andShould yield False
- 
+        # Test 1: The set of 3 datapoints should be able to be contained 
+        # within the set radius with the given input and should yield False
+
         parameters = PARAMETERS_T()
         parameters.radius1 = 3
         coordinates = np.zeros((3, 2))
@@ -45,8 +42,9 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_1())
         
-        # The set of 3 datapoints should NOT be able to be able
-        # to be contained within the set radius and should yield True
+        # Test 2: The set of 3 datapoints should NOT be able to be able
+        # to be contained within the set radius with the given input and should yield True
+        
         parameters.radius1 = 0
         coordinates = np.zeros((3, 2))
         for i in range(len(coordinates)):

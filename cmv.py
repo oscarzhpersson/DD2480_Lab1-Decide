@@ -10,6 +10,11 @@ class cmv:
         return 0
     
     # Set Condvector[1]
+    # Input: Array of coordinates.
+    # Output: True If there exists at least one 3-set of 
+    # consecutive datapoints that cannot be contained.
+    # False if all 3-sets of consecutive datapoints
+    # can be contained within the radius
     def LIC_1(self):
         for i in range(len(self.coordinates)-2): 
             x_center = self.coordinates[i+1, 0]
