@@ -1,12 +1,13 @@
 import numpy as np
-class CMV:
-    def __init__(self, PARAMS, coordinates)
+class cmv:
+    def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
-        self.CondVector = np.array(15, dtype=bool)
+        self.CondVector = np.zeros(15, dtype=bool)
 
     # Set Condvector[0]
     def LIC_0():
+        return 0
     
         # Set Condvector[1]
     def LIC_1():
@@ -17,8 +18,22 @@ class CMV:
         return 0
     
     # Set Condvector[3]
-    def LIC_3():
-        return 0
+    # Input: Array of coordinates.
+    # Output: True if there exists three consecutive datapoints
+    #         making up the area of a triangle with an area larger than AREA1.
+    def LIC_3(self):
+        for i in range( len(self.coordinates) - 2 ): # Iterate all coordinates, leaving an offset to pair triplets.
+
+            # Read the coordinates from the array into a tuple.
+            c1, c2, c3 = (self.coordinates[i], self.coordinates[i + 1], self.coordinates[i + 2])
+
+            # Calculates the area of the triangle using the determinant method.
+            area = 0.5 * np.abs( (c1[0] * (c2[1] - c3[1]) + c2[0] * (c3[1] - c1[1]) + c3[0] * (c1[1] - c2[1])) )
+
+            if area > self.PARAMS.area1:
+                return True
+
+        return False
 
     # Set Condvector[4]
     def LIC_4():
