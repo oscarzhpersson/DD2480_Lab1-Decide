@@ -27,15 +27,32 @@ class PARAMETERS_T:
 
 class TestLIC(unittest.TestCase):
     
-    """def test_LIC0(self):
+    # Tests the LIC1 function of the CMV component.
+    def test_LIC1(self):
+
+        # Test 1: The set of 3 datapoints should be able to be contained 
+        # within the set radius with the given input and should yield False
+
         parameters = PARAMETERS_T()
-        parameters.length1 = 1
-        coordinates = np.zeros((5, 2))
+        parameters.radius1 = 3
+        coordinates = np.zeros((3, 2))
         for i in range(len(coordinates)):
-            coordinates[i] = [i,i+1]
-            
+            coordinates[i] = [i,i]
+
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_0())"""
+        self.assertFalse(CMV.LIC_1())
+        
+        # Test 2: The set of 3 datapoints should NOT be able to be able
+        # to be contained within the set radius with the given input and should yield True
+        
+        parameters.radius1 = 0
+        coordinates = np.zeros((3, 2))
+        for i in range(len(coordinates)):
+            coordinates[i] = [i,i]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
