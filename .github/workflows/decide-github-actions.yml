@@ -25,3 +25,17 @@ jobs: # Group together jobs.
         pip install flake8
         pip install numpy
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Lint with flake8 # Part of default GitHub Actions set. Seemed useful, thus included in this one
+      # Runs flake8 python package. Checks run are:
+        # stop the build if there are Python syntax errors or undefined names
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+
+        # --count prints the total number of errors.
+        # --select=E9,F63,F7,F82 specifies the list of error codes we want flake8 to check for.
+          #E9 - Runtime errors.
+          #F are error codes referring to syntax errors within the code and described https://flake8.pycqa.org/en/latest/user/error-codes.html
+            #Fx refers to all error codes Fxab, eg. F60, refers to F601 and F602
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
