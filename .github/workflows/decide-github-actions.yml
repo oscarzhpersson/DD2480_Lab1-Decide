@@ -36,6 +36,9 @@ jobs: # Group together jobs.
           #E9 - Runtime errors.
           #F are error codes referring to syntax errors within the code and described https://flake8.pycqa.org/en/latest/user/error-codes.html
             #Fx refers to all error codes Fxab, eg. F60, refers to F601 and F602
+        # --exit-zero tells flake8 to exit with exit code 0 even if errors occur, where it otherwise would exit with non-zero integer.
+        # --max-line-length specifies a maximum length that any line can be.
+        # --statistics counts the number of errors and summarises it in a report.
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
