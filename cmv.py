@@ -6,7 +6,7 @@ class cmv:
         self.CondVector = np.zeros(15, dtype=bool)
 
     # Set Condvector[0]
-    def LIC_0():
+    def LIC_0(self):
         return 0
     
     # Set Condvector[1]
