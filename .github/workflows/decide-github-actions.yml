@@ -1,0 +1,7 @@
+name: lab_decide-github-actions
+
+on: # Is run every time someone pushes a change to the repository or merges a PR to the main branch.
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
