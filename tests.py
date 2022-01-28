@@ -140,6 +140,15 @@ class TestLIC(unittest.TestCase):
 
         """
 
+        parameters = PARAMETERS_T() # Import parameters
+        coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
+
+        #Test 1 - Returns False since there is not enough coordinates.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_5())
+
+
 if __name__ == '__main__':
     unittest.main()
         
