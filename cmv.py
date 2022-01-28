@@ -7,7 +7,12 @@ class cmv:
 
     # Set Condvector[0]
     def LIC_0(self):
-        return 0
+        for i in range(len(self.coordinates)-1):
+            x = self.coordinates[i, 0] - self.coordinates[i+1, 0]
+            y = self.coordinates[i, 1] - self.coordinates[i+1, 1]
+            if np.sqrt(x ** 2 + y ** 2) > self.PARAMS.length1:
+                return True
+        return False
     
     # Set Condvector[1]
     # Input: Array of coordinates.
@@ -102,6 +107,6 @@ class cmv:
     # Set Condvector[14]
     def LIC_14(self):
         return 0
-
+      
     def return_cond_vector(self):
         return 0

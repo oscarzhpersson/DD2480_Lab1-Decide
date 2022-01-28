@@ -1,6 +1,7 @@
 import numpy as np
 import enum
 from dataclasses import dataclass
+import cmv
 
 ##### CONSTANT #####
 
@@ -49,7 +50,7 @@ class PARAMETERS_T:
     radius2: float # Maximum radius in LIC 13.
     area2: float # Maximum area in LIC 14.
 
-parameters = PARAMETERS_T()
+#parameters = PARAMETERS_T()
 
 # TODO Import PUM
 # TODO Import CMV
@@ -58,5 +59,6 @@ parameters = PARAMETERS_T()
 #? Function you must write:
 
 def decide():
-    #Do something.
-    print("")
+    # CMV = cmv(coordinates, parameters)
+    # cond_vector = CMV.return_cond_vector()
+    return 0
