@@ -59,5 +59,6 @@ class PARAMETERS_T:
 #? Function you must write:
 
 def decide():
-    CMV = cmv(coordinates, parameters)
-    cond_vector = CMV.return_cond_vector()
+    # CMV = cmv(coordinates, parameters)
+    # cond_vector = CMV.return_cond_vector()
+    return 0
