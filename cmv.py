@@ -70,6 +70,27 @@ class cmv:
     
     # Set Condvector[5]
     def LIC_5(self):
+        '''Checks if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+
+        Function iterates through the array of coordinates in sets of two. A satisfying set of coordinates is described through the condition:
+        X[j] - X[i] < 0. (where i = j-1).
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist.
+
+        See Also
+        --------
+        PARAMETERS object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
         return 0
 
     # Set Condvector[6]
