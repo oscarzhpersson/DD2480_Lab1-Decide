@@ -87,7 +87,7 @@ class cmv:
 
         See Also
         --------
-        PARAMETERS object: Provides a full overview of the input data to the function (coordinates array).
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
 
         '''
 
