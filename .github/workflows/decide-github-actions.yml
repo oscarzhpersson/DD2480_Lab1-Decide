@@ -1,0 +1,48 @@
+name: lab_decide-github-actions
+
+on: # Is run every time someone pushes a change to the repository or merges a PR to the main branch.
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs: # Group together jobs.
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2 # Checks out the repository so the workflow (this) can use it.
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2 # Sets up python with the subsequently mentioned python version.
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies # Installs required dependencies.
+      # Current dependencies include: Flake8 and Numpy.
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+        pip install numpy
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Lint with flake8 # Part of default GitHub Actions set. Seemed useful, thus included in this one
+      # Runs flake8 python package. Checks run are:
+        # stop the build if there are Python syntax errors or undefined names
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+
+        # --count prints the total number of errors.
+        # --select=E9,F63,F7,F82 specifies the list of error codes we want flake8 to check for.
+          #E9 - Runtime errors.
+          #F are error codes referring to syntax errors within the code and described https://flake8.pycqa.org/en/latest/user/error-codes.html
+            #Fx refers to all error codes Fxab, eg. F60, refers to F601 and F602
+        # --exit-zero tells flake8 to exit with exit code 0 even if errors occur, where it otherwise would exit with non-zero integer.
+        # --max-line-length specifies a maximum length that any line can be.
+        # --statistics counts the number of errors and summarises it in a report.
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run unit tests # Runs the project groups written unit test file.
+      run: |
+        python3 tests.py
