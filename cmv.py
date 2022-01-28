@@ -91,6 +91,10 @@ class cmv:
 
         '''
 
+        # If an insufficient amount of points are present (< 2), return false.
+        if len(self.coordinates) < 2:
+            return False
+
         return 0
 
     # Set Condvector[6]
