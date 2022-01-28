@@ -95,7 +95,11 @@ class cmv:
         if len(self.coordinates) < 2:
             return False
 
-        return 0
+        for i in range(len(self.coordinates) - 1):
+            (x1, y1) = self.coordinates[i]
+            (x2, y2) = self.coordinates[i + 1]
+
+        return False
 
     # Set Condvector[6]
     def LIC_6(self):
