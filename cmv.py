@@ -99,6 +99,10 @@ class cmv:
             (x1, y1) = self.coordinates[i]
             (x2, y2) = self.coordinates[i + 1]
 
+            # If a satisfying set is found, return True.
+            if (x2 - x1) < 0:
+                return True
+
         return False
 
     # Set Condvector[6]
