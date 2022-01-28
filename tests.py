@@ -156,6 +156,11 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_5())
 
+        # Test 3 - Returns False since there is not a pair of coordinates satisfying the condition.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_5())
 
 if __name__ == '__main__':
     unittest.main()
