@@ -77,7 +77,7 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC2(self):
 
-       #Test 1: The input will two lines with a 90 degree angle and epsilon set to 0
+       #Test 1: The input will a staight line with a 180 degree angle and epsilon set to pi
        #This should yield false
         parameters = PARAMETERS_T()
         parameters.epsilon = np.pi
@@ -88,7 +88,19 @@ class TestLIC(unittest.TestCase):
         coordinates[2] = [2,0]
 
         CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_2())
 
+
+        #Test 2: This will give right angled and which should yield true
+        parameters.epsilon = 0
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_2())
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
