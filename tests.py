@@ -38,6 +38,18 @@ class TestLIC(unittest.TestCase):
     #     self.assertTrue(CMV.LIC_0())
 
     def test_LIC7(self):
+
+        """ Tests the LIC7 function of the CMV component.
+
+        Tests
+        -----
+        Test1: Asserts if function returns True if there exists a pair of coordinates that are exactly K_PTS = 2 apart with distance grater than 1. 
+        Test2: Asserts if function returns False if there does not exists a pair of coordinates that are exactly K_PTS = 2 apart with distance grater than 1. 
+        See Also
+        --------
+        LIC7: Function of the cmv class which this test is testing.
+        """
+        # The conditions are met, coordinate[0] and [3] are distance 2 apart with two points inbetween.
         parameters = PARAMETERS_T()
         parameters.length1 = 1
         parameters.k_Pts = 2
@@ -61,7 +73,7 @@ class TestLIC(unittest.TestCase):
         coordinates[4] = [0, 2]
             
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_7())
+        self.assertFalse(CMV.LIC_7())
 
 if __name__ == '__main__':
     unittest.main()
