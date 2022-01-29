@@ -7,7 +7,7 @@ class cmv:
 
     # Set Condvector[0]
     def LIC_0(self):
-        return self.__calculate_distance_LICs(self.PARAMS.length1)
+        return self._check_distance_LICs(self.PARAMS.length1)
     
     # Set Condvector[1]
     # Input: Array of coordinates.
@@ -127,7 +127,7 @@ class cmv:
         if not (1 <= k_Pts <= (len(self.coordinates)-2)):
             return False
         
-        return self.__calculate_distance_LICs(self.PARAMS.length1, offset=k_Pts)
+        return self._check_distance_LICs(self.PARAMS.length1, offset=k_Pts)
 
 
     # Set Condvector[8]
@@ -148,6 +148,21 @@ class cmv:
 
     # Set Condvector[12]
     def LIC_12(self):
+        '''Checks if There exists at least one set of two data points separated by exactly K PTS consecutive intervening points that are a distance greater than the length, LENGTH1, apart.
+        There must also exist at least one set of two data points separated by exactly K PTS consecutive intervening points that are a distance less than the length, LENGTH2, apart.
+        The function checks pairs of coordinates that are K_PTS apart to see if they pass both distance criterias.
+        Parameters
+        ----------
+        None
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist.
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        '''
         k_Pts = self.PARAMS.k_Pts
 
         # Checks pre-condition
@@ -156,8 +171,8 @@ class cmv:
         if not (1 <= k_Pts <= (len(self.coordinates)-2)):
             return False
 
-        check1 = self.__calculate_distance_LICs(self.PARAMS.length1, offset=k_Pts, greater_than_flag=True)
-        check2 = self.__calculate_distance_LICs(self.PARAMS.length2, offset=k_Pts, greather_than_flag=False)
+        check1 = self._check_distance_LICs(self.PARAMS.length1, offset=k_Pts, comp='gt')
+        check2 = self._check_distance_LICs(self.PARAMS.length2, offset=k_Pts, comp='lt')
         return check1 and check2
 
     # Set Condvector[13]
@@ -171,19 +186,45 @@ class cmv:
     def return_cond_vector(self):
         return 0
 
-    def __euclidean_distance(self, c1, c2):
+    def _euclidean_distance(self, c1, c2):
+        ''' Computes euclidean distance between c1 and c2
+        Parameters
+        ----------
+        c1: First coordinate
+        c2: Second coordinate
+        Returns
+        -------
+        float
+            The distance between the two points
+        '''
         x = c1[0] - c2[0]
         y = c1[1] - c2[1]
 
         return np.sqrt(x ** 2 + y ** 2)
 
-    def __calculate_distance_LICs(self, distance, offset=0, greater_than_flag = True):
+    def _check_distance_LICs(self, distance, offset=0, comp='gt'):
+        ''' 
+        Parameters
+        ----------
+        distance: The distance critera to compare the euclidean distance of coordinates with.
+        offset: Number of consecutive points between the pairs that match the critera
+        comp:
+            'gt': Check whether the coordinate distance is greater than the specified distance
+            'lt': Check whether the coordinate distance is less than the specified distance
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist.
+        '''
+
+        # The offset specifies the number of coordinates between pairs. 
         for i in range(len(self.coordinates)-offset- 1):
             c1 = self.coordinates[i]
             c2 = self.coordinates[i+offset+1]
-            if self.__euclidean_distance(c1, c2) > distance and greater_than_flag:
+            if self._euclidean_distance(c1, c2) > distance and comp == 'gt':
                 return True
-            if self.__euclidean_distance(c1, c2) < distance and greater_than_flag:
+            if self._euclidean_distance(c1, c2) < distance and comp == 'lt':
                 return True
         return False
 
