@@ -123,6 +123,45 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertFalse(CMV.LIC_3()) # Run the test.
 
+    def test_LIC5(self):
+        """ Tests the LIC5 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if function returns False when len(coordinates) < 2.
+        Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+        Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+
+        See Also
+        --------
+
+        LIC5: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1 - Returns False since there is not enough coordinates.
+        parameters = PARAMETERS_T() # Import parameters
+        coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_5())
+
+        # Test 2 - Returns True since there is a pair of coordinates satisfying the condition.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        coordinates[0] = [1, 0]
+        coordinates[1] = [25, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_5())
+
+        # Test 3 - Returns False since there is not a pair of coordinates satisfying the condition.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_5())
+
 if __name__ == '__main__':
     unittest.main()
         
