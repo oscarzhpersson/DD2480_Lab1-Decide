@@ -61,7 +61,7 @@ class cmv:
     # Create line 12
         line12_x = (point_2_x - point_1_x)
         line12_y = (point_2_y - point_1_y)
-        line_12 = math.sqrt((line12_x**2) + (line12_y**2))
+        line12 = math.sqrt((line12_x**2) + (line12_y**2))
 
     # Create line 13
         line23_x = (point_3_x - point_2_x)
@@ -77,13 +77,13 @@ class cmv:
     # c^2 = a^2 + b^2 - 2ab cos(C)
     # Can be restructured as:
     # C = arccos(line_12^2 + line_23^2 - line_13^2 / 2 * line12 * line13)
-        angle = math.acos(((line12**2) + (line23**2) - (line13**2)) / (2*line_12*line23))
+        angle = math.acos(((line12**2) + (line23**2) - (line13**2)) / (2*line12*line23))
 
     #If the angle is larger or smaller, output true else outputs false
         if (angle < (np.pi - self.PARAMS.epsilon) or angle > (np.pi + self.PARAMS.epsilon)):
-            return true
+            return True
         else:
-            return false
+            return False
     
     # Set Condvector[3]
     # Input: Array of coordinates.
