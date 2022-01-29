@@ -1,4 +1,5 @@
 import numpy as np
+import math
 class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
@@ -121,11 +122,11 @@ class cmv:
     def LIC_6(self):
 
         #Furfilling the lenght requirment for the number of points
-        if len(self.coordinates < 3 or self.PARAMS.n_Pts < 3):
+        if (len(self.coordinates) < 3 or self.PARAMS.n_Pts < 3):
             return False
 
         #if dist is less than 0
-        if self.PARAMS.dist <= 0:
+        if (self.PARAMS.dist <= 0):
             return False
 
 
@@ -133,23 +134,19 @@ class cmv:
         count = 1
         start = 0
         end = n_ptr
-        answer = False
         for i in range (len(self.coordinates)):
             if count < len(self.coordinates):
-
                 while count != end:
-                    compared_dist = find_distance(self.coordinates[start],self.coordinates[end], self.coordinates[count])
+                    compared_dist = cmv.find_distance(self.coordinates[start], self.coordinates[end - 1], self.coordinates[count])
                     if compared_dist > self.PARAMS.dist:
-                        answer = True
+                        return True
                     count += 1
 
                 start = end
-                if end < end + n_ptr:
+                if len(self.coordinates) > end + n_ptr:
                     end = end + n_ptr
 
-
-
-        return 0
+        return False
 
     # Set Condvector[7]
     def LIC_7(self):
