@@ -1,7 +1,7 @@
 import numpy as np
 import enum
 from dataclasses import dataclass
-import cmv
+from modules import cmv
 
 ##### CONSTANT #####
 
