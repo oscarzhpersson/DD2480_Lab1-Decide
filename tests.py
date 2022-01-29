@@ -88,7 +88,7 @@ class TestLIC(unittest.TestCase):
         coordinates[2] = [2,0]
 
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_2)
+
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
@@ -98,12 +98,11 @@ class TestLIC(unittest.TestCase):
 
         # Test 1: There exists a triangle with an area larger than area1.
 
-        coordinates[0] = [0, 0] # Creates a triangle with area 7.5.
-        coordinates[1] = [5, 3]
-        coordinates[2] = [5, 0]
+        for i in range(len(coordinates)):
+            coordinates[i] = [i, i]
 
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
-        self.assertTrue(CMV.LIC_3()) # Run the test.
+        self.assertFalse(CMV.LIC_3()) # Run the test.
 
         # Test 2: There does not exist a triangle with an area larger than area1.
 
@@ -136,6 +135,34 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertFalse(CMV.LIC_3()) # Run the test.
+
+
+    def test_LIC6(self):
+        #Test 1: Having the distance larger in every comparision
+        parameters = PARAMETERS_T()
+        parameters.dist = 1000
+        parameters.n_Pts = 3
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_6())
+
+        #TEST 2: Having the Distance smaller than in every comparision
+        parameters.dist = 1
+        parameters.n_Pts = 3
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [5, 5]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_6())
+
 
 if __name__ == '__main__':
     unittest.main()
