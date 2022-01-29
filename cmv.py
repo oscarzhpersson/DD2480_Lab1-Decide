@@ -112,7 +112,57 @@ class cmv:
 
     # Set Condvector[6]
     def LIC_6(self):
-        return 0
+
+        #Furfilling the lenght requirment for the number of points
+        if len(self.coordinates < 3):
+            return false
+
+        #if dist is less than 0
+        if dist < 0:
+            return false
+
+        # Checking the distance from the first to last point
+        # The last X coordinate - the first
+        line_F_L_X = (self.coordinates[len(self.coordinates) - 1, 0] - self.coordinates[0, 0])
+
+        # The last Y coordinate - the first
+        line_F_L_Y = (self.coordinates[len(self.coordinates) - 1, 1] - self.coordinates[0, 1])
+
+        # The line between first and last point
+        Dist = math.sqrt((line_F_L_X ** 2) + (line_F_L_y ** 2))
+
+        answer = false
+        tot_len = 0
+        #Coodinates [0,0], [1,1], [2,2], [3,3], [4,4]
+        for i in range(len(self.coordinates) - 2):
+            if line_F_L_X != line_F_L_Y:
+                point_1_x = self.coordinates[i, 0]
+                point_1_y = self.coordinates[i, 1]
+                point_2_x = self.coordinates[i+1, 0]
+                point_2_y = self.coordinates[i+1, 1]
+
+                point_1 = self.coordinates[point_1_x - point_2_x]
+                point_2 = self.coordinates[point_1_y - point_2_y]
+                point = math.sqrt((point_1**2) + (point_2**2))
+
+                if point > Dist:
+                    answer = true
+            else:
+                point_1_x = self.coordinates[i, 0]
+                point_1_y = self.coordinates[i, 1]
+                point_2_x = self.coordinates[i + 1, 0]
+                point_2_y = self.coordinates[i + 1, 1]
+
+                point_1 = self.coordinates[point_1_x - point_2_x]
+                point_2 = self.coordinates[point_1_y - point_2_y]
+                point = math.sqrt((point_1 ** 2) + (point_2 ** 2))
+                tot_len += point
+
+        if Dist > tot_len:
+            answer = true
+
+        return answer
+
 
     # Set Condvector[7]
     def LIC_7(self):
