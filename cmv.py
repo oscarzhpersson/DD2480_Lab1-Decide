@@ -110,59 +110,46 @@ class cmv:
     def LIC_5(self):
         return 0
 
+    #finds the distance from p3 to p1 & p2
+    def find_distance(p1, p2, p3):
+        nom = abs((p2[0] - p1[0]) * (p1[1] - p3[1]) - (p1[0] - p3[0]) * (p2[1] - p1[1]))
+        denom = math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+        return nom / denom
+
+
     # Set Condvector[6]
     def LIC_6(self):
 
         #Furfilling the lenght requirment for the number of points
-        if len(self.coordinates < 3):
-            return false
+        if len(self.coordinates < 3 or self.PARAMS.n_Pts < 3):
+            return False
 
         #if dist is less than 0
-        if dist < 0:
-            return false
+        if self.PARAMS.dist <= 0:
+            return False
 
-        # Checking the distance from the first to last point
-        # The last X coordinate - the first
-        line_F_L_X = (self.coordinates[len(self.coordinates) - 1, 0] - self.coordinates[0, 0])
 
-        # The last Y coordinate - the first
-        line_F_L_Y = (self.coordinates[len(self.coordinates) - 1, 1] - self.coordinates[0, 1])
+        n_ptr = self.PARAMS.n_Pts
+        count = 1
+        start = 0
+        end = n_ptr
+        answer = False
+        for i in range (len(self.coordinates)):
+            if count < len(self.coordinates):
 
-        # The line between first and last point
-        Dist = math.sqrt((line_F_L_X ** 2) + (line_F_L_y ** 2))
+                while count != end:
+                    compared_dist = find_distance(self.coordinates[start],self.coordinates[end], self.coordinates[count])
+                    if compared_dist > self.PARAMS.dist:
+                        answer = True
+                    count += 1
 
-        answer = false
-        tot_len = 0
-        #Coodinates [0,0], [1,1], [2,2], [3,3], [4,4]
-        for i in range(len(self.coordinates) - 2):
-            if line_F_L_X != line_F_L_Y:
-                point_1_x = self.coordinates[i, 0]
-                point_1_y = self.coordinates[i, 1]
-                point_2_x = self.coordinates[i+1, 0]
-                point_2_y = self.coordinates[i+1, 1]
+                start = end
+                if end < end + n_ptr:
+                    end = end + n_ptr
 
-                point_1 = self.coordinates[point_1_x - point_2_x]
-                point_2 = self.coordinates[point_1_y - point_2_y]
-                point = math.sqrt((point_1**2) + (point_2**2))
 
-                if point > Dist:
-                    answer = true
-            else:
-                point_1_x = self.coordinates[i, 0]
-                point_1_y = self.coordinates[i, 1]
-                point_2_x = self.coordinates[i + 1, 0]
-                point_2_y = self.coordinates[i + 1, 1]
 
-                point_1 = self.coordinates[point_1_x - point_2_x]
-                point_2 = self.coordinates[point_1_y - point_2_y]
-                point = math.sqrt((point_1 ** 2) + (point_2 ** 2))
-                tot_len += point
-
-        if Dist > tot_len:
-            answer = true
-
-        return answer
-
+        return 0
 
     # Set Condvector[7]
     def LIC_7(self):
