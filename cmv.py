@@ -7,10 +7,10 @@ class cmv:
 
     # Set Condvector[0]
     def LIC_0(self):
-        for i in range(len(self.coordinates)-1):
-            x = self.coordinates[i, 0] - self.coordinates[i+1, 0]
-            y = self.coordinates[i, 1] - self.coordinates[i+1, 1]
-            if np.sqrt(x ** 2 + y ** 2) > self.PARAMS.length1:
+        for i in range(len(self.coordinates)-self.PARAMS.k_Pts - 1):
+            c1 = self.coordinates[i]
+            c2 = self.coordinates[i+1]
+            if self.__euclidean_distance(c1, c2) > self.PARAMS.length1:
                 return True
         return False
     
@@ -133,12 +133,12 @@ class cmv:
             return False
         
         for i in range(len(self.coordinates)-self.PARAMS.k_Pts - 1):
-            ## This can probably be refactored with LIC0, uses same Euclidean Distance.
-            x = self.coordinates[i, 0] - self.coordinates[i+k_Pts+1, 0]
-            y = self.coordinates[i, 1] - self.coordinates[i+k_Pts+1, 1]
-            if np.sqrt(x ** 2 + y ** 2) > self.PARAMS.length1:
+            c1 = self.coordinates[i]
+            c2 = self.coordinates[i+k_Pts+1]
+            if self.__euclidean_distance(c1, c2) > self.PARAMS.length1:
                 return True
         return False
+
 
     # Set Condvector[8]
     def LIC_8(self):
@@ -170,3 +170,11 @@ class cmv:
       
     def return_cond_vector(self):
         return 0
+
+    def __euclidean_distance(self, c1, c2):
+        x = c1[0] - c2[0]
+        y = c1[1] - c2[1]
+
+        return np.sqrt(x ** 2 + y ** 2)
+
+
