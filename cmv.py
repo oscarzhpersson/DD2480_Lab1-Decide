@@ -187,15 +187,15 @@ class cmv:
         return 0
 
     def _euclidean_distance(self, c1, c2):
-        ''' Computes euclidean distance between c1 and c2
+        ''' Computes euclidean distance between c1 and c2.
         Parameters
         ----------
-        c1: First coordinate
-        c2: Second coordinate
+        c1: First coordinate.
+        c2: Second coordinate.
         Returns
         -------
         float
-            The distance between the two points
+            The distance between the two points.
         '''
         x = c1[0] - c2[0]
         y = c1[1] - c2[1]
@@ -207,10 +207,10 @@ class cmv:
         Parameters
         ----------
         distance: The distance critera to compare the euclidean distance of coordinates with.
-        offset: Number of consecutive points between the pairs that match the critera
+        offset: Number of consecutive points between the pairs that match the critera.
         comp:
-            'gt': Check whether the coordinate distance is greater than the specified distance
-            'lt': Check whether the coordinate distance is less than the specified distance
+            'gt': Check whether the coordinate distance is greater than the specified distance.
+            'lt': Check whether the coordinate distance is less than the specified distance.
         Returns
         -------
         bool
