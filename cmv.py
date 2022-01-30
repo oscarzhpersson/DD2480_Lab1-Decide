@@ -1,4 +1,6 @@
 import numpy as np
+import math
+
 class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
@@ -103,6 +105,13 @@ class cmv:
                 return True
 
         return False
+
+        # finds the distance from p3 to p1 & p2
+
+    def find_distance(p1, p2, p3):
+        nom = abs((p2[0] - p1[0]) * (p1[1] - p3[1]) - (p1[0] - p3[0]) * (p2[1] - p1[1]))
+        denom = math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+        return nom / denom
 
     # Set Condvector[6]
     def LIC_6(self):
