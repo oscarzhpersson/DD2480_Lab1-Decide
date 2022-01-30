@@ -44,7 +44,7 @@ class cmv:
         return False
 
         # Set Condvector[2]
-        def LIC_2(self):
+    def LIC_2(self):
 
             '''Checks if the angle formed by three consecutive points are larger than pi+epsilon or smaller pi-epsilon.
 
