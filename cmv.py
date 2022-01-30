@@ -44,10 +44,30 @@ class cmv:
         return False
 
         # Set Condvector[2]
-        # Input: Array of coordinates.
-        # Output: True If there exists an angle that
-        # Is larger than epsilon + pi or epsilon - pi
         def LIC_2(self):
+
+            '''Checks if the angle formed by three consecutive points are larger than pi+epsilon or smaller pi-epsilon.
+
+            The function creates a trinagle from the different points and uses the cosinus formula:
+            C = arccos(line_12^2 + line_23^2 - line_13^2 / 2 * line12 * line13)
+            C is the angle that is compared to pi+epsilon or pi-epsilon.
+
+
+            Parameters
+            ----------
+            None
+
+            Returns
+            -------
+            bool
+                True if pi+epsilon is larger than the angle or pi-epsilon is smaller than the angle
+                False if the above clauses is not satisfied
+
+            See Also
+            --------
+            PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+            '''
 
             # Pick out three consecutive points
             for i in range(len(self.coordinates) - 2):
@@ -73,10 +93,7 @@ class cmv:
             line13_y = (point_3_y - point_1_y)
             line13 = math.sqrt((line13_x ** 2) + (line13_y ** 2))
 
-            # Gets the angle, uses the formula orignal formula:
-            # c^2 = a^2 + b^2 - 2ab cos(C)
-            # Can be restructured as:
-            # C = arccos(line_12^2 + line_23^2 - line_13^2 / 2 * line12 * line13)
+            #Finding the angle
             angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
 
             # If the angle is larger or smaller, output true else outputs false
