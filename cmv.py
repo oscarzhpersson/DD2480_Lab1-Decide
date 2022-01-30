@@ -266,6 +266,7 @@ class cmv:
             if (area > self.PARAMS.area1) and (area < self.PARAMS.area2) :
                 return True
 
+
         return False
       
     def return_cond_vector(self):
