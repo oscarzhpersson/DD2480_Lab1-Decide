@@ -179,7 +179,7 @@ class cmv:
             b  = np.sqrt((c3[0] - c2[0])**2 + (c3[1] - c2[1])**2)
             angle = np.arccos((a**2 + b**2 - c**2)/ (2*a*b))
             
-            if (angle < (pi - self.PARAMS.epsilon)) or (angle > (pi + self.PARAMS.epsilon)) :
+            if (angle < (np.pi - self.PARAMS.epsilon)) or (angle > (np.pi + self.PARAMS.epsilon)) :
                 return True
 
         return False
