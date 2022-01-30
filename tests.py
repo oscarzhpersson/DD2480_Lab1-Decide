@@ -78,10 +78,23 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC2(self):
 
-        # Test 1: The input will a staight line with a 180 degree angle and epsilon set to pi
-        # This should yield false
+        """ Tests the LIC2 function of the CMV component.
+
+                Tests
+                -----
+
+                Test1: Asserts if function returns False when len(coordinates) < 2.
+                Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+
+                See Also
+                --------
+
+                LIC5: Function of the cmv class which this test is testing.
+
+        """
+        # Test 1: returns false because angle is larger than pi-epsilon, epsilon is set to 1
         parameters = PARAMETERS_T()
-        parameters.epsilon = np.pi
+        parameters.epsilon = np.pi - 1
         coordinates = np.zeros((3, 2))
 
         coordinates[0] = [0, 0]
@@ -91,7 +104,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_2())
 
-        # Test 2: This will give right angled and which should yield true
+        # Test 2: returns True because the angle formed is 90 degrees and is smaller than pi - epsilon, epsilon set to 0
         parameters.epsilon = 0
         coordinates = np.zeros((3, 2))
 
