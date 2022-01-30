@@ -83,8 +83,8 @@ class TestLIC(unittest.TestCase):
                 Tests
                 -----
 
-                Test1: Asserts if function returns False when len(coordinates) < 2.
-                Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+                Test1: Asserts if the functions returns False if angle is larger than pi - epsilon
+                Test2: Asserts if the function returns True if the angle is smaller than pi - epsilon.
 
                 See Also
                 --------
