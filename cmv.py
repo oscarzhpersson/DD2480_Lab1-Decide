@@ -65,8 +65,48 @@ class cmv:
 
     # Set Condvector[4]
     def LIC_4(self):
-        return 0
-    
+        qpts = self.PARAMS.q_Pts
+        quads = self.PARAMS.quads
+
+        if (quads < 1 or quads > 3):
+            return False
+
+        if (2 > qpts or len(self.coordinates) < qpts):
+            return False
+
+        count = 0
+        for i in range(len(self.coordinates) / qpts):
+            first_quadrent = 0
+            sec_quadrent = 0
+            third_quadrent = 0
+            fourth_quadrent = 0
+            tot_quadrents = 0
+            for j in range (qpts):
+
+                # check for 1st quadrant
+                if self.coordinates[j + count, 0] > 0 and self.coordinates[j + count, 1] > 0:
+                    first_quadrent = 1
+                # check for 2nd quadrant
+                elif self.coordinates[i, 0] < 0 and self.coordinates[j + count, 1] > 0:
+                    sec_quadrent = 1
+                # check for 3rd quadrant
+                elif self.coordinates[j + count, 0] < 0 and self.coordinates[j + count, 1] < 0:
+                    third_quadrent = 1
+                # check for fourth quadrant
+                elif self.coordinates[j + count, 0] > 0 and self.coordinates[j + count, 1] < 0:
+                    fourth_quadrent = 1
+                #Else its the origin
+                else:
+                    first_quadrent = 1
+
+            count += qpts
+            tot_quadrents = first_quadrent + sec_quadrent + third_quadrent + fourth_quadrent
+
+            if tot_quadrents < quads:
+                return True
+
+        return False
+
     # Set Condvector[5]
     def LIC_5(self):
         '''Checks if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
