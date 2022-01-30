@@ -80,7 +80,7 @@ class cmv:
             angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
 
             # If the angle is larger or smaller, output true else outputs false
-            if (angle < (np.pi - self.PARAMS.epsilon)):
+            if (angle < (np.pi - self.PARAMS.epsilon) or angle > (np.pi + self.PARAMS.epsilon)):
                 return True
             else:
                 return False
