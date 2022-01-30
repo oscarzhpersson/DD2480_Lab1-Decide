@@ -65,8 +65,9 @@ class cmv:
 
     # Set Condvector[4]
     def LIC_4(self):
-        qpts = self.PARAMS.q_Pts
+        qpts = int(self.PARAMS.q_Pts)
         quads = self.PARAMS.quads
+        lenght = int(len(self.coordinates))
 
         if (quads < 1 or quads > 3):
             return False
@@ -75,7 +76,7 @@ class cmv:
             return False
 
         count = 0
-        for i in range(len(self.coordinates) / qpts):
+        for i in range(lenght):
             first_quadrent = 0
             sec_quadrent = 0
             third_quadrent = 0
@@ -99,7 +100,7 @@ class cmv:
                 else:
                     first_quadrent = 1
 
-            count += qpts
+            count += 1
             tot_quadrents = first_quadrent + sec_quadrent + third_quadrent + fourth_quadrent
 
             if tot_quadrents < quads:
