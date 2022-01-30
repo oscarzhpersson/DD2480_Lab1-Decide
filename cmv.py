@@ -186,7 +186,7 @@ class cmv:
 
     # Set Condvector[10]
     def LIC_10(self):
-    '''There exists at least one set of three data points 
+        '''There exists at least one set of three data points 
         separated by exactly E PTS and F PTS consecutive 
         intervening points, respectively, that are the vertices 
         of a triangle with area greater than AREA1
@@ -233,7 +233,7 @@ class cmv:
 
     # Set Condvector[14]
     def LIC_14(self):
-    '''There exists at least one set of three data points 
+        '''There exists at least one set of three data points 
         separated by exactly E PTS and F PTS consecutive 
         intervening points, respectively, that are the vertices 
         of a triangle with area greater than AREA1 and smaller
