@@ -126,23 +126,26 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC4(self):
 
-        """ Tests the LIC5 function of the CMV component.
+        """ Tests the LIC4 function of the CMV component.
+            The tests try different combination of where the points does not fulfill the requirement of the having QUADS quadrants fulfilled
+            and other tests that do so.
+
 
              Tests
              -----
 
-             Test1: Asserts if function returns False when len(coordinates) < 2.
-             Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
-             Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+            Test1: Tests the function when it the three different quadrants are fulfilled and the QUADS parameter is set to 2
+            Test2: Tests the function when the functions is not fulfilled and the Quads parameter is larger than the quadrants filled by the points
+            Test3: Test with more points but the number of quadrants are not filled
+            Test4: Test with more points and the number of quadrants are filled
 
              See Also
              --------
-
-             LIC5: Function of the cmv class which this test is testing.
+             LIC4: Function of the cmv class which this test is testing.
 
         """
 
-        #TEST 1
+        #Test 1: The quadrants filled are more than QUADS required
         parameters = PARAMETERS_T()
         parameters.q_Pts = 3
         parameters.quads = 2
@@ -155,7 +158,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_4())
 
-        #TEST 2
+        #Test 2: The quadrants filled are less than QUADS required
         parameters.q_Pts = 3
         parameters.quads = 2
 
@@ -167,7 +170,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_4())
 
-        #Test 3
+        #Test 3: The quadrants filled are less than QUADS required and with more points
         parameters.q_Pts = 3
         parameters.quads = 2
 
@@ -181,7 +184,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_4())
 
-        #Test 4
+        #Test 3: The quadrants filled are more than QUADS required and is inbetween points
         parameters.q_Pts = 3
         parameters.quads = 2
 
