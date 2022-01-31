@@ -59,6 +59,7 @@ class TestLIC(unittest.TestCase):
         Test1: Asserts if function returns True when RADIUS1 = 0.
         Test2: Asserts if function returns False if three consecutive datapoints are the same and form a single point (RADIUS1 > 0).
         Test3: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same x value.
+        Test4: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same y value.
 
         See Also
         --------
@@ -90,6 +91,21 @@ class TestLIC(unittest.TestCase):
         coordinates[0] = [0,1]
         coordinates[1] = [0,2]
         coordinates[2] = [0,5]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 2
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Test 4: If all 3 coordinates have the same y value, the radius will be
+        # the distance between the two most separated points divided by two.
+        # Radius of circle formed by coordinates is 2
+        coordinates[0] = [1,0]
+        coordinates[1] = [2,0]
+        coordinates[2] = [5,0]
         # The given RADIUS1 should output FALSE 
         parameters.radius1 = 2
         CMV = cmv(parameters, coordinates)
