@@ -124,6 +124,80 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertFalse(CMV.LIC_3()) # Run the test.
 
+    def test_LIC4(self):
+
+        """ Tests the LIC4 function of the CMV component.
+            The tests try different combination of where the points does not fulfill the requirement of the having QUADS quadrants fulfilled
+            and other tests that do so.
+
+
+             Tests
+             -----
+
+            Test1: Tests the function when it the three different quadrants are fulfilled and the QUADS parameter is set to 2
+            Test2: Tests the function when the functions is not fulfilled and the Quads parameter is larger than the quadrants filled by the points
+            Test3: Test with more points but the number of quadrants are not filled
+            Test4: Test with more points and the number of quadrants are filled
+
+             See Also
+             --------
+             LIC4: Function of the cmv class which this test is testing.
+
+        """
+
+        #Test 1: The quadrants filled are more than QUADS required
+        parameters = PARAMETERS_T()
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((3, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [-1, -1]
+        coordinates[2] = [1, -1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_4())
+
+        #Test 2: The quadrants filled are less than QUADS required
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((3, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_4())
+
+        #Test 3: The quadrants filled are less than QUADS required and with more points
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [1, 1]
+        coordinates[3] = [1, 1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_4())
+
+        #Test 3: The quadrants filled are more than QUADS required and is inbetween points
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [-1, -1]
+        coordinates[3] = [1, -1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_4())
+
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
 

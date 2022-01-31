@@ -63,10 +63,80 @@ class cmv:
 
         return False
 
-    # Set Condvector[4]
+    def check_quadrants(self, coor, qpts):
+        first_quadrent = 0
+        sec_quadrent = 0
+        fourth_quadrent = 0
+        third_quadrent = 0
+        coor = np.array(coor)
+
+        for i in range(qpts):
+            if coor[i, 0] > 0 and coor[i, 1] > 0:
+                first_quadrent = 1
+                # check for 2nd quadrant
+            elif coor[i, 0] < 0 and coor[i, 1] > 0:
+                sec_quadrent = 1
+                # check for 3rd quadrant
+            elif coor[i, 0] < 0 and coor[i, 1] < 0:
+                third_quadrent = 1
+                # check for fourth quadrant
+            elif coor[i, 0] > 0 and coor[i, 1] < 0:
+                fourth_quadrent = 1
+                # Else its the origin
+            else:
+                first_quadrent = 1
+
+        total_quad = first_quadrent + sec_quadrent + third_quadrent + fourth_quadrent
+
+        return total_quad
+
     def LIC_4(self):
-        return 0
-    
+
+        '''Checks if there exist a Q_pts consecutive data points that lie in more than QUADS quadrants.
+               The function checks a set of coordinates that are in different quadrants and returns true if the points are in more than QUADS quadrant.
+
+               Parameters
+               ----------
+               None
+
+               Returns
+               -------
+               bool
+                   True if a set satisfying the conditions exist.
+                   False if a set of satisfying conditions does not exist.
+
+               See Also
+               --------
+               PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+               '''
+
+        #storing the values in parameter
+        qpts = int(self.PARAMS.q_Pts)
+        quads = self.PARAMS.quads
+        length = int(len(self.coordinates))
+
+        #Checking the first prerequisite
+        if (quads <= 1 or quads >= 3):
+            return False
+
+        #Checking the second prerequisite
+        if (2 > qpts or len(self.coordinates) < qpts):
+            return False
+
+        #Checking the number of quadrants the points fulfill
+        for i in range(length):
+            pointlist = []
+            for j in range(qpts):
+                if (i + qpts) > length:
+                    return False
+                pointlist.append(self.coordinates[i + j])
+
+            total_quad = self.check_quadrants(pointlist, qpts)
+            if total_quad > quads:
+                return True
+
+        return False
+
     # Set Condvector[5]
     def LIC_5(self):
         '''Checks if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
