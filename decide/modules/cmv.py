@@ -90,6 +90,35 @@ class cmv:
 
         return total_quad
 
+    def LIC_4(self):
+        print("Print 1")
+        qpts = int(self.PARAMS.q_Pts)
+        quads = self.PARAMS.quads
+        lenght = int(len(self.coordinates))
+        print("Print 2")
+
+        if (quads <= 1 or quads >= 3):
+            return False
+        print("Print 3")
+
+        print("Len: ", len(self.coordinates))
+        print("qpts: ", qpts)
+        if (2 > qpts or len(self.coordinates) < qpts):
+            return False
+        print("Print 4")
+        for i in range(lenght):
+            pointlist = []
+            for j in range(qpts):
+                if (i + qpts) > lenght:
+                    return False
+                pointlist.append(self.coordinates[i + j])
+
+            total_quad = self.check_quadrants(pointlist, qpts)
+            if total_quad > quads:
+                return True
+
+        return False
+
     # Set Condvector[5]
     def LIC_5(self):
         '''Checks if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
