@@ -37,6 +37,28 @@ class cmv:
     # False if all 3-sets of consecutive datapoints
     # can be contained within the radius
     def LIC_1(self):
+        '''Checks if there is a set of three coordinates that cannot all be contained within a circle of radius RADIUS1. This is done by forming a circle from the datapoints and comparing its radius to RADIUS1.
+
+        Function iterates through the array of coordinates in sets of three. A satisfying set of coordinates is described through the condition:
+        radius > self.PARAMS.radius1
+        or
+        self.PARAMS.radius1 == 0
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
 
         if self.PARAMS.radius1 == 0:
             return True
