@@ -33,7 +33,11 @@ class cmv:
             p2 = Point(self.coordinates[i+1, 0], self.coordinates[i+1, 1])
             p3 = Point(self.coordinates[i+2, 0], self.coordinates[i+2, 1])
 
-            radius = Circle(p1, p2, p3).radius
+            # This set of coordinates can be contained within RADIUS1
+            if p1 == p2 == p3:
+                continue
+            else:
+                radius = Circle(p1, p2, p3).radius
 
             # True if p1, p2 and p3 cannot all be contained within a circle of radius RADIUS1
             if (radius > self.PARAMS.radius1):
