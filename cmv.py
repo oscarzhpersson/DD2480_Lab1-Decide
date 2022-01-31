@@ -172,6 +172,12 @@ class cmv:
 
         if (len(self.coordinates) < 5) :
             return False
+        if (self.PARAMS.c_Pts < 1):
+            return False
+        if (self.PARAMS.d_Pts < 1):
+            return False
+        if (self.PARAMS.c_Pts + self.PARAMS.d_Pts > len(self.coordinates) - 3):
+            return False
         for i in range( len(self.coordinates) - self.PARAMS.c_Pts - self.PARAMS.d_Pts ): # Iterate all coordinates, till coordinates are out of range.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.c_Pts], self.coordinates[i + self.PARAMS.d_Pts])
             c    = np.sqrt((c3[0] - c1[0])**2 + (c3[1] - c1[1])**2)
@@ -205,6 +211,12 @@ class cmv:
         PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
         '''
         if (len(self.coordinates) < 5) :
+            return False
+        if (self.PARAMS.e_Pts < 1):
+            return False
+        if (self.PARAMS.f_Pts < 1):
+            return False
+        if (self.PARAMS.e_Pts + self.PARAMS.f_Pts > len(self.coordinates) - 3):
             return False
         for i in range( len(self.coordinates) - self.PARAMS.e_Pts - self.PARAMS.f_Pts ): # Iterate all coordinates, till coordinates are out of range.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.e_Pts], self.coordinates[i + self.PARAMS.f_Pts])
@@ -254,6 +266,8 @@ class cmv:
         '''
 
         if (len(self.coordinates) < 5) :
+            return False
+        if (self.PARAMS.area2 < 0):
             return False
         for i in range( len(self.coordinates) - self.PARAMS.e_Pts - self.PARAMS.f_Pts ): # Iterate all coordinates, till coordinates are out of range.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.e_Pts], self.coordinates[i + self.PARAMS.f_Pts])
