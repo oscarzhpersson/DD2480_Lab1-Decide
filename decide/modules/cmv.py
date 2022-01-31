@@ -33,6 +33,8 @@ class cmv:
             p2 = Point(self.coordinates[i+1, 0], self.coordinates[i+1, 1])
             p3 = Point(self.coordinates[i+2, 0], self.coordinates[i+2, 1])
 
+            radius = Circle(p1, p2, p3).radius
+
         return 0
     
     # Set Condvector[2]
