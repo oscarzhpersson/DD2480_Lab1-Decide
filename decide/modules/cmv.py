@@ -143,7 +143,17 @@ class cmv:
 
     # Set Condvector[12]
     def LIC_12(self):
-        return 0
+        k_Pts = self.PARAMS.k_Pts
+
+        # Checks pre-condition
+        if len(self.coordinates) < 3:
+            return False
+        if not (1 <= k_Pts <= (len(self.coordinates)-2)):
+            return False
+
+        check1 = self.__calculate_distance_LICs(self.PARAMS.length1, offset=k_Pts, greater_than_flag=True)
+        check2 = self.__calculate_distance_LICs(self.PARAMS.length2, offset=k_Pts, greather_than_flag=False)
+        return check1 and check2
 
     # Set Condvector[13]
     def LIC_13(self):
