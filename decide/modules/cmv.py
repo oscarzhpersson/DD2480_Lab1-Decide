@@ -63,62 +63,6 @@ class cmv:
 
         return False
 
-    def check_quadrants(self, coor, qpts):
-        first_quadrent = 0
-        sec_quadrent = 0
-        fourth_quadrent = 0
-        third_quadrent = 0
-        coor = np.array(coor)
-
-        for i in range(qpts):
-            if coor[i, 0] > 0 and coor[i, 1] > 0:
-                first_quadrent = 1
-                # check for 2nd quadrant
-            elif coor[i, 0] < 0 and coor[i, 1] > 0:
-                sec_quadrent = 1
-                # check for 3rd quadrant
-            elif coor[i, 0] < 0 and coor[i, 1] < 0:
-                third_quadrent = 1
-                # check for fourth quadrant
-            elif coor[i, 0] > 0 and coor[i, 1] < 0:
-                fourth_quadrent = 1
-                # Else its the origin
-            else:
-                first_quadrent = 1
-
-        total_quad = first_quadrent + sec_quadrent + third_quadrent + fourth_quadrent
-
-        return total_quad
-
-    # Set Condvector[4]
-    def LIC_4(self):
-        print("Print 1")
-        qpts = int(self.PARAMS.q_Pts)
-        quads = self.PARAMS.quads
-        lenght = int(len(self.coordinates))
-        print("Print 2")
-
-        if (quads <= 1 or quads >= 3):
-            return False
-        print("Print 3")
-
-        print("Len: ", len(self.coordinates))
-        print("qpts: ", qpts)
-        if (2 > qpts or len(self.coordinates) < qpts):
-            return False
-        print("Print 4")
-        for i in range(lenght):
-            pointlist = []
-            for j in range(qpts):
-                if (i + qpts) > lenght:
-                    return False
-                pointlist.append(self.coordinates[i + j])
-
-            total_quad = self.check_quadrants(pointlist, qpts)
-            if total_quad > quads:
-                return True
-
-        return False
 
     # Set Condvector[5]
     def LIC_5(self):
