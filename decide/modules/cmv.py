@@ -7,12 +7,7 @@ class cmv:
 
     # Set Condvector[0]
     def LIC_0(self):
-        for i in range(len(self.coordinates)-self.PARAMS.k_Pts - 1):
-            c1 = self.coordinates[i]
-            c2 = self.coordinates[i+1]
-            if self.__euclidean_distance(c1, c2) > self.PARAMS.length1:
-                return True
-        return False
+        return self.__calculate_distance_LICs(self.PARAMS.length1)
     
     # Set Condvector[1]
     # Input: Array of coordinates.
@@ -127,12 +122,7 @@ class cmv:
         if not (1 <= k_Pts <= (len(self.coordinates)-2)):
             return False
         
-        for i in range(len(self.coordinates)-self.PARAMS.k_Pts - 1):
-            c1 = self.coordinates[i]
-            c2 = self.coordinates[i+k_Pts+1]
-            if self.__euclidean_distance(c1, c2) > self.PARAMS.length1:
-                return True
-        return False
+        return self.__calculate_distance_LICs(self.PARAMS.length1, offset=k_Pts)
 
 
     # Set Condvector[8]
@@ -171,3 +161,13 @@ class cmv:
         y = c1[1] - c2[1]
 
         return np.sqrt(x ** 2 + y ** 2)
+
+    def __calculate_distance_LICs(self, distance, offset=0, greater_than_flag = True):
+        for i in range(len(self.coordinates)-offset- 1):
+            c1 = self.coordinates[i]
+            c2 = self.coordinates[i+offset+1]
+            if self.__euclidean_distance(c1, c2) > distance and greater_than_flag:
+                return True
+            if self.__euclidean_distance(c1, c2) < distance and greater_than_flag:
+                return True
+        return False
