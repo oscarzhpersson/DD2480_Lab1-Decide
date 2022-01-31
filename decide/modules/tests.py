@@ -37,7 +37,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_0())
 
-        ## Test for when the points greater than length1 are not consecutive. 
+        ## Test for when the distance greater than length1 are not consecutive. 
         parameters = PARAMETERS_T()
         parameters.length1 = 1
         coordinates = np.zeros((3, 2))
@@ -48,6 +48,8 @@ class TestLIC(unittest.TestCase):
             
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_0())
+
+        
 
 
     # Tests the LIC1 function of the CMV component.
@@ -126,19 +128,14 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
-
         Tests
         -----
-
         Test1: Asserts if function returns False when len(coordinates) < 2.
         Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
         Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
-
         See Also
         --------
-
         LIC5: Function of the cmv class which this test is testing.
-
         """
 
         # Test 1 - Returns False since there is not enough coordinates.
@@ -167,7 +164,6 @@ class TestLIC(unittest.TestCase):
     def test_LIC7(self):
 
         """ Tests the LIC7 function of the CMV component.
-
         Tests
         -----
         Test1: Asserts if function returns True if there exists a pair of coordinates that are exactly K_PTS = 2 apart with distance grater than 1. 
@@ -202,6 +198,70 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
+    def test_LIC12(self):
+
+        """ Tests the LIC12 function of the CMV component.
+        Tests
+        -----
+        Test1: Asserts if function returns True if there exists a pair of coordinates that are exactly K_PTS = 2 apart with distance greater than lenght1 and less than length2. 
+        Test2: Asserts if function returns False if there does not exists a pair of coordinates that are exactly K_PTS = 2 apart with distance greater than 1 and less than length2. 
+        Test3: Asserts if function returns False if there if there does not exists a pair of coordinates that are exactly K_PTS = 2 apart with distance greater than lenght1.  
+        Test4: Asserts if function returns False if there if there does not exists a pair of coordinates that are exactly K_PTS = 2 apart with distance less than length2.    
+        See Also
+        --------
+        LIC12: Function of the cmv class which this test is testing.
+        """
+
+        # Test standard criterias 
+        parameters = PARAMETERS_T()
+        parameters.length1 = 1
+        parameters.length2 = 3
+        parameters.k_Pts = 2
+        coordinates = np.zeros((4, 2))
+
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [0, 2]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_12())
+
+        ## Tests if it fails when there are more inbetween than specified.
+        coordinates = np.zeros((5, 2))
+
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [0, 1]
+        coordinates[4] = [0, 2]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_12())
+
+        ## Tests if it fails when the distance is equal to length2
+        parameters.length1 = 2
+        coordinates = np.zeros((4, 2))
+
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [0, 2]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_12())
+
+        ## Tests if it fails when the distance is equal to length2
+        parameters.length2 = 2
+        coordinates = np.zeros((4, 2))
+
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [0, 2]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_12())
+
 if __name__ == '__main__':
     unittest.main()
-        
