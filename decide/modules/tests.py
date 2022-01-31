@@ -36,18 +36,7 @@ class TestLIC(unittest.TestCase):
             
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_0())
-
-        # Test if it fails when the distance is not grather than length1
-        parameters = PARAMETERS_T()
-        parameters.length1 = 1
-        coordinates = np.zeros((2, 2))
         
-        coordinates[0] = [0,0]
-        coordinates[1] = [0, 1]
-            
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_0())
-
         ## Test for when the distance greater than length1 are not consecutive. 
         parameters = PARAMETERS_T()
         parameters.length1 = 1
@@ -139,19 +128,14 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
-
         Tests
         -----
-
         Test1: Asserts if function returns False when len(coordinates) < 2.
         Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
         Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
-
         See Also
         --------
-
         LIC5: Function of the cmv class which this test is testing.
-
         """
 
         # Test 1 - Returns False since there is not enough coordinates.
@@ -180,7 +164,6 @@ class TestLIC(unittest.TestCase):
     def test_LIC7(self):
 
         """ Tests the LIC7 function of the CMV component.
-
         Tests
         -----
         Test1: Asserts if function returns True if there exists a pair of coordinates that are exactly K_PTS = 2 apart with distance grater than 1. 
@@ -215,60 +198,9 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
-    def test_LIC11(self):
-        """ Tests the LIC5 function of the CMV component.
-
-        Tests
-        -----
-
-        Test1: Asserts if function returns False when len(coordinates) < 3.
-        Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
-        Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
-        Test4: Asserts if function returns False if there are not enough points between the pair of coordinates satisfying the condition.
-
-        See Also
-        --------
-
-        LIC5: Function of the cmv class which this test is testing.
-
-        """
-
-        # Test 1 - Returns False since there is not enough coordinates.
-        parameters = PARAMETERS_T() # Import parameters
-        parameters.g_pts = 1
-        coordinates = np.zeros((1, 3)) # Create an empty array of 1 coordinate pairs.
-
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_11())
-
-        # Test 2 - Returns True since there is a pair of coordinates satisfying the condition.
-        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
-
-        coordinates[2] = [25, 0]
-
-        CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_11())
-
-        # Test 3 - Returns False since there is not a pair of coordinates satisfying the condition.
-        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
-
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_11())
-
-        # Test 4 - Returns False since there is not enough points between the pair of coordinates satisfying the condition.
-        parameters.g_pts = 3
-
-        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
-
-        coordinates[2] = [25, 0]
-
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_11())
-
     def test_LIC12(self):
 
         """ Tests the LIC12 function of the CMV component.
-
         Tests
         -----
         Test1: Asserts if function returns True if there exists a pair of coordinates that are exactly K_PTS = 2 apart with distance greater than lenght1 and less than length2. 
@@ -333,4 +265,3 @@ class TestLIC(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-        
