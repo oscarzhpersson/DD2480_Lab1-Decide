@@ -35,6 +35,13 @@ class cmv:
 
             radius = Circle(p1, p2, p3).radius
 
+            # True if p1, p2 and p3 cannot all be contained within a circle of radius RADIUS1
+            if (radius > self.PARAMS.radius1):
+                return True
+            
+        # All sets of 3-consecutive points are within a circle with set radius
+        return False
+
         return 0
     
     # Set Condvector[2]
