@@ -1,5 +1,15 @@
 import numpy as np
 from sympy import Point, Circle
+import math
+
+# Helper functions
+def find_radius(min, max):
+    x = max[0] - min[0]
+    y = max[1] - min[1]
+    diameter = math.sqrt(x ** 2 + y ** 2)
+    radius = diameter / 2
+    return radius
+
 class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
@@ -32,13 +42,26 @@ class cmv:
             p1 = Point(self.coordinates[i, 0], self.coordinates[i, 1])
             p2 = Point(self.coordinates[i+1, 0], self.coordinates[i+1, 1])
             p3 = Point(self.coordinates[i+2, 0], self.coordinates[i+2, 1])
+            list = [(p1.x, p1.y), (p2.x, p2.y), (p3.x, p3.y)]
+            radius = 0
 
             # This set of coordinates can be contained within RADIUS1
             if p1 == p2 == p3:
                 continue
+            # Same x coordinates
+            elif p1.x == p2.x == p3.x:
+                y_min = min(list, key = lambda t: t[1])
+                y_max = max(list, key = lambda t: t[1])
+                radius = find_radius(y_min, y_max)
+
+            # Same y coordinates    
+            elif p1.y == p2.y == p3.y:
+                x_min = min(list, key = lambda t: t[0])
+                x_max = max(list, key = lambda t: t[0])
+                radius = find_radius(x_min, x_max)
             else:
                 radius = Circle(p1, p2, p3).radius
-
+            
             # True if p1, p2 and p3 cannot all be contained within a circle of radius RADIUS1
             if (radius > self.PARAMS.radius1):
                 return True
