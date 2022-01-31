@@ -23,11 +23,19 @@ Requires import only
 
 # Usage
 
-The program is built and compiled by running...
+The program is built and executed by running:
 
-Then tested by running...
+```bash
+python3 main.py
 
-Finally executed by running...
+```
+
+Then tested by running:
+
+```bash
+python3 modules/test.py
+
+```
 
 Further detailed documentation is provided separately.
 
