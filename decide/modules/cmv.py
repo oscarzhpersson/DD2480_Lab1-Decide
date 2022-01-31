@@ -176,7 +176,7 @@ class cmv:
             return False
         if (self.PARAMS.e_Pts + self.PARAMS.f_Pts > len(self.coordinates) - 3):
             return False
-        for i in range( len(self.coordinates) - self.PARAMS.e_Pts - self.PARAMS.f_Pts ): # Iterate all coordinates, till coordinates are out of range.
+        for i in range( len(self.coordinates) - self.PARAMS.e_Pts - self.PARAMS.f_Pts - 2): # Iterate all coordinates, till coordinates are out of range.
             c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.e_Pts + 1], self.coordinates[i + self.PARAMS.e_Pts + 1 + self.PARAMS.f_Pts + 1])
             c    = np.sqrt((c3[0] - c1[0])**2 + (c3[1] - c1[1])**2)
             a    = np.sqrt((c2[0] - c1[0])**2 + (c2[1] - c1[1])**2)
