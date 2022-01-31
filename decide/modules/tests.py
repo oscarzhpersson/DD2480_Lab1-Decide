@@ -232,19 +232,19 @@ class TestLIC(unittest.TestCase):
         parameters.area1 = 5
         parameters.area2 = 10
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_10())
+        self.assertTrue(CMV.LIC_14())
 
         #Test2
         parameters.area1 = 4
         parameters.area2 = 5
         CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_10())
+        self.assertFalse(CMV.LIC_14())
 
         #Test3
         parameters.area1 = 7
         parameters.area2 = 10
         CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_10())
+        self.assertFalse(CMV.LIC_14())
 
 if __name__ == '__main__':
     unittest.main()
