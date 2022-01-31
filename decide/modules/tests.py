@@ -151,6 +151,20 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_4())
 
+
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [1, 1]
+        coordinates[3] = [1, 1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_4())
+
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
 
