@@ -359,6 +359,21 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
+    def test_LIC8(self):
+        """ Tests the LIC8 function of the CMV component.
+
+        Tests
+        -----
+        Test1: 
+
+        See Also
+        --------
+
+        LIC8: Function of the cmv class which this test is testing.
+
+        """
+        
+
     def test_LIC11(self):
         """ Tests the LIC5 function of the CMV component.
         Tests
