@@ -10,6 +10,11 @@ def find_radius(min, max):
     radius = diameter / 2
     return radius
 
+def distance(self, i, j):
+    x = self.coordinates[i, 0] - self.coordinates[j, 0]
+    y = self.coordinates[i, 1] - self.coordinates[j, 1]
+    return math.sqrt(x ** 2 + y ** 2)
+
 class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
@@ -48,6 +53,7 @@ class cmv:
             # This set of coordinates can be contained within RADIUS1
             if p1 == p2 == p3:
                 continue
+
             # Same x coordinates
             elif p1.x == p2.x == p3.x:
                 y_min = min(list, key = lambda t: t[1])
@@ -59,6 +65,14 @@ class cmv:
                 x_min = min(list, key = lambda t: t[0])
                 x_max = max(list, key = lambda t: t[0])
                 radius = find_radius(x_min, x_max)
+
+            # Two unique points instead of three
+            elif p1 == p3 or p2 == p3:
+                radius = distance(self, i, i+1) / 2
+            elif p2 == p1:
+                radius = distance(self, i+1, i+2) / 2
+            
+            # Three unique points, radius can be derived from circle
             else:
                 radius = Circle(p1, p2, p3).radius
             
