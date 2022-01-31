@@ -323,6 +323,19 @@ class cmv:
             # This set of coordinates can be contained within RADIUS1
             if p1 == p2 == p3:
                 continue
+
+            # Same x coordinates
+            elif p1.x == p2.x == p3.x:
+                y_min = min(list, key = lambda t: t[1])
+                y_max = max(list, key = lambda t: t[1])
+                radius = find_radius(y_min, y_max)
+
+            # Same y coordinates    
+            elif p1.y == p2.y == p3.y:
+                x_min = min(list, key = lambda t: t[0])
+                x_max = max(list, key = lambda t: t[0])
+                radius = find_radius(x_min, x_max)
+                
             else:
                 radius = Circle(p1, p2, p3).radius
 
