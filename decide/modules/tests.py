@@ -49,6 +49,29 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_0())
 
+    # Tests the LIC1 function of the CMV component.
+    def test_LIC1(self):
+        """ Tests the LIC1 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if function returns True when RADIUS1 = 0.
+
+        See Also
+        --------
+
+        LIC1: Function of the cmv class which this test is testing.
+
+        """
+        
+        parameters = PARAMETERS_T()
+
+        # Test 1
+        parameters.radius1 = 0
+        coordinates = np.zeros((3, 2))
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
