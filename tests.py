@@ -202,6 +202,28 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
+    def test_LIC10(self):
+        parameters = PARAMETERS_T()
+        
+        parameters.e_Pts = 1
+        parameters.f_Pts = 2
+        parameters.area1 = 5
+
+        coordinates = np.zeros((9, 2))
+        coordinates[0] = [1,0]
+        coordinates[1] = [0, 0]
+        coordinates[2] = [0, 3]
+        coordinates[4] = [0, 2]
+        coordinates[5] = [0, 4]
+        coordinates[6] = [7, 0]
+        coordinates[7] = [0, 9]
+        coordinates[8] = [8, 2]
+        
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_10())
+
+
 if __name__ == '__main__':
     unittest.main()
         
