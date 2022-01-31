@@ -1,4 +1,5 @@
 import numpy as np
+import math
 class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
@@ -43,8 +44,34 @@ class cmv:
     
     # Set Condvector[2]
     def LIC_2(self):
-        return 0
-    
+        # Pick out three consecutive points
+        for i in range(len(self.coordinates) - 2):
+            point_1_x = self.coordinates[i, 0]
+            point_1_y = self.coordinates[i, 1]
+            point_2_x = self.coordinates[i + 1, 0]
+            point_2_y = self.coordinates[i + 1, 1]
+            point_3_x = self.coordinates[i + 2, 0]
+            point_3_y = self.coordinates[i + 2, 1]
+
+        # Create line 12
+        line12_x = (point_2_x - point_1_x)
+        line12_y = (point_2_y - point_1_y)
+        line12 = math.sqrt((line12_x ** 2) + (line12_y ** 2))
+
+        # Create line 13
+        line23_x = (point_3_x - point_2_x)
+        line23_y = (point_3_y - point_2_y)
+        line23 = math.sqrt((line23_x ** 2) + (line23_y ** 2))
+
+        # Create line 23
+        line13_x = (point_3_x - point_1_x)
+        line13_y = (point_3_y - point_1_y)
+        line13 = math.sqrt((line13_x ** 2) + (line13_y ** 2))
+
+        # Finding the angle
+        angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
+
+
     # Set Condvector[3]
     # Input: Array of coordinates.
     # Output: True if there exists three consecutive datapoints
