@@ -21,6 +21,10 @@ class cmv:
     # False if all 3-sets of consecutive datapoints
     # can be contained within the radius
     def LIC_1(self):
+
+        if self.PARAMS.radius1 == 0:
+            return True
+            
         return 0
     
     # Set Condvector[2]
