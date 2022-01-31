@@ -3,14 +3,36 @@ from sympy import Point, Circle
 import math
 
 # Helper functions
-def find_radius(min, max):
-    x = max[0] - min[0]
-    y = max[1] - min[1]
+def find_radius(min_coordinate, max_coordinate):
+    '''Takes two coordinates and calculates the radius of the circle that would pass through them
+
+        Parameters
+        ----------
+        two coordinates
+
+        Returns
+        -------
+        radius: distance between the coordinates divided by two     
+
+        '''
+    x = max_coordinate[0] - min_coordinate[0]
+    y = max_coordinate[1] - min_coordinate[1]
     diameter = math.sqrt(x ** 2 + y ** 2)
     radius = diameter / 2
     return radius
 
 def distance(self, i, j):
+    '''Takes two indexes i and j and calculates the distance between coordinate[i] and coordinate[j]
+
+        Parameters
+        ----------
+        index for coordinate array: i, j
+
+        Returns
+        -------
+        distance between coordinates            
+
+        '''
     x = self.coordinates[i, 0] - self.coordinates[j, 0]
     y = self.coordinates[i, 1] - self.coordinates[j, 1]
     return math.sqrt(x ** 2 + y ** 2)
