@@ -319,6 +319,8 @@ class cmv:
             p1 = Point(self.coordinates[i, 0], self.coordinates[i, 1])
             p2 = Point(self.coordinates[mid_index, 0], self.coordinates[mid_index, 1])
             p3 = Point(self.coordinates[last_index, 0], self.coordinates[last_index, 1])
+            list = [(p1.x, p1.y), (p2.x, p2.y), (p3.x, p3.y)]
+            radius = 0
 
             # This set of coordinates can be contained within RADIUS1
             if p1 == p2 == p3:
