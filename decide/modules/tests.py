@@ -61,6 +61,7 @@ class TestLIC(unittest.TestCase):
         Test3: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same x value.
         Test4: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same y value.
         Test5: Asserts if function returns True or False (depending on RADIUS1) when two out of the three points are the same.
+        Test6: Asserts if function returns True or False (depending on RADIUS1) when all three consecutive datapoints are unique.
 
         See Also
         --------
@@ -141,6 +142,21 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_1())
         # The given RADIUS1 should output TRUE 
         parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Test 6: If all three points are unique, a circle can be formed and a
+        # radius can be derived directly.
+        # Radius of circle formed by coordinates is 5
+        coordinates[0] = [1,-6]
+        coordinates[1] = [2,1]
+        coordinates[2] = [5,2]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 5
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 4
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_1())
 
