@@ -126,6 +126,22 @@ class TestLIC(unittest.TestCase):
 
     def test_LIC4(self):
 
+        """ Tests the LIC5 function of the CMV component.
+
+             Tests
+             -----
+
+             Test1: Asserts if function returns False when len(coordinates) < 2.
+             Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+             Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+
+             See Also
+             --------
+
+             LIC5: Function of the cmv class which this test is testing.
+
+        """
+
         #TEST 1
         parameters = PARAMETERS_T()
         parameters.q_Pts = 3
@@ -151,7 +167,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_4())
 
-
+        #Test 3
         parameters.q_Pts = 3
         parameters.quads = 2
 
@@ -164,6 +180,20 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_4())
+
+        #Test 4
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [-1, -1]
+        coordinates[3] = [1, -1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_4())
 
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
