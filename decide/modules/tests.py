@@ -37,6 +37,17 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_0())
 
+        # Test if it fails when the distance is not grather than length1
+        parameters = PARAMETERS_T()
+        parameters.length1 = 1
+        coordinates = np.zeros((2, 2))
+        
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 1]
+            
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_0())
+
         ## Test for when the distance greater than length1 are not consecutive. 
         parameters = PARAMETERS_T()
         parameters.length1 = 1
