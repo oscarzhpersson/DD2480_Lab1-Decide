@@ -300,6 +300,16 @@ class cmv:
 
     # Set Condvector[8]
     def LIC_8(self):
+        # Prerequisite checks
+        if self.PARAMS.radius1 == 0:
+            return True
+        if len(self.coordinates) < 5: 
+            return True
+        if self.PARAMS.a_Pts + self.PARAMS.b_Pts < 2:
+            return True
+        if (self.PARAMS.a_Pts + self.PARAMS.b_Pts) > len(self.coordinates) - 3: 
+            return True
+            
         return 0
 
     # Set Condvector[9]
