@@ -63,6 +63,32 @@ class cmv:
 
         return False
 
+    def check_quadrants(self, coor, qpts):
+        first_quadrent = 0
+        sec_quadrent = 0
+        fourth_quadrent = 0
+        third_quadrent = 0
+        coor = np.array(coor)
+
+        for i in range(qpts):
+            if coor[i, 0] > 0 and coor[i, 1] > 0:
+                first_quadrent = 1
+                # check for 2nd quadrant
+            elif coor[i, 0] < 0 and coor[i, 1] > 0:
+                sec_quadrent = 1
+                # check for 3rd quadrant
+            elif coor[i, 0] < 0 and coor[i, 1] < 0:
+                third_quadrent = 1
+                # check for fourth quadrant
+            elif coor[i, 0] > 0 and coor[i, 1] < 0:
+                fourth_quadrent = 1
+                # Else its the origin
+            else:
+                first_quadrent = 1
+
+        total_quad = first_quadrent + sec_quadrent + third_quadrent + fourth_quadrent
+
+        return total_quad
 
     # Set Condvector[5]
     def LIC_5(self):
