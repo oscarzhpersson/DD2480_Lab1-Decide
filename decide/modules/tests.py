@@ -222,8 +222,8 @@ class TestLIC(unittest.TestCase):
 
         # Test 1 
         parameters = PARAMETERS_T() # Import parameters
-        parameters.a_Pts = 1
-        parameters.b_Pts = 2
+        parameters.c_Pts = 1
+        parameters.d_Pts = 2
 
         coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
 
