@@ -91,25 +91,43 @@ class cmv:
         return total_quad
 
     def LIC_4(self):
-        print("Print 1")
+
+        '''Checks if there exist a Q_pts consecutive data points that lie in more than QUADS quadrants.
+               The function checks a set of coordinates that are in different quadrants and returns true if the points are in more than QUADS quadrant.
+
+               Parameters
+               ----------
+               None
+
+               Returns
+               -------
+               bool
+                   True if a set satisfying the conditions exist.
+                   False if a set of satisfying conditions does not exist.
+
+               See Also
+               --------
+               PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+               '''
+
+        #storing the values in parameter
         qpts = int(self.PARAMS.q_Pts)
         quads = self.PARAMS.quads
-        lenght = int(len(self.coordinates))
-        print("Print 2")
+        length = int(len(self.coordinates))
 
+        #Checking the first prerequisite
         if (quads <= 1 or quads >= 3):
             return False
-        print("Print 3")
 
-        print("Len: ", len(self.coordinates))
-        print("qpts: ", qpts)
+        #Checking the second prerequisite
         if (2 > qpts or len(self.coordinates) < qpts):
             return False
-        print("Print 4")
-        for i in range(lenght):
+
+        #Checking the number of quadrants the points fulfill
+        for i in range(length):
             pointlist = []
             for j in range(qpts):
-                if (i + qpts) > lenght:
+                if (i + qpts) > length:
                     return False
                 pointlist.append(self.coordinates[i + j])
 
