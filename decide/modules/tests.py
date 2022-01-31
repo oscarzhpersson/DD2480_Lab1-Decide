@@ -77,6 +77,22 @@ class TestLIC(unittest.TestCase):
         self.assertTrue(CMV.LIC_1())
 
     def test_LIC2(self):
+
+        """ Tests the LIC2 function of the CMV component.
+
+                Tests
+                -----
+
+                Test1: Asserts if the functions returns False if angle is larger than pi - epsilon
+                Test2: Asserts if the function returns True if the angle is smaller than pi - epsilon.
+
+                See Also
+                --------
+
+                LIC2: Function of the cmv class which this test is testing.
+
+        """
+
         # Test 1: returns false because angle is larger than pi-epsilon, epsilon is set to 1
         parameters = PARAMETERS_T()
         parameters.epsilon = np.pi - 1
