@@ -972,9 +972,54 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_13())
 
+    def test_LIC14(self):
+
+        """ Tests the LIC14 function of the CMV component.
+        Tests
+        -----
+        Test1: Asserts if function returns True if area is larger than area1 but smaller than area2.
+        Test2: Asserts if function returns False if area is larger than area1 but NOT smaller than area2.
+        Test2: Asserts if function returns False if area is NOT larger than area1 but smaller than area2.
+        See Also
+        --------
+        LIC14: Function of the cmv class which this test is testing.
+        """
+        parameters = PARAMETERS_T()
+
+        parameters.e_Pts = 1
+        parameters.f_Pts = 2
+        parameters.area1 = 5
+
+        
+        coordinates = np.zeros((6, 2))
+        coordinates[0] = [0,0]
+        coordinates[1] = [0, 4]
+        coordinates[2] = [0, 3]            
+        coordinates[3] = [7, 0]
+        coordinates[4] = [9, 4]
+        coordinates[5] = [4, 0]
+
+        #Test1
+        parameters.area1 = 5
+        parameters.area2 = 10
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_14())
+
+        #Test2
+        parameters.area1 = 4
+        parameters.area2 = 5
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_14())
+
+        #Test3
+        parameters.area1 = 7
+        parameters.area2 = 10
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_14())
+
     def test_main(self):
         parameters = PARAMETERS_T()
-        coordinates = np.zeros((56, 2))
+        coordinates = np.zeros((62, 2))
             # LIC 0
         coordinates[0] =[0,1]
         coordinates[1] =[1,2]
@@ -1091,14 +1136,22 @@ class TestLIC(unittest.TestCase):
         coordinates[54] = [1,1]
         coordinates[55] = [30,30]
 
+        coordinates[56] = [0,0]
+        coordinates[57] = [0, 4]
+        coordinates[58] = [0, 3]            
+        coordinates[59] = [7, 0]
+        coordinates[60] = [9, 4]
+        coordinates[61] = [4, 0]
+
         parameters.radius2 = 10
+        parameters.area2 = 10
+
 
         CMV = cmv(parameters, coordinates)
         condVect = CMV.return_cond_vector()
         for i in range(15):
             print(i)
             self.assertTrue(condVect[i])
-
 
 
 if __name__ == '__main__':
