@@ -375,7 +375,7 @@ class TestLIC(unittest.TestCase):
         See Also
         --------
 
-        LIC5: Function of the cmv class which this test is testing.
+        LIC9: Function of the cmv class which this test is testing.
 
         """
 
@@ -391,7 +391,7 @@ class TestLIC(unittest.TestCase):
 
         # Test 2 
         parameters.epsilon = 1
-        coordinates = np.zeros((6, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
 
         coordinates[0] = [0, 0]
         coordinates[1] = [1, 0]
@@ -405,7 +405,7 @@ class TestLIC(unittest.TestCase):
         self.assertTrue(CMV.LIC_9())
 
         # Test 3 
-        coordinates = np.zeros((6, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
         coordinates[0] = [0, 1]
         coordinates[1] = [1, 0]
         coordinates[2] = [3, 1]
@@ -415,6 +415,22 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_9())
+
+        #Test 4
+        parameters.epsilon = 3
+        parameters.c_Pts = 1
+        parameters.d_Pts = 1
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [50, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
+
         
 
     def test_LIC11(self):
@@ -462,20 +478,6 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_11())
 
-
-        #Test 4
-        parameters.epsilon = 3
-        parameters.c_Pts = 1
-        parameters.d_Pts = 1
-        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
-        coordinates[0] = [0, 0]
-        coordinates[1] = [1, 0]
-        coordinates[2] = [0, 1]
-        coordinates[3] = [7, 0]
-        coordinates[4] = [50, 0]
-
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_9())
 
 
 if __name__ == '__main__':
