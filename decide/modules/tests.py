@@ -368,6 +368,7 @@ class TestLIC(unittest.TestCase):
         Test2: Asserts if function returns False when RADIUS1 == 0
         Test3: Asserts if function returns False when A_PTS + B_PTS < 2
         Test4: Asserts if function returns False when A_PTS + B_PTS > NUMPOINTS - 3
+        Test5: Asserts if function returns False when all pairs of points are the same.
 
         See Also
         --------
@@ -409,6 +410,21 @@ class TestLIC(unittest.TestCase):
         parameters.a_Pts = 5
         parameters.b_Pts = 5
         parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 5
+        parameters = PARAMETERS_T()
+        parameters.radius1 = 10
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((6, 2))
+        coordinates[0] = [1,1]
+        coordinates[1] = [0,0]
+        coordinates[2] = [1,1]
+        coordinates[3] = [0,0]
+        coordinates[4] = [1,1]
+        coordinates[5] = [0,0]
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_8())
 
