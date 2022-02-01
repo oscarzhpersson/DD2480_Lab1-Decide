@@ -347,7 +347,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_7())
 
-        ## Tests if it fails when there are more inbetween than specified.
+        # Tests if it fails when there are more inbetween than specified.
         coordinates = np.zeros((5, 2))
 
         coordinates[0] = [0,0]
