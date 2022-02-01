@@ -25,6 +25,7 @@ class PARAMETERS_T:
     radius2: float = 0 # Maximum radius in LIC 13.
     area2: float = 0 # Maximum area in LIC 14.
 
+
 class TestLIC(unittest.TestCase):
     def test_LIC0(self):
         ## Test if coordinates that are sqrt(2) are accepted if length1 = 1.
