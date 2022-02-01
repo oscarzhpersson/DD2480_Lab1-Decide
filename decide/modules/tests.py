@@ -741,14 +741,20 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_12())
 
     def test_LIC13(self):
+        """ Tests the LIC13 function of the CMV component.
 
-        #Test1: Asserts if function returns False if RADIUS2 = 0
-        #Test2: Asserts if function returns False if NUMPOINTS < 5
-        #Test3: Asserts if function returns False if A_PTS + B_PTS < 2
-        #Test4: Asserts if function returns False if A_PTS + B_PTS > NUMPOINTS - 3
-        #Test5: Asserts if function returns False when given correct input which should yield False
-        #Test6: Tests several valid input cases where the function should return True
-        
+        Tests
+        -----
+        Test1: Asserts if function returns False if RADIUS2 = 0
+        Test2: Asserts if function returns False if NUMPOINTS < 5
+        Test3: Asserts if function returns False if A_PTS + B_PTS < 2
+        Test4: Asserts if function returns False if A_PTS + B_PTS > NUMPOINTS - 3
+        Test5: Asserts if function returns False when given correct input which should yield False
+        Test6: Tests several valid input cases where the function should return True
+
+        LIC13: Function of the cmv class which this test is testing.
+
+        """
 
         # Test 1
         parameters = PARAMETERS_T()
