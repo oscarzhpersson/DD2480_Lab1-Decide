@@ -67,7 +67,7 @@ class TestLIC(unittest.TestCase):
         Tests
         -----
 
-        Test1: Asserts if function returns True when RADIUS1 = 0.
+        Test1: Asserts if function returns False when RADIUS1 = 0.
         Test2: Asserts if function returns False if three consecutive datapoints are the same and form a single point (RADIUS1 > 0).
         Test3: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same x value.
         Test4: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same y value.
@@ -87,7 +87,7 @@ class TestLIC(unittest.TestCase):
         parameters.radius1 = 0
         coordinates = np.zeros((3, 2))
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_1())
+        self.assertFalse(CMV.LIC_1())
 
         # Test 2: If all 3 coordinates are the same, they become a single point.
         # This point should be able to be contained within RADIUS1 yielding FALSE
