@@ -2,6 +2,7 @@ import numpy as np
 import enum
 from dataclasses import dataclass
 from modules import cmv
+from modules import pum
 
 ##### CONSTANT #####
 
@@ -15,7 +16,7 @@ class Connectors(enum.Enum):
     "ANDD"
 
 # Matrix of X, Y coordinate pairs.
-coordinate = np.zeros((100, 2)) #? Replaces the coordinate X and coordinate Y variable.
+coordinates = np.zeros((100, 2)) #? Replaces the coordinate X and coordinate Y variable.
 
 # 2D array of 15x15 booleans.
 bMatrix = np.zeros((15, 15))
@@ -50,7 +51,7 @@ class PARAMETERS_T:
     radius2: float # Maximum radius in LIC 13.
     area2: float # Maximum area in LIC 14.
 
-#parameters = PARAMETERS_T()
+parameters = PARAMETERS_T()
 
 # TODO Import PUM
 # TODO Import CMV
@@ -59,6 +60,17 @@ class PARAMETERS_T:
 #? Function you must write:
 
 def decide():
+    CMV = cmv(parameters, coordinates)
+    condVect = CMV.return_cond_vector()
+
+    LCM = np.ones((15, 15))
+    PUV = np.ones(15, dtype=bool)
+    PUM = pum(condVect, LCM, PUV)
+
+    PUM_matrix = PUM.compute_PUM()
+    FUV_vector = PUM.compute_FUV(PUM_matrix)
+    PUM.Launch(FUV_vector)
+
     # CMV = cmv(coordinates, parameters)
     # cond_vector = CMV.return_cond_vector()
     return 0
