@@ -1036,6 +1036,14 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_14())
 
     def test_main(self):
+        """ Test the main function of the Assignment
+
+        Test
+        ---
+        Assert if Return True  if all LIC have passed while running through specific coordinates and parameters.
+        ---
+
+        """
         parameters = PARAMETERS_T()
         coordinates = np.zeros((62, 2))
             # LIC 0
@@ -1118,7 +1126,7 @@ class TestLIC(unittest.TestCase):
         parameters.c_Pts = 1
         parameters.d_Pts = 2
 
-        # LIC 10?
+        # LIC 10
         coordinates[35] = [0,0]
         coordinates[36] = [0, 4]
         coordinates[37] = [0, 3]
@@ -1154,6 +1162,7 @@ class TestLIC(unittest.TestCase):
         coordinates[54] = [1,1]
         coordinates[55] = [30,30]
 
+        # LIC_14
         coordinates[56] = [0,0]
         coordinates[57] = [0, 4]
         coordinates[58] = [0, 3]            
