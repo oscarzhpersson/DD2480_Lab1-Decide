@@ -536,7 +536,45 @@ class cmv:
 
     # Set Condvector[10]
     def LIC_10(self):
-        return 0
+        ''' Check if there exist one set of data points that 
+            are separated by E Pts and F Pts respectively 
+            and that the Area constructed by the points will 
+            be larger than Area1.
+        
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5 / e_Pts<1 / f_Pts<1).
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        '''
+        
+        if (len(self.coordinates) < 5) :
+            return False
+        if (self.PARAMS.e_Pts < 1):
+            return False
+        if (self.PARAMS.f_Pts < 1):
+            return False
+        if (self.PARAMS.e_Pts + self.PARAMS.f_Pts > len(self.coordinates) - 3):
+            return False
+        for i in range( len(self.coordinates) - self.PARAMS.e_Pts - self.PARAMS.f_Pts - 2): # Iterate all coordinates, till coordinates are out of range.
+            c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.e_Pts + 1], self.coordinates[i + self.PARAMS.e_Pts + 1 + self.PARAMS.f_Pts + 1])
+            c    = np.sqrt((c3[0] - c1[0])**2 + (c3[1] - c1[1])**2)
+            a    = np.sqrt((c2[0] - c1[0])**2 + (c2[1] - c1[1])**2)
+            b  = np.sqrt((c3[0] - c2[0])**2 + (c3[1] - c2[1])**2)
+            p = (a + b + c)/2
+            area = np.sqrt(p*(p-a)*(p-b)*(p-c))
+            
+            if (area > self.PARAMS.area1) :
+                return True
+
+        return False
 
     # Set Condvector[11]
     def LIC_11(self):
