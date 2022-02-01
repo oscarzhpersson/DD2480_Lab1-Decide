@@ -28,6 +28,23 @@ class PARAMETERS_T:
 
 class TestLIC(unittest.TestCase):
     def test_LIC0(self):
+
+        """ Tests the LIC1 function of the CMV component.
+
+        Tests
+        -----
+
+        Test 1: Tests if coordinates that are sqrt(2) are accepted if length1 = 1, should return True.
+        Test 2: Tests if it fails when the distance is not grather than length1, should return False.
+        Test 3: Tests when the distance greater than length1 are not consecutive, should return False.
+
+        See Also
+        --------
+
+        LIC0: Function of the cmv class which this test is testing.
+
+        """
+
         ## Test if coordinates that are sqrt(2) are accepted if length1 = 1.
         parameters = PARAMETERS_T()
         parameters.length1 = 1
