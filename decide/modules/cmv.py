@@ -607,7 +607,6 @@ class cmv:
                 x_min = min(list, key = lambda t: t[0])
                 x_max = max(list, key = lambda t: t[0])
                 radius = find_radius(x_min, x_max)
-                print(radius)
 
             # radius = (distance between p1 and p2) / 2
             elif p1 == p3 or p2 == p3:
@@ -622,10 +621,11 @@ class cmv:
                 radius = Circle(p1, p2, p3).radius
 
             # True if points cannot be contained within a circle of radius RADIUS2
-            if (radius > self.PARAMS.radius1):
+            if (radius > self.PARAMS.radius2):
                 ret_flag_1 = True
+                
             # True if points can be contained within or on a circle of radius RADIUS2
-            if (radius <= self.PARAMS.radius1):
+            if (radius <= self.PARAMS.radius2):
                 ret_flag_2 = True
             
             # Function conditional met
