@@ -162,6 +162,23 @@ class TestLIC(unittest.TestCase):
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
+
+        """ Tests the LIC3 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if there exists a triangle with an area larger than area1, in a scenario where it should.
+        Test2: Asserts if there does not exist a triangle with an area larger than area1 in a scenario when it should not.
+        Test3: Asserts if test 1 works using negative coordinates.
+
+        See Also
+        --------
+
+        LIC3: Function of the cmv class which this test is testing.
+
+        """
+
         parameters = PARAMETERS_T() # Import parameters
         parameters.area1 = 5 # Set the target area to an arbitrary value: 5.
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
@@ -359,6 +376,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
+
     def test_LIC8(self):
         """ Tests the LIC8 function of the CMV component.
 
@@ -373,9 +391,6 @@ class TestLIC(unittest.TestCase):
         Test7: Tests functionality of conditional which handles the case of all coordinates having the same y values.
         Test8: Tests functionality of conditional which handles the case where there only exist two unique points.
         Test9: Tests functionality of conditional which handles the case where there exist three unique points.
-
-        See Also
-        --------
 
         LIC8: Function of the cmv class which this test is testing.
 
@@ -497,6 +512,76 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_8())
 
+
+    def test_LIC9(self):
+        """ Tests the LIC9 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if function returns False when len(coordinates) < 5.
+        Test2: Asserts if function returns True if angle < (pi - epsilon)
+        Test3: Asserts if function returns True if angle < (pi + epsilon)
+        Test4: Asserts if function returns False if angle criteria is not met
+
+        See Also
+        --------
+
+        LIC9: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1 
+        parameters = PARAMETERS_T() # Import parameters
+        parameters.c_Pts = 1
+        parameters.d_Pts = 2
+
+        coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
+        # Test 2 
+        parameters.epsilon = 1
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [40, 0]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [0, 9]
+        coordinates[5] = [0, 1]
+
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_9())
+
+        # Test 3 
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
+        coordinates[0] = [0, 1]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [3, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [0, 9]
+        coordinates[5] = [0, 5]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_9())
+
+        #Test 4
+        parameters.epsilon = 3
+        parameters.c_Pts = 1
+        parameters.d_Pts = 1
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [50, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
         
 
     def test_LIC11(self):
@@ -543,6 +628,8 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_11())
+
+
 
 if __name__ == '__main__':
     unittest.main()

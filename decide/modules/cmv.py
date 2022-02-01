@@ -138,6 +138,28 @@ class cmv:
     # Output: True if there exists three consecutive datapoints
     #         making up the area of a triangle with an area larger than AREA1.
     def LIC_3(self):
+
+        '''Function checks if there exists three consecutive datapoints who's collective area is larger than the specified AREA1 from PARAMETERS_T.
+
+        By using the determinant method, the function creates a triangle and calculates its area using three consecutive points from the coordinates. If three
+        consecutive points exist, return True. Otherwise return False.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if three consecutive datapoints make up a triangle with an area larger than AREA1 exists.
+            False if three consecutive datapoints make up a triangle with an area larger than AREA1 does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
         for i in range( len(self.coordinates) - 2 ): # Iterate all coordinates, leaving an offset to pair triplets.
 
             # Read the coordinates from the array into a tuple.
@@ -379,7 +401,44 @@ class cmv:
 
     # Set Condvector[9]
     def LIC_9(self):
-        return 0
+        ''' Check if there exist one set of three data points 
+            separated by exactly C PTS and D PTS respectively 
+            and that the angle formed will be either  
+            (angle < (pi-epsilon)) OR (angle > (pi+epsilon)).
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5).
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        '''
+
+        if (len(self.coordinates) < 5) :
+            return False
+        if (self.PARAMS.c_Pts < 1):
+            return False
+        if (self.PARAMS.d_Pts < 1):
+            return False
+        if (self.PARAMS.c_Pts + self.PARAMS.d_Pts > len(self.coordinates) - 3):
+            return False
+        for i in range( len(self.coordinates) - self.PARAMS.c_Pts - self.PARAMS.d_Pts - 2): # Iterate all coordinates, till coordinates are out of range.
+            c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.c_Pts + 1], self.coordinates[i + self.PARAMS.c_Pts + 1 + self.PARAMS.d_Pts + 1])
+            c    = np.sqrt((c3[0] - c1[0])**2 + (c3[1] - c1[1])**2)
+            a    = np.sqrt((c2[0] - c1[0])**2 + (c2[1] - c1[1])**2)
+            b  = np.sqrt((c3[0] - c2[0])**2 + (c3[1] - c2[1])**2)
+            angle = np.arccos((a**2 + b**2 - c**2)/ (2*a*b))
+            
+            if (angle < (np.pi - self.PARAMS.epsilon)) or (angle > (np.pi + self.PARAMS.epsilon)) :
+                return True
+
+        return False
 
     # Set Condvector[10]
     def LIC_10(self):
