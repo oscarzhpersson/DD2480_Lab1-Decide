@@ -162,6 +162,23 @@ class TestLIC(unittest.TestCase):
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
+
+        """ Tests the LIC3 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if there exists a triangle with an area larger than area1, in a scenario where it should.
+        Test2: Asserts if there does not exist a triangle with an area larger than area1 in a scenario when it should not.
+        Test3: Asserts if test 1 works using negative coordinates.
+
+        See Also
+        --------
+
+        LIC3: Function of the cmv class which this test is testing.
+
+        """
+
         parameters = PARAMETERS_T() # Import parameters
         parameters.area1 = 5 # Set the target area to an arbitrary value: 5.
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
