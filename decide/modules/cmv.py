@@ -157,9 +157,13 @@ class cmv:
 
         # Finding the angle
         angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
-        
-        return 0
-    
+
+        # If the angle is larger or smaller, output true else outputs false
+        if (angle < (np.pi - self.PARAMS.epsilon) or angle > (np.pi + self.PARAMS.epsilon)):
+            return True
+        else:
+            return False
+
     # Set Condvector[3]
     # Input: Array of coordinates.
     # Output: True if there exists three consecutive datapoints
