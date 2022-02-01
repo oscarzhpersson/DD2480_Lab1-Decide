@@ -146,15 +146,10 @@ class cmv:
 
     # Set Condvector[9]
     def LIC_9(self):
-        '''Check if one set of three data points separated by 
-        exactly C PTS and D PTS consecutive intervening points, 
-        respectively, that form an angle such that 
-        
-        angle < (pi-epsilon)
-
-        or 
-
-        angle > (pi+epsilon)
+        ''' Check if there exist one set of three data points 
+            separated by exactly C PTS and D PTS respectively 
+            and that the angle formed will be either  
+            (angle < (pi-epsilon)) OR (angle > (pi+epsilon)).
 
         Parameters
         ----------
