@@ -131,8 +131,57 @@ class cmv:
     
     # Set Condvector[2]
     def LIC_2(self):
-        return 0
-    
+
+        '''Checks if the angle formed by three consecutive points are larger than pi+epsilon or smaller pi-epsilon.
+                The function creates a trinagle from the different points and uses the cosinus formula:
+                C = arccos(line_12^2 + line_23^2 - line_13^2 / 2 * line12 * line13)
+                C is the angle that is compared to pi+epsilon or pi-epsilon.
+                Parameters
+                ----------
+                None
+                Returns
+                -------
+                bool
+                    True if pi+epsilon is larger than the angle or pi-epsilon is smaller than the angle
+                    False if the above clauses is not satisfied
+                See Also
+                --------
+                PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+                '''
+
+        # Pick out three consecutive points
+        for i in range(len(self.coordinates) - 2):
+            point_1_x = self.coordinates[i, 0]
+            point_1_y = self.coordinates[i, 1]
+            point_2_x = self.coordinates[i + 1, 0]
+            point_2_y = self.coordinates[i + 1, 1]
+            point_3_x = self.coordinates[i + 2, 0]
+            point_3_y = self.coordinates[i + 2, 1]
+
+        # Create line 12
+        line12_x = (point_2_x - point_1_x)
+        line12_y = (point_2_y - point_1_y)
+        line12 = math.sqrt((line12_x ** 2) + (line12_y ** 2))
+
+        # Create line 13
+        line23_x = (point_3_x - point_2_x)
+        line23_y = (point_3_y - point_2_y)
+        line23 = math.sqrt((line23_x ** 2) + (line23_y ** 2))
+
+        # Create line 23
+        line13_x = (point_3_x - point_1_x)
+        line13_y = (point_3_y - point_1_y)
+        line13 = math.sqrt((line13_x ** 2) + (line13_y ** 2))
+
+        # Finding the angle
+        angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
+
+        # If the angle is larger or smaller, output true else outputs false
+        if (angle < (np.pi - self.PARAMS.epsilon) or angle > (np.pi + self.PARAMS.epsilon)):
+            return True
+        else:
+            return False
+
     # Set Condvector[3]
     # Input: Array of coordinates.
     # Output: True if there exists three consecutive datapoints
