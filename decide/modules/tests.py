@@ -877,61 +877,6 @@ class TestLIC(unittest.TestCase):
         parameters.f_Pts = 2
         parameters.area1 = 5
 
-        coordinates = np.zeros((9, 2))
-        coordinates[0] = [1,0]
-        coordinates[1] = [0, 0]
-        coordinates = np.zeros((6, 2))
-        coordinates[0] = [0,0]
-        coordinates[1] = [0, 4]
-        coordinates[2] = [0, 3]
-        coordinates[4] = [0, 2]
-        coordinates[5] = [0, 4]
-        coordinates[6] = [7, 0]
-        coordinates[7] = [0, 9]
-        coordinates[8] = [8, 2]
-
-            
-        coordinates[3] = [7, 0]
-        coordinates[4] = [9, 4]
-        coordinates[5] = [4, 0]
-
-        #Test1
-        parameters.area1 = 5
-        parameters.area2 = 10
-        CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_14())
-
-        #Test2
-        parameters.area1 = 4
-        parameters.area2 = 5
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_14())
-
-        #Test3
-        parameters.area1 = 7
-        parameters.area2 = 10
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_14())
-
-
-    def test_LIC14(self):
-
-        """ Tests the LIC14 function of the CMV component.
-        Tests
-        -----
-        Test1: Asserts if function returns True if area is larger than area1 but smaller than area2.
-        Test2: Asserts if function returns False if area is larger than area1 but NOT smaller than area2.
-        Test2: Asserts if function returns False if area is NOT larger than area1 but smaller than area2.
-        See Also
-        --------
-        LIC14: Function of the cmv class which this test is testing.
-        """
-        parameters = PARAMETERS_T()
-
-        parameters.e_Pts = 1
-        parameters.f_Pts = 2
-        parameters.area1 = 5
-
         
         coordinates = np.zeros((6, 2))
         coordinates[0] = [0,0]
