@@ -1046,7 +1046,7 @@ class TestLIC(unittest.TestCase):
         """
         parameters = PARAMETERS_T()
         coordinates = np.zeros((62, 2))
-            # LIC 0
+        # LIC 0
         coordinates[0] =[0,1]
         coordinates[1] =[1,2]
         coordinates[2] =[2,3]
