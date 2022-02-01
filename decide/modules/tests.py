@@ -172,7 +172,65 @@ class TestLIC(unittest.TestCase):
         self.assertTrue(CMV.LIC_1())
 
     # Tests the LIC3 function of the CMV component.
+    def test_LIC2(self):
+
+        """ Tests the LIC2 function of the CMV component.
+
+                       Tests
+                       -----
+
+                       Test1: Asserts if the functions returns False if angle is larger than pi - epsilon
+                       Test2: Asserts if the function returns True if the angle is smaller than pi - epsilon.
+
+                       See Also
+                       --------
+
+                       LIC2: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1: returns false because angle is larger than pi-epsilon, epsilon is set to 1
+        parameters = PARAMETERS_T()
+        parameters.epsilon = np.pi - 1
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_2())
+
+        # Test 2: returns True because the angle formed is 90 degrees and is smaller than pi - epsilon, epsilon set to 0
+        parameters.epsilon = 0
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_2())
+
+    # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
+
+        """ Tests the LIC3 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if there exists a triangle with an area larger than area1, in a scenario where it should.
+        Test2: Asserts if there does not exist a triangle with an area larger than area1 in a scenario when it should not.
+        Test3: Asserts if test 1 works using negative coordinates.
+
+        See Also
+        --------
+
+        LIC3: Function of the cmv class which this test is testing.
+
+        """
+
         parameters = PARAMETERS_T() # Import parameters
         parameters.area1 = 5 # Set the target area to an arbitrary value: 5.
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
@@ -363,6 +421,214 @@ class TestLIC(unittest.TestCase):
             
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
+
+
+    def test_LIC8(self):
+        """ Tests the LIC8 function of the CMV component.
+
+        Tests
+        -----
+        Test1: Asserts if function returns False when NUMPOINTS < 5
+        Test2: Asserts if function returns False when RADIUS1 == 0
+        Test3: Asserts if function returns False when A_PTS + B_PTS < 2
+        Test4: Asserts if function returns False when A_PTS + B_PTS > NUMPOINTS - 3
+        Test5: Asserts if function returns False when all pairs of points are the same.
+        Test6: Tests functionality of conditional which handles the case of all coordinates having the same x values.
+        Test7: Tests functionality of conditional which handles the case of all coordinates having the same y values.
+        Test8: Tests functionality of conditional which handles the case where there only exist two unique points.
+        Test9: Tests functionality of conditional which handles the case where there exist three unique points.
+
+        LIC8: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((4, 2))
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 2
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((5, 2))
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        parameters.radius1 = 0
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 3
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((5, 2))
+        parameters.a_Pts = 0
+        parameters.b_Pts = 1
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 4
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((5, 2))
+        parameters.a_Pts = 5
+        parameters.b_Pts = 5
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 5
+        parameters = PARAMETERS_T()
+        parameters.radius1 = 10
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((6, 2))
+        coordinates[0] = [1,1]
+        coordinates[1] = [0,0]
+        coordinates[2] = [1,1]
+        coordinates[3] = [0,0]
+        coordinates[4] = [1,1]
+        coordinates[5] = [0,0]
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_8())
+
+        # Test 6
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [0,1]
+        coordinates[1] = [0,0]
+        coordinates[2] = [0,2]
+        coordinates[3] = [0,0]
+        coordinates[4] = [0,5] 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Test 7
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [1,0]
+        coordinates[1] = [0,0]
+        coordinates[2] = [2,0]
+        coordinates[3] = [0,0]
+        coordinates[4] = [5,0]
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Test 8
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [3,2]
+        coordinates[1] = [0,0]
+        coordinates[2] = [1,0]
+        coordinates[3] = [0,0]
+        coordinates[4] = [3,2]
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Same test, switching position of coordinates
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [3,2]
+        coordinates[1] = [0,0]
+        coordinates[2] = [3,2]
+        coordinates[3] = [0,0]
+        coordinates[4] = [1,0]
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Test 9 
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [1,-6]
+        coordinates[1] = [0,0]
+        coordinates[2] = [2,1]
+        coordinates[3] = [0,0]
+        coordinates[4] = [5,2]
+        parameters.radius1 = 4
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+
+    def test_LIC9(self):
+        """ Tests the LIC9 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if function returns False when len(coordinates) < 5.
+        Test2: Asserts if function returns True if angle < (pi - epsilon)
+        Test3: Asserts if function returns True if angle < (pi + epsilon)
+        Test4: Asserts if function returns False if angle criteria is not met
+
+        See Also
+        --------
+
+        LIC9: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1 
+        parameters = PARAMETERS_T() # Import parameters
+        parameters.c_Pts = 1
+        parameters.d_Pts = 2
+
+        coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
+        # Test 2 
+        parameters.epsilon = 1
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [40, 0]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [0, 9]
+        coordinates[5] = [0, 1]
+
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_9())
+
+        # Test 3 
+        coordinates = np.zeros((6, 2)) # Create an empty array of 6 coordinate pairs.
+        coordinates[0] = [0, 1]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [3, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [0, 9]
+        coordinates[5] = [0, 5]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_9())
+
+        #Test 4
+        parameters.epsilon = 3
+        parameters.c_Pts = 1
+        parameters.d_Pts = 1
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [50, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
+        
 
     def test_LIC11(self):
         """ Tests the LIC5 function of the CMV component.
