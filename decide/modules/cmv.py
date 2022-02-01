@@ -138,6 +138,28 @@ class cmv:
     # Output: True if there exists three consecutive datapoints
     #         making up the area of a triangle with an area larger than AREA1.
     def LIC_3(self):
+
+        '''Function checks if there exists three consecutive datapoints who's collective area is larger than the specified AREA1 from PARAMETERS_T.
+
+        By using the determinant method, the function creates a triangle and calculates its area using three consecutive points from the coordinates. If three
+        consecutive points exist, return True. Otherwise return False.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if three consecutive datapoints make up a triangle with an area larger than AREA1 exists.
+            False if three consecutive datapoints make up a triangle with an area larger than AREA1 does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
         for i in range( len(self.coordinates) - 2 ): # Iterate all coordinates, leaving an offset to pair triplets.
 
             # Read the coordinates from the array into a tuple.
