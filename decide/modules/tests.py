@@ -740,12 +740,13 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_12())
 
-    def test_LIC12(self):
+    def test_LIC13(self):
 
         #Test1: Asserts if function returns False if RADIUS2 = 0
         #Test2: Asserts if function returns False if NUMPOINTS < 5
         #Test3: Asserts if function returns False if A_PTS + B_PTS < 2
         #Test4: Asserts if function returns False if A_PTS + B_PTS > NUMPOINTS - 3
+        
 
         # Test 1
         parameters = PARAMETERS_T()
@@ -783,8 +784,8 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_13())
 
-
         
+
 
 if __name__ == '__main__':
     unittest.main()
