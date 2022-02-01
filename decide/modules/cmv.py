@@ -44,6 +44,23 @@ class cmv:
 
     # Set Condvector[0]
     def LIC_0(self):
+        '''Checks if there is a set of two consecutive coordinate points which are separated by a distance less than the length property of PARAMETERS_T.
+
+                Parameters
+                ----------
+                None
+
+                Returns
+                -------
+                bool
+                    True if the distance between any two consecutive points is larger than length of PARAMETERS_T.
+                    False if the distance between any two consecutive points is not larger than length of PARAMETERS_T.
+
+                See Also
+                --------
+                PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array, length property).
+                '''
+
         return self._calculate_distance_LICs(self.PARAMS.length1)
     
     # Set Condvector[1]
