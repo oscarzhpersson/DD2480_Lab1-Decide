@@ -364,7 +364,7 @@ class TestLIC(unittest.TestCase):
 
         Tests
         -----
-        Test1: 
+        Test1: Asserts if function returns False when NUMPOINTS < 5
 
         See Also
         --------
@@ -372,6 +372,14 @@ class TestLIC(unittest.TestCase):
         LIC8: Function of the cmv class which this test is testing.
 
         """
+
+        # Test 1
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((4, 2))
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
         
 
     def test_LIC11(self):
