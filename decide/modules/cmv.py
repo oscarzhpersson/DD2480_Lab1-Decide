@@ -150,11 +150,11 @@ class cmv:
 
     # Set Condvector[10]
     def LIC_10(self):
-        '''There exists at least one set of three data points 
-        separated by exactly E PTS and F PTS consecutive 
-        intervening points, respectively, that are the vertices 
-        of a triangle with area greater than AREA1
-
+        ''' Check if there exist one set of data points that 
+            are separated by E Pts and F Pts respectively 
+            and that the Area constructed by the points will 
+            be larger than Area1.
+        
         Parameters
         ----------
         None
@@ -163,11 +163,12 @@ class cmv:
         -------
         bool
             True if a set satisfying the conditions exist.
-            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5).
+            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5 / e_Pts<1 / f_Pts<1).
         See Also
         --------
         PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
         '''
+        
         if (len(self.coordinates) < 5) :
             return False
         if (self.PARAMS.e_Pts < 1):
