@@ -914,7 +914,7 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_14())
 
 
-        def test_LIC14(self):
+    def test_LIC14(self):
 
         """ Tests the LIC14 function of the CMV component.
         Tests
