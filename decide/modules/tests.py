@@ -162,6 +162,20 @@ class TestLIC(unittest.TestCase):
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
+        # Test 1: returns false because angle is larger than pi-epsilon, epsilon is set to 1
+        parameters = PARAMETERS_T()
+        parameters.epsilon = np.pi - 1
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_2())
+
+    # Tests the LIC3 function of the CMV component.
+    def test_LIC3(self):
         parameters = PARAMETERS_T() # Import parameters
         parameters.area1 = 5 # Set the target area to an arbitrary value: 5.
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
