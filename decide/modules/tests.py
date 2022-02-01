@@ -740,5 +740,126 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_12())
 
+    def test_LIC13(self):
+        """ Tests the LIC13 function of the CMV component.
+
+        Tests
+        -----
+        Test1: Asserts if function returns False if RADIUS2 = 0
+        Test2: Asserts if function returns False if NUMPOINTS < 5
+        Test3: Asserts if function returns False if A_PTS + B_PTS < 2
+        Test4: Asserts if function returns False if A_PTS + B_PTS > NUMPOINTS - 3
+        Test5: Asserts if function returns False when given correct input which should yield False
+        Test6: Tests several valid input cases where the function should return True
+
+        LIC13: Function of the cmv class which this test is testing.
+
+        """
+
+        # Test 1
+        parameters = PARAMETERS_T()
+        parameters.radius2 = 0
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((6, 2))
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
+
+        # Test 2
+        parameters = PARAMETERS_T()
+        parameters.radius2 = 10
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((4, 2))
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
+
+        # Test 3
+        parameters = PARAMETERS_T()
+        parameters.radius2 = 10
+        parameters.a_Pts = 1
+        parameters.b_Pts = 0
+        coordinates = np.zeros((6, 2))
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
+
+        # Test 4
+        parameters = PARAMETERS_T()
+        parameters.radius2 = 10
+        parameters.a_Pts = 10
+        parameters.b_Pts = 10
+        coordinates = np.zeros((6, 2))
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
+
+        # Test 5
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((6, 2))
+        # Will only satisfy radius > self.PARAMS.radius2
+        coordinates[0] = [1,-6]
+        coordinates[1] = [0,0]
+        coordinates[2] = [2,-5]
+        coordinates[3] = [5,5]
+        coordinates[4] = [5,2]
+        coordinates[5] = [10,10]
+        parameters.radius2 = 4
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
+
+        # Test 6
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        parameters.radius2 = 10
+        coordinates = np.zeros((6, 2))
+        # [0] == [2] == [4]
+        coordinates[0] = [1,1]
+        coordinates[1] = [10,10]
+        coordinates[2] = [1,1]
+        coordinates[3] = [20,20]
+        coordinates[4] = [1,1]
+        coordinates[5] = [30,30]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+        # [0].x == [2].x == [4].x
+        coordinates[0] = [1,2]
+        coordinates[2] = [1,4]
+        coordinates[4] = [1,5]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+        # [0].y == [2].y == [4].y
+        coordinates[0] = [2,1]
+        coordinates[2] = [4,1]
+        coordinates[4] = [5,1]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+        # Points are colinear
+        coordinates[0] = [1,1]
+        coordinates[2] = [2,2]
+        coordinates[4] = [3,3]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+        # [0] == [2] (Only two unique points)
+        coordinates[0] = [1,1]
+        coordinates[2] = [1,1]
+        coordinates[4] = [3,3]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+        # Three unique points
+        coordinates[0] = [1,2]
+        coordinates[2] = [3,2]
+        coordinates[4] = [4,1]
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_13())
+
+
+
 if __name__ == '__main__':
     unittest.main()
