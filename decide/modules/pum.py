@@ -1,7 +1,7 @@
 import numpy as np
 
 class pum:
-    def __init__(self, CMV, LCM, PUV):
+    def __init__(self, CMV, LCM, PUV, FUV):
         ## 15x15 array [1 = ANDD, 0 = ORR, -1 = NOTUSED]
         self.CMV = CMV
         self.LCM = LCM
