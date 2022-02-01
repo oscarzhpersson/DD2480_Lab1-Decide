@@ -746,6 +746,7 @@ class TestLIC(unittest.TestCase):
         #Test2: Asserts if function returns False if NUMPOINTS < 5
         #Test3: Asserts if function returns False if A_PTS + B_PTS < 2
         #Test4: Asserts if function returns False if A_PTS + B_PTS > NUMPOINTS - 3
+        #Test5: Asserts if function returns False when given correct input which should yield False
         
 
         # Test 1
@@ -784,7 +785,21 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_13())
 
-        
+        # Test 5
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates = np.zeros((6, 2))
+        # Will only satisfy radius > self.PARAMS.radius1
+        coordinates[0] = [1,-6]
+        coordinates[1] = [0,0]
+        coordinates[2] = [2,-5]
+        coordinates[3] = [5,5]
+        coordinates[4] = [5,2]
+        coordinates[5] = [10,10]
+        parameters.radius2 = 4
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_13())
 
 
 if __name__ == '__main__':
