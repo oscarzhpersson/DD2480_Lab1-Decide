@@ -103,6 +103,12 @@ class cmv:
                 x_min = min(list, key = lambda t: t[0])
                 x_max = max(list, key = lambda t: t[0])
                 radius = find_radius(x_min, x_max)
+            
+            # Points are colinear
+            elif Point.is_collinear(p1, p2, p3):
+                x_min = min(list, key = lambda t: t[0])
+                x_max = max(list, key = lambda t: t[0])
+                radius = find_radius(x_min, x_max)
 
             # Two unique points instead of three
             elif p1 == p3 or p2 == p3:
@@ -411,6 +417,12 @@ class cmv:
                 x_min = min(list, key = lambda t: t[0])
                 x_max = max(list, key = lambda t: t[0])
                 radius = find_radius(x_min, x_max)
+
+            # Points are colinear
+            elif Point.is_collinear(p1, p2, p3):
+                x_min = min(list, key = lambda t: t[0])
+                x_max = max(list, key = lambda t: t[0])
+                radius = find_radius(x_min, x_max)
             
             # radius = (distance between p1 and p2) / 2
             elif p1 == p3 or p2 == p3:
@@ -541,9 +553,9 @@ class cmv:
         '''Checks if there is a set of three coordinates, separated by A_PTS and B_PTS intervening points, that cannot all be contained within a circle of radius RADIUS2. It also checks if there is a set of three coordinates, separated by A_PTS and B_PTS intervening points, that can all be contained within or on a circle of radius RADIUS2. Both of these checks need to be true in order for the return value of the function to be true. This is done by forming a circle from the datapoints and comparing its radius to RADIUS2.
 
         Function iterates through the array of coordinates in sets of three. A satisfying set of coordinates is described through the condition:
-        radius > self.PARAMS.radius1
+        radius > self.PARAMS.radius2
         or
-        radius <= self.PARAMS.radius1
+        radius <= self.PARAMS.radius2
 
         Parameters
         ----------
