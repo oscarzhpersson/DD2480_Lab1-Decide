@@ -41,7 +41,6 @@ class cmv:
     def __init__(self, PARAMS, coordinates):
         self.PARAMS = PARAMS # Check main file for structure
         self.coordinates = coordinates
-        self.CondVector = np.zeros(15, dtype=bool)
 
     # Set Condvector[0]
     def LIC_0(self):
@@ -500,9 +499,9 @@ class cmv:
         if len(self.coordinates) < 3:
             return False
 
-        for i in range(len(self.coordinates) - self.PARAMS.g_pts - 1):
+        for i in range(len(self.coordinates) - self.PARAMS.g_Pts - 1):
             (x1, y1) = self.coordinates[i]
-            (x2, y2) = self.coordinates[i + self.PARAMS.g_pts + 1]
+            (x2, y2) = self.coordinates[i + self.PARAMS.g_Pts + 1]
 
             # If a satisfying set is found, return True.
             if (x2 - x1) < 0:
@@ -548,7 +547,12 @@ class cmv:
         return 0
       
     def return_cond_vector(self):
-        return 0
+        condVector = np.zeros(15, dtype=bool)
+        LICs = [f'self.LIC_{i}()' for i in range(15)]
+        for i, lic in enumerate(LICs):
+            condVector[i] = eval(lic)
+        
+        return condVector
 
     def __euclidean_distance(self, c1, c2):
         ''' Computes euclidean distance between c1 and c2.
