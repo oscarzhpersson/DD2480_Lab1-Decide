@@ -556,6 +556,10 @@ class cmv:
             list = [(p1.x, p1.y), (p2.x, p2.y), (p3.x, p3.y)]
             radius = 0
 
+            # This set of coordinates can be contained within RADIUS2
+            if p1 == p2 == p3:
+                ret_flag_2 = True
+
             # True if points cannot be contained within a circle of radius RADIUS2
             if (radius > self.PARAMS.radius1):
                 ret_flag_1 = True
