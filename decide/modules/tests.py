@@ -27,6 +27,9 @@ class PARAMETERS_T:
 
 
 class TestLIC(unittest.TestCase):
+    '''
+
+    ''' 
     def test_LIC0(self):
         ## Test if coordinates that are sqrt(2) are accepted if length1 = 1.
         parameters = PARAMETERS_T()
@@ -968,6 +971,133 @@ class TestLIC(unittest.TestCase):
         coordinates[4] = [4,1]
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_13())
+
+    def test_main(self):
+        parameters = PARAMETERS_T()
+        coordinates = np.zeros((56, 2))
+            # LIC 0
+        coordinates[0] =[0,1]
+        coordinates[1] =[1,2]
+        coordinates[2] =[2,3]
+
+        parameters.length1 = 1
+
+        
+        # LIC 1
+        coordinates[3] = [1,0]
+        coordinates[4] = [2,0]
+        coordinates[5] = [5,0]
+
+        parameters.radius1 = 1
+
+        # LIC 2
+        coordinates[6] = [0,1]
+        coordinates[7] = [0,2]
+        coordinates[8] = [0,5]
+
+        parameters.epsilon = 0
+
+        # LIC 3
+        coordinates[9] = [0, 0]
+        coordinates[10] = [5, 3]
+        coordinates[11] = [5, 0]
+
+        parameters.area1 = 5
+
+        # LIC 4
+        coordinates[12] = [1, 1]
+        coordinates[13] = [-1, -1]
+        coordinates[14] = [1, -1]
+
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        # LIC 5
+        coordinates[15] = [1, 0]
+        coordinates[16] = [25, 0]
+
+
+
+        # LIC 6
+        coordinates[17] = [0, 0]
+        coordinates[18] = [5, 5]
+        coordinates[19] = [2, 0]
+
+        parameters.dist = 1
+        parameters.n_Pts = 3
+
+        # LIC 7
+        coordinates[20] = [0,0]
+        coordinates[21] = [0, 1]
+        coordinates[22] = [0, 1]
+        coordinates[23] = [0, 2]
+
+        parameters.k_Pts = 2
+
+        # LIC 8
+        coordinates[24] = [1,1]
+        coordinates[25] = [0,0]
+        coordinates[26] = [3,3]
+        coordinates[27] = [0,0]
+        coordinates[28] = [5,5]
+
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+
+        # LIC 9
+        coordinates[29] = [0, 1]
+        coordinates[30] = [1, 0]
+        coordinates[31] = [3, 1]
+        coordinates[32] = [7, 0]
+        coordinates[33] = [0, 9]
+        coordinates[34] = [0, 5]
+
+        parameters.c_Pts = 1
+        parameters.d_Pts = 2
+
+        # LIC 10?
+        coordinates[35] = [0,0]
+        coordinates[36] = [0, 4]
+        coordinates[37] = [0, 3]
+        coordinates[38] = [7, 0]
+        coordinates[39] = [9, 4]
+        coordinates[40] = [4, 0]
+
+        parameters.e_Pts = 1
+        parameters.f_Pts = 2
+
+        # LIC 11
+        coordinates[41] = [0,0]
+        coordinates[42] = [0,0]
+        coordinates[43] = [25, 0]
+        coordinates[44] = [0,0]
+        coordinates[45] = [0,0]
+
+        parameters.g_Pts = 1
+
+        #LIC 12
+        coordinates[46] = [0,0]
+        coordinates[47] = [0, 1]
+        coordinates[48] = [0, 1]
+        coordinates[49] = [0, 2]
+
+        parameters.length2 = 3
+
+        # LIC_13
+        coordinates[50] = [1,1]
+        coordinates[51] = [10,10]
+        coordinates[52] = [1,1]
+        coordinates[53] = [20,20]
+        coordinates[54] = [1,1]
+        coordinates[55] = [30,30]
+
+        parameters.radius2 = 10
+
+        CMV = cmv(parameters, coordinates)
+        condVect = CMV.return_cond_vector()
+        for i in range(15):
+            print(i)
+            self.assertTrue(condVect[i])
 
 
 
