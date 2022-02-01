@@ -629,11 +629,31 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_9())
         
     def test_LIC10(self):
-        parameters = PARAMETERS_T()
+        """ Tests the LIC10 function of the CMV component.
+
+        Tests
+        -----
+
+        Test1: Asserts if function returns False when len(coordinates) < 5.
+        Test2: Asserts if function returns True if area constructed is larger than area1.
+        Test3: Asserts if function returns False if area constructed is smaller than area1.
+        See Also
+        --------
+
+        LIC10: Function of the cmv class which this test is testing.
+
+        """
+
         
+        parameters = PARAMETERS_T() # Import parameters
         parameters.e_Pts = 1
         parameters.f_Pts = 2
-        parameters.area1 = 5
+
+        # Test 1 
+        coordinates = np.zeros((1, 2)) # Create an empty array of 1 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
 
         coordinates = np.zeros((6, 2))
         coordinates[0] = [0,0]
@@ -643,8 +663,17 @@ class TestLIC(unittest.TestCase):
         coordinates[4] = [9, 4]
         coordinates[5] = [4, 0]
             
+        #Test2
+        parameters.area1 = 5
+
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_10())
+
+        #Test3
+        parameters.area1 = 10
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_10())
+
         
     def test_LIC11(self):
         """ Tests the LIC5 function of the CMV component.
