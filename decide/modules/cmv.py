@@ -131,13 +131,84 @@ class cmv:
     
     # Set Condvector[2]
     def LIC_2(self):
-        return 0
-    
+
+        '''Checks if the angle formed by three consecutive points are larger than pi+epsilon or smaller pi-epsilon.
+                The function creates a trinagle from the different points and uses the cosinus formula:
+                C = arccos(line_12^2 + line_23^2 - line_13^2 / 2 * line12 * line13)
+                C is the angle that is compared to pi+epsilon or pi-epsilon.
+                Parameters
+                ----------
+                None
+                Returns
+                -------
+                bool
+                    True if pi+epsilon is larger than the angle or pi-epsilon is smaller than the angle
+                    False if the above clauses is not satisfied
+                See Also
+                --------
+                PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+                '''
+
+        # Pick out three consecutive points
+        for i in range(len(self.coordinates) - 2):
+            point_1_x = self.coordinates[i, 0]
+            point_1_y = self.coordinates[i, 1]
+            point_2_x = self.coordinates[i + 1, 0]
+            point_2_y = self.coordinates[i + 1, 1]
+            point_3_x = self.coordinates[i + 2, 0]
+            point_3_y = self.coordinates[i + 2, 1]
+
+        # Create line 12
+        line12_x = (point_2_x - point_1_x)
+        line12_y = (point_2_y - point_1_y)
+        line12 = math.sqrt((line12_x ** 2) + (line12_y ** 2))
+
+        # Create line 13
+        line23_x = (point_3_x - point_2_x)
+        line23_y = (point_3_y - point_2_y)
+        line23 = math.sqrt((line23_x ** 2) + (line23_y ** 2))
+
+        # Create line 23
+        line13_x = (point_3_x - point_1_x)
+        line13_y = (point_3_y - point_1_y)
+        line13 = math.sqrt((line13_x ** 2) + (line13_y ** 2))
+
+        # Finding the angle
+        angle = math.acos(((line12 ** 2) + (line23 ** 2) - (line13 ** 2)) / (2 * line12 * line23))
+
+        # If the angle is larger or smaller, output true else outputs false
+        if (angle < (np.pi - self.PARAMS.epsilon) or angle > (np.pi + self.PARAMS.epsilon)):
+            return True
+        else:
+            return False
+
     # Set Condvector[3]
     # Input: Array of coordinates.
     # Output: True if there exists three consecutive datapoints
     #         making up the area of a triangle with an area larger than AREA1.
     def LIC_3(self):
+
+        '''Function checks if there exists three consecutive datapoints who's collective area is larger than the specified AREA1 from PARAMETERS_T.
+
+        By using the determinant method, the function creates a triangle and calculates its area using three consecutive points from the coordinates. If three
+        consecutive points exist, return True. Otherwise return False.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if three consecutive datapoints make up a triangle with an area larger than AREA1 exists.
+            False if three consecutive datapoints make up a triangle with an area larger than AREA1 does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
         for i in range( len(self.coordinates) - 2 ): # Iterate all coordinates, leaving an offset to pair triplets.
 
             # Read the coordinates from the array into a tuple.
@@ -300,11 +371,123 @@ class cmv:
 
     # Set Condvector[8]
     def LIC_8(self):
-        return 0
+        '''Checks if there is a set of three coordinates, separated by A_PTS and B_PTS intervening points, that cannot all be contained within a circle of radius RADIUS1. This is done by forming a circle from the datapoints and comparing its radius to RADIUS1.
+
+        Function iterates through the array of coordinates in sets of three. A satisfying set of coordinates is described through the condition:
+        radius > self.PARAMS.radius1
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
+        # Prerequisite checks
+        if self.PARAMS.radius1 == 0:
+            return False
+        if len(self.coordinates) < 5: 
+            return False
+        if self.PARAMS.a_Pts + self.PARAMS.b_Pts < 2:
+            return False
+        if (self.PARAMS.a_Pts + self.PARAMS.b_Pts) > len(self.coordinates) - 3: 
+            return False
+
+        # Iterating with regards to intervene point distance from a_Pts and b_Pts
+        for i in range(len(self.coordinates) - (2 + self.PARAMS.a_Pts + self.PARAMS.b_Pts)):
+
+            mid_index = i + 1 + self.PARAMS.a_Pts
+            last_index = mid_index + 1 + self.PARAMS.b_Pts
+            # Points generated by x,y values of coordinates separated by a_Pts and b_Pts
+            p1 = Point(self.coordinates[i, 0], self.coordinates[i, 1])
+            p2 = Point(self.coordinates[mid_index, 0], self.coordinates[mid_index, 1])
+            p3 = Point(self.coordinates[last_index, 0], self.coordinates[last_index, 1])
+            list = [(p1.x, p1.y), (p2.x, p2.y), (p3.x, p3.y)]
+            radius = 0
+
+            # This set of coordinates can be contained within RADIUS1
+            if p1 == p2 == p3:
+                continue
+
+            # Same x coordinates
+            elif p1.x == p2.x == p3.x:
+                y_min = min(list, key = lambda t: t[1])
+                y_max = max(list, key = lambda t: t[1])
+                radius = find_radius(y_min, y_max)
+
+            # Same y coordinates    
+            elif p1.y == p2.y == p3.y:
+                x_min = min(list, key = lambda t: t[0])
+                x_max = max(list, key = lambda t: t[0])
+                radius = find_radius(x_min, x_max)
+            
+            # radius = (distance between p1 and p2) / 2
+            elif p1 == p3 or p2 == p3:
+                radius = distance(self, i, i+1) / 2
+
+            # radius = (distance between p2 and p3) / 2
+            elif p2 == p1:
+                radius = distance(self, i+1, i+2) / 2
+
+            # 3 unique points, radius can be derived from circle
+            else:
+                radius = Circle(p1, p2, p3).radius
+
+            # True if points cannot be contained within a circle of radius RADIUS1
+            if (radius > self.PARAMS.radius1):
+                return True
+
+        return False
 
     # Set Condvector[9]
     def LIC_9(self):
-        return 0
+        ''' Check if there exist one set of three data points 
+            separated by exactly C PTS and D PTS respectively 
+            and that the angle formed will be either  
+            (angle < (pi-epsilon)) OR (angle > (pi+epsilon)).
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying the conditions exist.
+            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5).
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        '''
+
+        if (len(self.coordinates) < 5) :
+            return False
+        if (self.PARAMS.c_Pts < 1):
+            return False
+        if (self.PARAMS.d_Pts < 1):
+            return False
+        if (self.PARAMS.c_Pts + self.PARAMS.d_Pts > len(self.coordinates) - 3):
+            return False
+        for i in range( len(self.coordinates) - self.PARAMS.c_Pts - self.PARAMS.d_Pts - 2): # Iterate all coordinates, till coordinates are out of range.
+            c1, c2, c3 = (self.coordinates[i], self.coordinates[i + self.PARAMS.c_Pts + 1], self.coordinates[i + self.PARAMS.c_Pts + 1 + self.PARAMS.d_Pts + 1])
+            c    = np.sqrt((c3[0] - c1[0])**2 + (c3[1] - c1[1])**2)
+            a    = np.sqrt((c2[0] - c1[0])**2 + (c2[1] - c1[1])**2)
+            b  = np.sqrt((c3[0] - c2[0])**2 + (c3[1] - c2[1])**2)
+            angle = np.arccos((a**2 + b**2 - c**2)/ (2*a*b))
+            
+            if (angle < (np.pi - self.PARAMS.epsilon)) or (angle > (np.pi + self.PARAMS.epsilon)) :
+                return True
+
+        return False
 
     # Set Condvector[10]
     def LIC_10(self):
