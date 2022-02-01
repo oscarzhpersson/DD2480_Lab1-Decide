@@ -8,17 +8,28 @@ class pum:
         self.PUV = PUV
 
     def compute_PUM(self):
-        PUM = np.zeros(15, 15, dtype=bool)
+        PUM = np.ones(15, 15, dtype=bool)
         for i in range(self.LCM.shape[0]):
             for j in range(self.LCM.shape[0]):
                 if i == j:
                     continue
                 op = self.LCM[i,j]
                 if op == 1:
-                    PUM[i,j] = self.CMV[i] and self.CMV[j]
+                    PUM[i, j] = self.CMV[i] and self.CMV[j]
                 if op == 0:
-                    PUM[i,j] = self.CMV[i] or self.CMV[j]
+                    PUM[i, j] = self.CMV[i] or self.CMV[j]
                 if op == -1:
-                    PUM[i,j] = False
+                    PUM[i, j] = False
 
         return PUM
+
+
+    def compute_FUV(self, PUM):
+        FUV = np.zeros(15, dtype=bool)
+        for i in range(len(FUV)):
+            if not self.PUV[i]:
+                FUV[i] = True
+            else:
+                FUV[i] = np.all(PUM[i])
+
+        return FUV
