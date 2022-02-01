@@ -378,7 +378,7 @@ class TestLIC(unittest.TestCase):
         coordinates = np.zeros((4, 2))
         parameters.radius1 = 1
         CMV = cmv(parameters, coordinates)
-        self.assertTrue(CMV.LIC_8())
+        self.assertFalse(CMV.LIC_8())
 
         
 

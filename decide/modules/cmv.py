@@ -302,13 +302,13 @@ class cmv:
     def LIC_8(self):
         # Prerequisite checks
         if self.PARAMS.radius1 == 0:
-            return True
+            return False
         if len(self.coordinates) < 5: 
-            return True
+            return False
         if self.PARAMS.a_Pts + self.PARAMS.b_Pts < 2:
-            return True
+            return False
         if (self.PARAMS.a_Pts + self.PARAMS.b_Pts) > len(self.coordinates) - 3: 
-            return True
+            return False
 
         # Iterating with regards to intervene point distance from a_Pts and b_Pts
         for i in range(len(self.coordinates) - (2 + self.PARAMS.a_Pts + self.PARAMS.b_Pts)):
