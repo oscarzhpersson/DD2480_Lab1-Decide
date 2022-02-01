@@ -116,9 +116,8 @@ class cmv:
     # Set Condvector[6]
     def LIC_6(self):
 
-        ''' Checks if There exists at least one set of n_Ptr consecutive datapoints where the first and last point form a line and the in-between datapoints are measured to this line.
-            The criteria is that one of these points are further away to this line than than the "dist" variable.
-            The function checks n_ptr set of consecutive coordinates that to see if they pass the distance criteria.
+        ''' Checks if There exists at least one set of n_Ptr consecutive datapoints measured to a line is smaller than dist.
+
 
               Parameters
               ----------
