@@ -211,6 +211,7 @@ class TestLIC(unittest.TestCase):
         Test1: Asserts if function returns False when len(coordinates) < 5.
         Test2: Asserts if function returns True if angle < (pi - epsilon)
         Test3: Asserts if function returns True if angle < (pi + epsilon)
+        Test4: Asserts if function returns False if angle criteria is not met
 
 
         See Also
@@ -256,6 +257,21 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_9())
+
+        #Test 4
+        parameters.epsilon = 3
+        parameters.c_Pts = 1
+        parameters.d_Pts = 1
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 0]
+        coordinates[2] = [0, 1]
+        coordinates[3] = [7, 0]
+        coordinates[4] = [50, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_9())
+
 
 if __name__ == '__main__':
     unittest.main()
