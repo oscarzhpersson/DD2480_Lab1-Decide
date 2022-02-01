@@ -565,12 +565,20 @@ class cmv:
                 y_min = min(list, key = lambda t: t[1])
                 y_max = max(list, key = lambda t: t[1])
                 radius = find_radius(y_min, y_max)
-                
+
             # Same y coordinates    
             elif p1.y == p2.y == p3.y:
                 x_min = min(list, key = lambda t: t[0])
                 x_max = max(list, key = lambda t: t[0])
                 radius = find_radius(x_min, x_max)
+
+            # radius = (distance between p1 and p2) / 2
+            elif p1 == p3 or p2 == p3:
+                radius = distance(self, i, i+1) / 2
+
+            # radius = (distance between p2 and p3) / 2
+            elif p2 == p1:
+                radius = distance(self, i+1, i+2) / 2
 
             # True if points cannot be contained within a circle of radius RADIUS2
             if (radius > self.PARAMS.radius1):
