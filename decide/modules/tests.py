@@ -371,6 +371,7 @@ class TestLIC(unittest.TestCase):
         Test5: Asserts if function returns False when all pairs of points are the same.
         Test6: Tests functionality of conditional which handles the case of all coordinates having the same x values.
         Test7: Tests functionality of conditional which handles the case of all coordinates having the same y values.
+        Test8: Tests functionality of conditional which handles the case where there only exist two unique points.
 
         See Also
         --------
@@ -452,6 +453,32 @@ class TestLIC(unittest.TestCase):
         coordinates[2] = [2,0]
         coordinates[3] = [0,0]
         coordinates[4] = [5,0]
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Test 8: 
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [3,2]
+        coordinates[1] = [0,0]
+        coordinates[2] = [1,0]
+        coordinates[3] = [0,0]
+        coordinates[4] = [3,2]
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Same test, switching position of coordinates
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [3,2]
+        coordinates[1] = [0,0]
+        coordinates[2] = [3,2]
+        coordinates[3] = [0,0]
+        coordinates[4] = [1,0]
         parameters.radius1 = 1
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_8())
