@@ -932,20 +932,11 @@ class TestLIC(unittest.TestCase):
         parameters.f_Pts = 2
         parameters.area1 = 5
 
-        coordinates = np.zeros((9, 2))
-        coordinates[0] = [1,0]
-        coordinates[1] = [0, 0]
+        
         coordinates = np.zeros((6, 2))
         coordinates[0] = [0,0]
         coordinates[1] = [0, 4]
-        coordinates[2] = [0, 3]
-        coordinates[4] = [0, 2]
-        coordinates[5] = [0, 4]
-        coordinates[6] = [7, 0]
-        coordinates[7] = [0, 9]
-        coordinates[8] = [8, 2]
-
-            
+        coordinates[2] = [0, 3]            
         coordinates[3] = [7, 0]
         coordinates[4] = [9, 4]
         coordinates[5] = [4, 0]
