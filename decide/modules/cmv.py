@@ -531,6 +531,29 @@ class cmv:
 
     # Set Condvector[13]
     def LIC_13(self):
+        '''Checks if there is a set of three coordinates, separated by A_PTS and B_PTS intervening points, that cannot all be contained within a circle of radius RADIUS2. It also checks if there is a set of three coordinates, separated by A_PTS and B_PTS intervening points, that can all be contained within or on a circle of radius RADIUS2. Both of these checks need to be true in order for the return value of the function to be true. This is done by forming a circle from the datapoints and comparing its radius to RADIUS2.
+
+        Function iterates through the array of coordinates in sets of three. A satisfying set of coordinates is described through the condition:
+        radius > self.PARAMS.radius1
+        or
+        radius <= self.PARAMS.radius1
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        bool
+            True if a set satisfying both the conditions exist.
+            False if a set of satisfying conditions for both the conditions does not exist.
+
+        See Also
+        --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+
+        '''
+
         # Prerequisite checks
         if self.PARAMS.radius2 == 0:
             return False
