@@ -499,9 +499,9 @@ class cmv:
         if len(self.coordinates) < 3:
             return False
 
-        for i in range(len(self.coordinates) - self.PARAMS.g_pts - 1):
+        for i in range(len(self.coordinates) - self.PARAMS.g_Pts - 1):
             (x1, y1) = self.coordinates[i]
-            (x2, y2) = self.coordinates[i + self.PARAMS.g_pts + 1]
+            (x2, y2) = self.coordinates[i + self.PARAMS.g_Pts + 1]
 
             # If a satisfying set is found, return True.
             if (x2 - x1) < 0:

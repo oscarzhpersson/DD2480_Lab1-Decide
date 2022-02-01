@@ -645,7 +645,7 @@ class TestLIC(unittest.TestCase):
 
         # Test 1 - Returns False since there is not enough coordinates.
         parameters = PARAMETERS_T() # Import parameters
-        parameters.g_pts = 1
+        parameters.g_Pts = 1
         coordinates = np.zeros((1, 3)) # Create an empty array of 1 coordinate pairs.
 
         CMV = cmv(parameters, coordinates)
@@ -666,7 +666,7 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_11())
 
         # Test 4 - Returns False since there is not enough points between the pair of coordinates satisfying the condition.
-        parameters.g_pts = 3
+        parameters.g_Pts = 3
 
         coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
 
