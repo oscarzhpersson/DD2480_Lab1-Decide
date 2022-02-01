@@ -49,33 +49,116 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_0())
 
-
     # Tests the LIC1 function of the CMV component.
     def test_LIC1(self):
+        """ Tests the LIC1 function of the CMV component.
 
-        # Test 1: The set of 3 datapoints should be able to be contained 
-        # within the set radius with the given input and should yield False
+        Tests
+        -----
+
+        Test1: Asserts if function returns True when RADIUS1 = 0.
+        Test2: Asserts if function returns False if three consecutive datapoints are the same and form a single point (RADIUS1 > 0).
+        Test3: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same x value.
+        Test4: Asserts if function returns True or False (depending on RADIUS1) when three consecutive datapoints have the same y value.
+        Test5: Asserts if function returns True or False (depending on RADIUS1) when two out of the three points are the same.
+        Test6: Asserts if function returns True or False (depending on RADIUS1) when all three consecutive datapoints are unique.
+
+        See Also
+        --------
+
+        LIC1: Function of the cmv class which this test is testing.
+
+        """
 
         parameters = PARAMETERS_T()
-        parameters.radius1 = 3
-        coordinates = np.zeros((3, 2))
-        for i in range(len(coordinates)):
-            coordinates[i] = [i,i]
 
-        CMV = cmv(parameters, coordinates)
-        self.assertFalse(CMV.LIC_1())
-        
-        # Test 2: The set of 3 datapoints should NOT be able to be able
-        # to be contained within the set radius with the given input and should yield True
-        
+        # Test 1
         parameters.radius1 = 0
         coordinates = np.zeros((3, 2))
-        for i in range(len(coordinates)):
-            coordinates[i] = [i,i]
-
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_1())
 
+        # Test 2: If all 3 coordinates are the same, they become a single point.
+        # This point should be able to be contained within RADIUS1 yielding FALSE
+        parameters.radius1 = 1
+        coordinates = np.zeros((3, 2))
+        for i in range(len(coordinates)):
+            coordinates[i] = [0,5]
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+
+        # Test 3: If all 3 coordinates have the same x value, the radius will be
+        # the distance between the two most separated y coordinate values divided by two.
+        # Radius of circle formed by coordinates is 2
+        coordinates[0] = [0,1]
+        coordinates[1] = [0,2]
+        coordinates[2] = [0,5]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 2
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Test 4: If all 3 coordinates have the same y value, the radius will be
+        # the distance between the two most separated points divided by two.
+        # Radius of circle formed by coordinates is 2
+        coordinates[0] = [1,0]
+        coordinates[1] = [2,0]
+        coordinates[2] = [5,0]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 2
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Test 5: If two out of the three points are the same, only two unique points
+        # exist. The radius will be the distance between these two points.
+        # Radius of circle formed by coordinates is 1.41...
+        coordinates[0] = [3,2]
+        coordinates[1] = [1,0]
+        coordinates[2] = [3,2]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 2
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Same test (Test 5), switching position of coordinates
+        coordinates[0] = [3,2]
+        coordinates[1] = [3,2]
+        coordinates[2] = [1,0]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 2
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
+
+        # Test 6: If all three points are unique, a circle can be formed and a
+        # radius can be derived directly.
+        # Radius of circle formed by coordinates is 5
+        coordinates[0] = [1,-6]
+        coordinates[1] = [2,1]
+        coordinates[2] = [5,2]
+        # The given RADIUS1 should output FALSE 
+        parameters.radius1 = 5
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_1())
+        # The given RADIUS1 should output TRUE 
+        parameters.radius1 = 4
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_1())
 
     # Tests the LIC3 function of the CMV component.
     def test_LIC3(self):
@@ -123,6 +206,80 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates) # Create an instance of the CMV component.
         self.assertFalse(CMV.LIC_3()) # Run the test.
+
+    def test_LIC4(self):
+
+        """ Tests the LIC4 function of the CMV component.
+            The tests try different combination of where the points does not fulfill the requirement of the having QUADS quadrants fulfilled
+            and other tests that do so.
+
+
+             Tests
+             -----
+
+            Test1: Tests the function when it the three different quadrants are fulfilled and the QUADS parameter is set to 2
+            Test2: Tests the function when the functions is not fulfilled and the Quads parameter is larger than the quadrants filled by the points
+            Test3: Test with more points but the number of quadrants are not filled
+            Test4: Test with more points and the number of quadrants are filled
+
+             See Also
+             --------
+             LIC4: Function of the cmv class which this test is testing.
+
+        """
+
+        #Test 1: The quadrants filled are more than QUADS required
+        parameters = PARAMETERS_T()
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((3, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [-1, -1]
+        coordinates[2] = [1, -1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_4())
+
+        #Test 2: The quadrants filled are less than QUADS required
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((3, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_4())
+
+        #Test 3: The quadrants filled are less than QUADS required and with more points
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [1, 1]
+        coordinates[3] = [1, 1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_4())
+
+        #Test 3: The quadrants filled are more than QUADS required and is inbetween points
+        parameters.q_Pts = 3
+        parameters.quads = 2
+
+        coordinates = np.zeros((5, 2))
+        coordinates[0] = [1, 1]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [-1, -1]
+        coordinates[3] = [1, -1]
+        coordinates[4] = [1, 1]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_4())
 
     def test_LIC5(self):
         """ Tests the LIC5 function of the CMV component.
@@ -202,6 +359,7 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_7())
 
+    
     def test_LIC9(self):
         """ Tests the LIC9 function of the CMV component.
 
@@ -256,6 +414,53 @@ class TestLIC(unittest.TestCase):
 
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_9())
+        
+
+    def test_LIC11(self):
+        """ Tests the LIC5 function of the CMV component.
+        Tests
+        -----
+        Test1: Asserts if function returns False when len(coordinates) < 3.
+        Test2: Asserts if function returns True if there is a set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+        Test3: Asserts if function returns False if there is no set of two coordinates such that X[j] - X[i] < 0. (where i = j-1).
+        Test4: Asserts if function returns False if there are not enough points between the pair of coordinates satisfying the condition.
+        See Also
+        --------
+        LIC5: Function of the cmv class which this test is testing.
+        """
+
+        # Test 1 - Returns False since there is not enough coordinates.
+        parameters = PARAMETERS_T() # Import parameters
+        parameters.g_pts = 1
+        coordinates = np.zeros((1, 3)) # Create an empty array of 1 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_11())
+
+        # Test 2 - Returns True since there is a pair of coordinates satisfying the condition.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        coordinates[2] = [25, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_11())
+
+        # Test 3 - Returns False since there is not a pair of coordinates satisfying the condition.
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_11())
+
+        # Test 4 - Returns False since there is not enough points between the pair of coordinates satisfying the condition.
+        parameters.g_pts = 3
+
+        coordinates = np.zeros((5, 2)) # Create an empty array of 5 coordinate pairs.
+
+        coordinates[2] = [25, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_11())
+
 
 if __name__ == '__main__':
     unittest.main()
