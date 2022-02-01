@@ -580,6 +580,10 @@ class cmv:
             elif p2 == p1:
                 radius = distance(self, i+1, i+2) / 2
 
+            # 3 unique points, radius can be derived from circle
+            else:
+                radius = Circle(p1, p2, p3).radius
+
             # True if points cannot be contained within a circle of radius RADIUS2
             if (radius > self.PARAMS.radius1):
                 ret_flag_1 = True
