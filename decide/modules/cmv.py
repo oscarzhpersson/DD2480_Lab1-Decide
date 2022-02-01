@@ -326,6 +326,11 @@ class cmv:
 
         return False
 
+    def find_distance(p1, p2, p3):
+        nom = abs((p2[0] - p1[0]) * (p1[1] - p3[1]) - (p1[0] - p3[0]) * (p2[1] - p1[1]))
+        denom = math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+        return nom / denom
+
         # Set Condvector[6]
     def LIC_6(self):
 
