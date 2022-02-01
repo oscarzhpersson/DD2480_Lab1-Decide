@@ -326,9 +326,60 @@ class cmv:
 
         return False
 
-    # Set Condvector[6]
+    def find_distance(p1, p2, p3):
+        nom = abs((p2[0] - p1[0]) * (p1[1] - p3[1]) - (p1[0] - p3[0]) * (p2[1] - p1[1]))
+        denom = math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+        return nom / denom
+
+        # Set Condvector[6]
     def LIC_6(self):
-        return 0
+
+        ''' Checks if There exists at least one set of n_Ptr consecutive datapoints where the first and last point form a line and the in-between datapoints are measured to this line.
+            The criteria is that one of these points are further away to this line than than the "dist" variable.
+            The function checks n_ptr set of consecutive coordinates that to see if they pass the distance criteria.
+              Parameters
+              ----------
+              None
+              Returns
+              -------
+              bool
+                  True if a set satisfying the conditions exist.
+                  False if a set of satisfying conditions does not exist.
+              See Also
+              --------
+              PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        '''
+
+        # Furfilling the lenght requirment for the number of points
+        if (len(self.coordinates) < 3 or self.PARAMS.n_Pts < 3):
+            return False
+
+        # if dist is less than 0
+        if (self.PARAMS.dist <= 0):
+            return False
+
+        n_ptr = self.PARAMS.n_Pts
+        count = 1
+        start = 0
+        end = n_ptr
+        for i in range(len(self.coordinates)):
+            if count < len(self.coordinates):
+                while count != end:
+                    compared_dist = cmv.find_distance(self.coordinates[start], self.coordinates[end - 1],
+                                                      self.coordinates[count])
+
+                    # If a distance larger is fount than dist, return true
+                    if compared_dist > self.PARAMS.dist:
+                        return True
+
+                    # Check next point
+                    count += 1
+
+                start = end
+                if len(self.coordinates) > end + n_ptr:
+                    end = end + n_ptr
+
+        return False
 
     # Set Condvector[7]
     def LIC_7(self):

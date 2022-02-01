@@ -25,6 +25,7 @@ class PARAMETERS_T:
     radius2: float = 0 # Maximum radius in LIC 13.
     area2: float = 0 # Maximum area in LIC 14.
 
+
 class TestLIC(unittest.TestCase):
     def test_LIC0(self):
         ## Test if coordinates that are sqrt(2) are accepted if length1 = 1.
@@ -396,7 +397,45 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_5())
         
-  
+    def test_LIC6(self):
+
+        """ Tests the LIC6 function of the CMV component.
+                Tests
+                -----
+                Test1: Asserts if function returns False when distance > every point to the line.
+                Test2: Asserts if function returns True if there exist a point to the line that is greater than the distance, the distance is set to 1.
+                See Also
+                --------
+                LIC6: Function of the cmv class which this test is testing.
+        """
+
+
+        # Test 1: Having the distance larger in every comparision
+        parameters = PARAMETERS_T()
+        parameters.dist = 1000
+        parameters.n_Pts = 3
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [1, 1]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertFalse(CMV.LIC_6())
+
+        # TEST 2: Having the Distance smaller than in every comparision
+        parameters.dist = 1
+        parameters.n_Pts = 3
+        coordinates = np.zeros((3, 2))
+
+        coordinates[0] = [0, 0]
+        coordinates[1] = [5, 5]
+        coordinates[2] = [2, 0]
+
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_6())
+
+
     def test_LIC7(self):
 
         """ Tests the LIC7 function of the CMV component.
