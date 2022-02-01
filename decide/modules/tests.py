@@ -750,8 +750,8 @@ class TestLIC(unittest.TestCase):
         # Test 1
         parameters = PARAMETERS_T()
         parameters.radius2 = 0
-        parameters.a_Pts = 5
-        parameters.b_Pts = 5
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
         coordinates = np.zeros((6, 2))
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_13())
@@ -759,8 +759,8 @@ class TestLIC(unittest.TestCase):
         # Test 2
         parameters = PARAMETERS_T()
         parameters.radius2 = 10
-        parameters.a_Pts = 5
-        parameters.b_Pts = 5
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
         coordinates = np.zeros((4, 2))
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_13())
@@ -782,6 +782,7 @@ class TestLIC(unittest.TestCase):
         coordinates = np.zeros((6, 2))
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_13())
+
 
         
 
