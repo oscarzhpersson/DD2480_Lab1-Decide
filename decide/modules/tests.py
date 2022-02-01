@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
 from cmv import cmv
+from pum import pum
 from dataclasses import dataclass
 
 @dataclass
@@ -1169,6 +1170,14 @@ class TestLIC(unittest.TestCase):
         for i in range(15):
             print(i)
             self.assertTrue(condVect[i])
+
+        LCM = np.ones((15, 15))
+        PUV = np.ones(15, dtype=bool)
+        PUM = pum(condVect, LCM, PUV)
+
+        PUM_matrix = PUM.compute_PUM()
+        FUV_vector = PUM.compute_FUV(PUM_matrix)
+        self.assertTrue(PUM.Launch(FUV_vector))
 
 
 if __name__ == '__main__':

@@ -1,15 +1,14 @@
 import numpy as np
 
 class pum:
-    def __init__(self, CMV, LCM, PUV, FUV):
+    def __init__(self, CMV, LCM, PUV):
         ## 15x15 array [1 = ANDD, 0 = ORR, -1 = NOTUSED]
         self.CMV = CMV
         self.LCM = LCM
         self.PUV = PUV
-        self.FUV = FUV
 
     def compute_PUM(self):
-        PUM = np.ones(15, 15, dtype=bool)
+        PUM = np.ones((15, 15), dtype=bool)
         for i in range(self.LCM.shape[0]):
             for j in range(self.LCM.shape[0]):
                 if i == j:
