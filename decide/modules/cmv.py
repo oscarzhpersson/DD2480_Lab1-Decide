@@ -541,6 +541,10 @@ class cmv:
         if (self.PARAMS.a_Pts + self.PARAMS.b_Pts) > len(self.coordinates) - 3: 
             return False
 
+        # Both must be True for function to return True
+        ret_flag_1 = False
+        ret_flag_2 = False
+
         # Iterating with regards to intervene point distance from a_Pts and b_Pts
         for i in range(len(self.coordinates) - (2 + self.PARAMS.a_Pts + self.PARAMS.b_Pts)):
             mid_index = i + 1 + self.PARAMS.a_Pts
@@ -551,6 +555,18 @@ class cmv:
             p3 = Point(self.coordinates[last_index, 0], self.coordinates[last_index, 1])
             list = [(p1.x, p1.y), (p2.x, p2.y), (p3.x, p3.y)]
             radius = 0
+
+            # True if points cannot be contained within a circle of radius RADIUS2
+            if (radius > self.PARAMS.radius1):
+                ret_flag_1 = True
+            # True if points can be contained within or on a circle of radius RADIUS2
+            if (radius <= self.PARAMS.radius1):
+                ret_flag_2 = True
+            
+            # Function conditional met
+            if ret_flag_1 and ret_flag_2:
+                return True
+
 
         return False
 
