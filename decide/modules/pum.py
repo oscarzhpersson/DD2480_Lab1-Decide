@@ -6,6 +6,7 @@ class pum:
         self.CMV = CMV
         self.LCM = LCM
         self.PUV = PUV
+        self.FUV = FUV
 
     def compute_PUM(self):
         PUM = np.ones(15, 15, dtype=bool)
@@ -33,3 +34,6 @@ class pum:
                 FUV[i] = np.all(PUM[i])
 
         return FUV
+
+    def Launch(self, FUV):
+        return np.all(FUV)
