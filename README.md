@@ -98,6 +98,7 @@ Jansen
 ```
 Addition of the LIC9 function of the CMV.
 Addition of the LIC10 function of the CMV.
+Addition of the LIC14 function of the CMV.
 ```
 
 Mustafa
