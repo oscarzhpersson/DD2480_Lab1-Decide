@@ -369,6 +369,7 @@ class TestLIC(unittest.TestCase):
         Test3: Asserts if function returns False when A_PTS + B_PTS < 2
         Test4: Asserts if function returns False when A_PTS + B_PTS > NUMPOINTS - 3
         Test5: Asserts if function returns False when all pairs of points are the same.
+        Test6: Tests functionality of conditional which handles the case of all coordinates having the same x values.
 
         See Also
         --------
@@ -427,6 +428,19 @@ class TestLIC(unittest.TestCase):
         coordinates[5] = [0,0]
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_8())
+
+        # Test 6
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [0,1]
+        coordinates[1] = [0,0]
+        coordinates[2] = [0,2]
+        coordinates[3] = [0,0]
+        coordinates[4] = [0,5] 
+        parameters.radius1 = 1
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
 
         
 
