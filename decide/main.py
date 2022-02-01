@@ -53,24 +53,18 @@ class PARAMETERS_T:
 
 parameters = PARAMETERS_T()
 
-# TODO Import PUM
-# TODO Import CMV
-# TODO Import FUV
-
 #? Function you must write:
 
 def decide():
     CMV = cmv(parameters, coordinates)
     condVect = CMV.return_cond_vector()
 
-    LCM = np.ones((15, 15))
-    PUV = np.ones(15, dtype=bool)
-    PUM = pum(condVect, LCM, PUV)
+    LCM = np.ones((15, 15)) # Create a default LCM, to be imported as input.
+    PUV = np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
 
-    PUM_matrix = PUM.compute_PUM()
-    FUV_vector = PUM.compute_FUV(PUM_matrix)
-    PUM.Launch(FUV_vector)
+    PUM = pum(condVect, LCM, PUV) # Imports the PUM class with specified input values.
 
-    # CMV = cmv(coordinates, parameters)
-    # cond_vector = CMV.return_cond_vector()
-    return 0
+    PUM_matrix = PUM.compute_PUM() # Calculates the PUM.
+    FUV_vector = PUM.compute_FUV(PUM_matrix) # Calculates the FUV.
+
+    return PUM.Launch(FUV_vector) # Return whether LAUNCH is True of False.
