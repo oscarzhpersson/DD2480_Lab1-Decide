@@ -83,7 +83,7 @@ class cmv:
         '''
 
         if self.PARAMS.radius1 == 0:
-            return True
+            return False
         
         for i in range(len(self.coordinates)-2):
 
@@ -127,7 +127,6 @@ class cmv:
         # All sets of 3-consecutive points are within a circle with set radius
         return False
 
-        return 0
     
     # Set Condvector[2]
     def LIC_2(self):
