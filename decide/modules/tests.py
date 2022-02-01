@@ -437,6 +437,7 @@ class TestLIC(unittest.TestCase):
         Test7: Tests functionality of conditional which handles the case of all coordinates having the same y values.
         Test8: Tests functionality of conditional which handles the case where there only exist two unique points.
         Test9: Tests functionality of conditional which handles the case where there exist three unique points.
+        Test10: Asserts if function return True on a valid input where points are collinear
 
         LIC8: Function of the cmv class which this test is testing.
 
@@ -555,6 +556,19 @@ class TestLIC(unittest.TestCase):
         coordinates[3] = [0,0]
         coordinates[4] = [5,2]
         parameters.radius1 = 4
+        CMV = cmv(parameters, coordinates)
+        self.assertTrue(CMV.LIC_8())
+
+        # Test 10
+        parameters = PARAMETERS_T()
+        parameters.a_Pts = 1
+        parameters.b_Pts = 1
+        coordinates[0] = [1,1]
+        coordinates[1] = [0,0]
+        coordinates[2] = [3,3]
+        coordinates[3] = [0,0]
+        coordinates[4] = [5,5]
+        parameters.radius1 = 1
         CMV = cmv(parameters, coordinates)
         self.assertTrue(CMV.LIC_8())
 
