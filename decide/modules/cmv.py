@@ -772,6 +772,8 @@ class cmv:
         
         '''
 
+        if self.PARAMS.e_Pts + self.PARAMS.f_Pts < 2:
+            return False
         if (len(self.coordinates) < 5) :
             return False
         if (self.PARAMS.area2 < 0):
