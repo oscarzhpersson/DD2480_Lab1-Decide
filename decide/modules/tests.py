@@ -1187,27 +1187,29 @@ class TestLIC(unittest.TestCase):
 
 
         #False Cases
-        parameters.length1 =0
-        parameters.radius1 =0
-        parameters.epsilon =0
-        parameters.area1 = 0
-        parameters.q_Pts = 0
-        parameters.quads = 0
-        parameters.dist = 0
-        parameters.n_Pts = 0
-        parameters.k_Pts = 0
-        parameters.a_Pts = 0
-        parameters.b_Pts = 0
-        parameters.c_Pts = 0
-        parameters.d_Pts = 0
-        parameters.e_Pts = 0
-        parameters.f_Pts = 0
-        parameters.g_Pts = 0
-        parameters.length2 = 0
-        parameters.radius2 = 0
-        parameters.area2 = 0
+        false_param = parameters
 
-        CMV = cmv(parameters, coordinates)
+        false_param.length1 =0
+        false_param.radius1 =0
+        false_param.epsilon =0
+        false_param.area1 = 0
+        false_param.q_Pts = 0
+        false_param.quads = 0
+        false_param.dist = 0
+        false_param.n_Pts = 0
+        false_param.k_Pts = 0
+        false_param.a_Pts = 0
+        false_param.b_Pts = 0
+        false_param.c_Pts = 0
+        false_param.d_Pts = 0
+        false_param.e_Pts = 0
+        false_param.f_Pts = 0
+        false_param.g_Pts = 0
+        false_param.length2 = 0
+        false_param.radius2 = 0
+        false_param.area2 = 0
+
+        CMV = cmv(false_param, coordinates)
         condVect = CMV.return_cond_vector()
 
         LCM = np.ones((15, 15))
