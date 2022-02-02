@@ -1186,5 +1186,38 @@ class TestLIC(unittest.TestCase):
         self.assertTrue(PUM.Launch(FUV_vector))
 
 
+        #False Cases
+        parameters.length1 =0
+        parameters.radius1 =0
+        parameters.epsilon =0
+        parameters.area1 = 0
+        parameters.q_Pts = 0
+        parameters.quads = 0
+        parameters.dist = 0
+        parameters.n_Pts = 0
+        parameters.k_Pts = 0
+        parameters.a_Pts = 0
+        parameters.b_Pts = 0
+        parameters.c_Pts = 0
+        parameters.d_Pts = 0
+        parameters.e_Pts = 0
+        parameters.f_Pts = 0
+        parameters.g_Pts = 0
+        parameters.length2 = 0
+        parameters.radius2 = 0
+        parameters.area2 = 0
+
+        CMV = cmv(parameters, coordinates)
+        condVect = CMV.return_cond_vector()
+
+        LCM = np.ones((15, 15))
+        PUV = np.ones(15, dtype=bool)
+        PUM = pum(condVect, LCM, PUV)
+
+        PUM_matrix = PUM.compute_PUM()
+        FUV_vector = PUM.compute_FUV(PUM_matrix)
+        self.assertFalse(PUM.Launch(FUV_vector))
+
+
 if __name__ == '__main__':
     unittest.main()
