@@ -759,12 +759,16 @@ class cmv:
         
         Parameters
         ----------
-        
+        None
+
         Returns
         -------
+            True if a set is larger than area1 and smaller than area2.
+            False if True condition is not met or NUMPOINTS < 5 and area2 < 0.
 
         See Also
         --------
+        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
         
         '''
 
