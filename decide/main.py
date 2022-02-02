@@ -174,6 +174,15 @@ def input():
 def decide():
     ''' Main function that will take inputs parameters and coordinates from input() function. It will then form the LCM and PUV matrices as part of its input, in order to calculate the PUM and finally the FUV vector, yielding an answer YES or NO (Launch or not). 
     
+        Input
+        -----
+        numpoints (int): Number of coordinates in the testing scenario.
+        coordinates (int[]): The coordinates for a testing scenario.
+        LCM (bool[][]): The logical connector matrix.
+        PUV (int): Preliminary unlocking vector.
+        Parameters (Imported from stdin): Parameters for the testing scenario.
+
+
         Returns
         -------
         True or False (Successfull launch or not)
@@ -182,7 +191,7 @@ def decide():
     input()
 
     CMV = cmv(parameters, coordinates)
-    condVect = CMV.return_cond_vector()
+    condVect = CMV.return_cond_vector() # Calculate the CMV from LICs.
 
     PUM = pum(condVect, LCM, PUV) # Imports the PUM class with specified input values.
 
