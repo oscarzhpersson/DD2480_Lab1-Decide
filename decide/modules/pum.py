@@ -34,7 +34,7 @@ class pum:
                 if op == 0:
                     PUM[i, j] = self.CMV[i] or self.CMV[j]
                 if op == -1:
-                    PUM[i, j] = False
+                    PUM[i, j] = True
 
         return PUM
 

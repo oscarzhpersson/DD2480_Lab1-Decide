@@ -1035,6 +1035,53 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         self.assertFalse(CMV.LIC_14())
 
+    def test_PUM(self):
+
+        # Test 1 - Checks that the or works
+        cond_vect = np.ones(15, dtype=bool)
+        cond_vect[3] = False
+
+        LCM = np.ones((15,15), dtype=bool)
+        LCM[:, 3] = 0
+        LCM[3, :] = 0
+        PUV = np.ones(15, dtype=bool)
+
+        PUM = pum(cond_vect, LCM, PUV)
+        PUM_Matrix = PUM.compute_PUM()
+        FUV_Vector = PUM.compute_FUV(PUM_Matrix)
+        self.assertTrue(PUM.Launch(FUV_Vector))
+
+        # Test 2 - Ignores the False value
+        cond_vect = np.ones(15, dtype=bool)
+        cond_vect[3] = False
+
+        LCM = np.zeros((15,15), dtype=bool)
+        LCM[3,4] = 1
+        PUV = np.ones(15, dtype=bool)
+        PUV[3] = False
+
+        PUM = pum(cond_vect, LCM, PUV)
+        PUM_Matrix = PUM.compute_PUM()
+        print(PUM_Matrix[3,4])
+        FUV_Vector = PUM.compute_FUV(PUM_Matrix)
+        self.assertTrue(PUM.Launch(FUV_Vector))
+
+        #Test 3 - Does not ignore the False value
+        cond_vect = np.ones(15, dtype=bool)
+        cond_vect[3] = False
+
+        LCM = np.zeros((15,15), dtype=bool)
+        LCM[3,4] = 1
+        PUV = np.ones(15, dtype=bool)
+
+        PUM = pum(cond_vect, LCM, PUV)
+        PUM_Matrix = PUM.compute_PUM()
+        print(PUM_Matrix[3,4])
+        FUV_Vector = PUM.compute_FUV(PUM_Matrix)
+        self.assertFalse(PUM.Launch(FUV_Vector))
+
+
+
     def test_main(self):
         """ Test the main function of the Assignment
 
@@ -1174,7 +1221,6 @@ class TestLIC(unittest.TestCase):
         CMV = cmv(parameters, coordinates)
         condVect = CMV.return_cond_vector()
         for i in range(15):
-            print(i)
             self.assertTrue(condVect[i])
 
         LCM = np.ones((15, 15))
