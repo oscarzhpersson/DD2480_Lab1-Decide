@@ -45,8 +45,8 @@ class PARAMETERS_T:
 
 numpoints = 62
 parameters = PARAMETERS_T()
-LCM = np.ones((15, 15)) # Create a default LCM, to be imported as input.
-PUV = np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
+LCM = np.zeros((15, 15)) #np.ones((15, 15)) # Create a default LCM, to be imported as input.
+PUV = np.zeros(15, dtype=bool) #np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
 coordinates = np.zeros((numpoints, 2)) # Matrix of X, Y coordinate pairs. Replaces the coordinate X and coordinate Y variable.
 
 #? Function you must write:
