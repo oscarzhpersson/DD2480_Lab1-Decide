@@ -184,7 +184,12 @@ def decide():
         
         '''
 
-    input()
+    # Checks that input file only contains numbers
+    try:
+        input()
+    except ValueError:
+        print("Elements in input file needs to be numbers")
+        return False
 
     # Checks if 2 <= NUMPOINTS <= 100 is satisfied
     if len(coordinates) < 2 or len(coordinates) > 100:
@@ -197,7 +202,7 @@ def decide():
         if not isinstance(x, float) or not isinstance(y, float):
             print("Coordinates needs to be integers")
             return False
-
+    
 
     CMV = cmv(parameters, coordinates)
     condVect = CMV.return_cond_vector()
