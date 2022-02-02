@@ -17,7 +17,7 @@ class Connectors(enum.Enum):
     "ANDD"
 
 # Matrix of X, Y coordinate pairs.
-coordinates = np.zeros((100, 2)) #? Replaces the coordinate X and coordinate Y variable.
+coordinates = np.zeros((62, 2)) #? Replaces the coordinate X and coordinate Y variable.
 
 # 2D array of 15x15 booleans.
 bMatrix = np.zeros((15, 15))
@@ -57,47 +57,133 @@ parameters = PARAMETERS_T()
 #? Function you must write:
 
 def input():
+    ''' Sets up input parameters and coorinates. Reads paramteres from file, and sets coordinates.
+        
+        '''
     
     # Parameter input handling.
-    parameters.length1 = sys.stdin.readline()
-    parameters.radius1 = sys.stdin.readline()
-    parameters.epsilon = sys.stdin.readline()
-    parameters.area1 = sys.stdin.readline()
-    parameters.q_Pts = sys.stdin.readline()
-    parameters.quads = sys.stdin.readline()
-    parameters.dist = sys.stdin.readline()
-    parameters.n_Pts = sys.stdin.readline()
-    parameters.k_Pts = sys.stdin.readline()
-    parameters.a_Pts = sys.stdin.readline()
-    parameters.b_Pts = sys.stdin.readline()
-    parameters.c_Pts = sys.stdin.readline()
-    parameters.d_Pts = sys.stdin.readline()
-    parameters.e_Pts = sys.stdin.readline()
-    parameters.f_Pts = sys.stdin.readline()
-    parameters.g_Pts = sys.stdin.readline()
-    parameters.length2 = sys.stdin.readline()
-    parameters.radius2 = sys.stdin.readline()
-    parameters.area2 = sys.stdin.readline()
+    parameters.length1 = float(sys.stdin.readline())
+    parameters.radius1 = float(sys.stdin.readline())
+    parameters.epsilon = float(sys.stdin.readline())
+    parameters.area1 = float(sys.stdin.readline())
+    parameters.q_Pts = int(sys.stdin.readline())
+    parameters.quads = int(sys.stdin.readline())
+    parameters.dist = float(sys.stdin.readline())
+    parameters.n_Pts = int(sys.stdin.readline())
+    parameters.k_Pts = int(sys.stdin.readline())
+    parameters.a_Pts = int(sys.stdin.readline())
+    parameters.b_Pts = int(sys.stdin.readline())
+    parameters.c_Pts = int(sys.stdin.readline())
+    parameters.d_Pts = int(sys.stdin.readline())
+    parameters.e_Pts = int(sys.stdin.readline())
+    parameters.f_Pts = int(sys.stdin.readline())
+    parameters.g_Pts = int(sys.stdin.readline())
+    parameters.length2 = float(sys.stdin.readline())
+    parameters.radius2 = float(sys.stdin.readline())
+    parameters.area2 = float(sys.stdin.readline())
 
-    #Matrices will have to be hard-coded.
+    # LIC 0
+    coordinates[0] = [0,1]
+    coordinates[1] = [1,2]
+    coordinates[2] = [2,3]
+    
+    # LIC 1
+    coordinates[3] = [1,0]
+    coordinates[4] = [2,0]
+    coordinates[5] = [5,0]
 
-    """numpoints = sys.stdin.readline()
-    coordinateInput = sys.stdin.readline()
-    coordinateInput = coordinateInput.replace('[', '')
-    coordinateInput = coordinateInput.replace(']', '').rstrip().lstrip()
-    coordinateInput = coordinateInput.split(',')
+    # LIC 2
+    coordinates[6] = [0,1]
+    coordinates[7] = [0,2]
+    coordinates[8] = [0,5]
 
-    print(coordinateInput)
+    # LIC 3
+    coordinates[9] = [0, 0]
+    coordinates[10] = [5, 3]
+    coordinates[11] = [5, 0]
 
-    for row in range(0, int(numpoints)):
-        for col in range(row, 2):
-            #coordinates[row][col] = float(coordinateInput[row * 2 + col + 2])
-    print(coordinates)
+    # LIC 4
+    coordinates[12] = [1, 1]
+    coordinates[13] = [-1, -1]
+    coordinates[14] = [1, -1]
 
-input()"""
+    # LIC 5
+    coordinates[15] = [1, 0]
+    coordinates[16] = [25, 0]
+
+    # LIC 6
+    coordinates[17] = [0, 0]
+    coordinates[18] = [5, 5]
+    coordinates[19] = [2, 0]
+
+    # LIC 7
+    coordinates[20] = [0,0]
+    coordinates[21] = [0, 1]
+    coordinates[22] = [0, 1]
+    coordinates[23] = [0, 2]
+
+    # LIC 8
+    coordinates[24] = [1,1]
+    coordinates[25] = [0,0]
+    coordinates[26] = [3,3]
+    coordinates[27] = [0,0]
+    coordinates[28] = [5,5]
+
+    # LIC 9
+    coordinates[29] = [0, 1]
+    coordinates[30] = [1, 0]
+    coordinates[31] = [3, 1]
+    coordinates[32] = [7, 0]
+    coordinates[33] = [0, 9]
+    coordinates[34] = [0, 5]
+
+    # LIC 10
+    coordinates[35] = [0,0]
+    coordinates[36] = [0, 4]
+    coordinates[37] = [0, 3]
+    coordinates[38] = [7, 0]
+    coordinates[39] = [9, 4]
+    coordinates[40] = [4, 0]
+
+    # LIC 11
+    coordinates[41] = [0,0]
+    coordinates[42] = [0,0]
+    coordinates[43] = [25, 0]
+    coordinates[44] = [0,0]
+    coordinates[45] = [0,0]
+
+
+    #LIC 12
+    coordinates[46] = [0,0]
+    coordinates[47] = [0, 1]
+    coordinates[48] = [0, 1]
+    coordinates[49] = [0, 2]
+
+    # LIC_13
+    coordinates[50] = [1,1]
+    coordinates[51] = [10,10]
+    coordinates[52] = [1,1]
+    coordinates[53] = [20,20]
+    coordinates[54] = [1,1]
+    coordinates[55] = [30,30]
+
+    # LIC_14
+    coordinates[56] = [0,0]
+    coordinates[57] = [0, 4]
+    coordinates[58] = [0, 3]            
+    coordinates[59] = [7, 0]
+    coordinates[60] = [9, 4]
+    coordinates[61] = [4, 0]
 
 
 def decide():
+    ''' Main function that will take inputs parameters and coordinates from input() function. It will then form the LCM and PUV matrices as part of its input, in order to calculate the PUM and finally the FUV vector, yielding an answer YES or NO (Launch or not). 
+    
+        Returns
+        -------
+        True or False (Successfull launch or not)
+        
+        '''
     input()
 
     CMV = cmv(parameters, coordinates)
@@ -111,6 +197,6 @@ def decide():
     PUM_matrix = PUM.compute_PUM() # Calculates the PUM.
     FUV_vector = PUM.compute_FUV(PUM_matrix) # Calculates the FUV.
 
-    return PUM.Launch(FUV_vector) # Return whether LAUNCH is True of False.
+    return PUM.Launch(FUV_vector) 
 
-decide()
+print(decide())

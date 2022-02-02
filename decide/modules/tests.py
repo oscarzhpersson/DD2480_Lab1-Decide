@@ -1087,8 +1087,6 @@ class TestLIC(unittest.TestCase):
         coordinates[15] = [1, 0]
         coordinates[16] = [25, 0]
 
-
-
         # LIC 6
         coordinates[17] = [0, 0]
         coordinates[18] = [5, 5]
@@ -1172,7 +1170,6 @@ class TestLIC(unittest.TestCase):
 
         parameters.radius2 = 10
         parameters.area2 = 10
-
 
         CMV = cmv(parameters, coordinates)
         condVect = CMV.return_cond_vector()
