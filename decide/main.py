@@ -203,7 +203,6 @@ def decide():
             print("Coordinates needs to be integers")
             return False
     
-
     CMV = cmv(parameters, coordinates)
     condVect = CMV.return_cond_vector()
 
