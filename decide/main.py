@@ -147,7 +147,6 @@ def input():
     coordinates[44] = [0,0]
     coordinates[45] = [0,0]
 
-
     #LIC 12
     coordinates[46] = [0,0]
     coordinates[47] = [0, 1]
@@ -208,8 +207,26 @@ def decide():
         True or False (Successfull launch or not)
         
         '''
-    input()
 
+    # Checks that input file only contains numbers
+    try:
+        input()
+    except ValueError:
+        print("Elements in input file needs to be numbers")
+        return False
+
+    # Checks if 2 <= NUMPOINTS <= 100 is satisfied
+    if len(coordinates) < 2 or len(coordinates) > 100:
+        print("Number of coordinates needs to be between 2 and 100")
+        return False
+
+    # Checks if coordinate values are floats
+    for i in range(len(coordinates)):
+        x, y = coordinates[i]
+        if not isinstance(x, float) or not isinstance(y, float):
+            print("Coordinates needs to be integers")
+            return False
+    
     CMV = cmv(parameters, coordinates)
     condVect = CMV.return_cond_vector() # Calculate the CMV from LICs.
 
