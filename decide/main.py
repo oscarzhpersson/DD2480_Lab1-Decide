@@ -2,8 +2,8 @@ import sys
 import numpy as np
 import enum
 from dataclasses import dataclass
-#from modules import cmv
-#from modules import pum
+from modules.cmv import cmv
+from modules.pum import pum
 
 ##### CONSTANT #####
 
@@ -57,7 +57,8 @@ parameters = PARAMETERS_T()
 #? Function you must write:
 
 def input():
-
+    
+    # Parameter input handling.
     parameters.length1 = sys.stdin.readline()
     parameters.radius1 = sys.stdin.readline()
     parameters.epsilon = sys.stdin.readline()
@@ -78,7 +79,38 @@ def input():
     parameters.radius2 = sys.stdin.readline()
     parameters.area2 = sys.stdin.readline()
 
+    #Matrices will have to be hard-coded.
+
+    """numpoints = sys.stdin.readline()
+    coordinateInput = sys.stdin.readline()
+    coordinateInput = coordinateInput.replace('[', '')
+    coordinateInput = coordinateInput.replace(']', '').rstrip().lstrip()
+    coordinateInput = coordinateInput.split(',')
+
+    print(coordinateInput)
+
+    for row in range(0, int(numpoints)):
+        for col in range(row, 2):
+            #coordinates[row][col] = float(coordinateInput[row * 2 + col + 2])
+    print(coordinates)
+
+input()"""
+
 
 def decide():
+    input()
 
-    
+    CMV = cmv(parameters, coordinates)
+    condVect = CMV.return_cond_vector()
+
+    LCM = np.ones((15, 15)) # Create a default LCM, to be imported as input.
+    PUV = np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
+
+    PUM = pum(condVect, LCM, PUV) # Imports the PUM class with specified input values.
+
+    PUM_matrix = PUM.compute_PUM() # Calculates the PUM.
+    FUV_vector = PUM.compute_FUV(PUM_matrix) # Calculates the FUV.
+
+    return PUM.Launch(FUV_vector) # Return whether LAUNCH is True of False.
+
+decide()
