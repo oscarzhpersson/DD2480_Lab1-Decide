@@ -22,7 +22,7 @@ class pum:
 
             """
 
-        PUM = np.ones(15, 15, dtype=bool)
+        PUM = np.ones((15, 15), dtype=bool)
         
         for i in range(self.LCM.shape[0]):
             for j in range(self.LCM.shape[0]):
