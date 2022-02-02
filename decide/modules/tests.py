@@ -4,6 +4,12 @@ from cmv import cmv
 from pum import pum
 from dataclasses import dataclass
 
+# Import 
+import sys
+sys.path.append("decide")
+import main as m
+
+
 @dataclass
 class PARAMETERS_T:
     length1: float = 0 # Length in LICs 0, 7, 12.
@@ -1038,7 +1044,7 @@ class TestLIC(unittest.TestCase):
     def test_main(self):
         """ Test the main function of the Assignment
 
-        Test
+        Tests
         ---
         Assert if Return True  if all LIC have passed while running through specific coordinates and parameters.
         ---
@@ -1222,16 +1228,8 @@ class TestLIC(unittest.TestCase):
 
         #Invalid Test Case
         coordinates = np.zeros((101,2))
-        CMV = cmv(parameters, coordinates)
-        condVect = CMV.return_cond_vector()
-
-        LCM = np.ones((15, 15))
-        PUV = np.ones(15, dtype=bool)
-        PUM = pum(condVect, LCM, PUV)
-
-        PUM_matrix = PUM.compute_PUM()
-        FUV_vector = PUM.compute_FUV(PUM_matrix)
-        self.assertTrue(PUM.Launch(FUV_vector))
+        dec = m.decide(coordinates, parameters, LCM, PUV)
+        self.assertFalse(dec)
 
 if __name__ == '__main__':
     unittest.main()
