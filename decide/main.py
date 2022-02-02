@@ -16,18 +16,6 @@ class Connectors(enum.Enum):
     "ORR",
     "ANDD"
 
-# Matrix of X, Y coordinate pairs.
-coordinates = np.zeros((62, 2)) #? Replaces the coordinate X and coordinate Y variable.
-
-# 2D array of 15x15 booleans.
-bMatrix = np.zeros((15, 15))
-
-# 2D array of 15x15 connectors as defined in Connectors enum.
-cMatrix = np.matrix((15, 15))
-
-# Array of 15 booleans.
-vector = np.zeros(15)
-
 ##### Inputs to the DECIDE() function #####
 
 @dataclass
@@ -52,7 +40,14 @@ class PARAMETERS_T:
     radius2: float = 0 # Maximum radius in LIC 13.
     area2: float = 0 # Maximum area in LIC 14.
 
+
+##### INPUT VARIABLES #####
+
+numpoints = 62
 parameters = PARAMETERS_T()
+LCM = np.ones((15, 15)) # Create a default LCM, to be imported as input.
+PUV = np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
+coordinates = np.zeros((numpoints, 2)) # Matrix of X, Y coordinate pairs. Replaces the coordinate X and coordinate Y variable.
 
 #? Function you must write:
 
@@ -188,9 +183,6 @@ def decide():
 
     CMV = cmv(parameters, coordinates)
     condVect = CMV.return_cond_vector()
-
-    LCM = np.ones((15, 15)) # Create a default LCM, to be imported as input.
-    PUV = np.ones(15, dtype=bool) # Create a default PUV, to be imported as input.
 
     PUM = pum(condVect, LCM, PUV) # Imports the PUM class with specified input values.
 
