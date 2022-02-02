@@ -1,15 +1,15 @@
 import numpy as np
 
 class pum:
-    def __init__(self, CMV, LCM, PUV, FUV):
+    def __init__(self, CMV, LCM, PUV):
         ## 15x15 array [1 = ANDD, 0 = ORR, -1 = NOTUSED]
         self.CMV = CMV
         self.LCM = LCM
         self.PUV = PUV
-        self.FUV = FUV
 
     #Creates the PUM
     def compute_PUM(self):
+
         """ The Conditions Met Vector (CMV) can now be used in conjunction with the Logical Connector Matrix (LCM) to form the Preliminary Unlocking Matrix (PUM)
 
             Parameters
@@ -22,7 +22,8 @@ class pum:
 
             """
 
-        PUM = np.ones(15, 15, dtype=bool)
+        PUM = np.ones((15, 15), dtype=bool)
+        
         for i in range(self.LCM.shape[0]):
             for j in range(self.LCM.shape[0]):
                 if i == j:

@@ -759,15 +759,13 @@ class cmv:
         
         Parameters
         ----------
-        None
+        
         Returns
         -------
-        bool
-            True if a set satisfying the conditions exist.
-            False if a set of satisfying conditions does not exist & when condition is not met (NUMPOINTS<5 / area2<0).
+
         See Also
         --------
-        PARAMETERS_T object: Provides a full overview of the input data to the function (coordinates array).
+        
         '''
 
         if (len(self.coordinates) < 5) :
