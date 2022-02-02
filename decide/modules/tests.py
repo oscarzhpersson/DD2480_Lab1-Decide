@@ -1220,6 +1220,18 @@ class TestLIC(unittest.TestCase):
         FUV_vector = PUM.compute_FUV(PUM_matrix)
         self.assertFalse(PUM.Launch(FUV_vector))
 
+        #Invalid Test Case
+        coordinates = np.zeros((101,2))
+        CMV = cmv(parameters, coordinates)
+        condVect = CMV.return_cond_vector()
+
+        LCM = np.ones((15, 15))
+        PUV = np.ones(15, dtype=bool)
+        PUM = pum(condVect, LCM, PUV)
+
+        PUM_matrix = PUM.compute_PUM()
+        FUV_vector = PUM.compute_FUV(PUM_matrix)
+        self.assertTrue(PUM.Launch(FUV_vector))
 
 if __name__ == '__main__':
     unittest.main()
