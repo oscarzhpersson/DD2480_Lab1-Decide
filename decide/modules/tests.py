@@ -1052,7 +1052,6 @@ class TestLIC(unittest.TestCase):
 
         See Also
         --------
-
         The decide() function of main.py for the complete program which is tested.
 
         """
