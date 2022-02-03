@@ -108,3 +108,7 @@ Addition of the LIC6 function of the CMV.
 Addition of the LIC2 function of the CMV.
 Addition of the LIC4 function of the CMV.
 ```
+
+# What we have done for P+
+
+In order to achieve P+ we have implemented a `Continous Integration (CI)` tool, using GitHub Actions. The tool is run every time someone pushes to or makes a Pull Request towards the main branch. It then runs a linter and our unit tests in order to spot errors within the code (syntax- or runtime errors) but also errors regarding assignment specifications. The tool runs Python 3.10 and Ubuntu Linux.
