@@ -1177,19 +1177,11 @@ class TestLIC(unittest.TestCase):
         parameters.radius2 = 10
         parameters.area2 = 10
 
-        CMV = cmv(parameters, coordinates)
-        condVect = CMV.return_cond_vector()
-        for i in range(15):
-            print(i)
-            self.assertTrue(condVect[i])
-
         LCM = np.ones((15, 15))
         PUV = np.ones(15, dtype=bool)
-        PUM = pum(condVect, LCM, PUV)
 
-        PUM_matrix = PUM.compute_PUM()
-        FUV_vector = PUM.compute_FUV(PUM_matrix)
-        self.assertTrue(PUM.Launch(FUV_vector))
+        dec = m.decide(coordinates, parameters, LCM, PUV)
+        self.assertTrue(dec)
 
 
         #False Cases
@@ -1215,16 +1207,8 @@ class TestLIC(unittest.TestCase):
         false_param.radius2 = 0
         false_param.area2 = 0
 
-        CMV = cmv(false_param, coordinates)
-        condVect = CMV.return_cond_vector()
-
-        LCM = np.ones((15, 15))
-        PUV = np.ones(15, dtype=bool)
-        PUM = pum(condVect, LCM, PUV)
-
-        PUM_matrix = PUM.compute_PUM()
-        FUV_vector = PUM.compute_FUV(PUM_matrix)
-        self.assertFalse(PUM.Launch(FUV_vector))
+        dec = m.decide(coordinates, parameters, LCM, PUV)
+        self.assertFalse(dec)
 
         #Invalid Test Case
         coordinates = np.zeros((101,2))
