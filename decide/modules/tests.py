@@ -4,6 +4,12 @@ from cmv import cmv
 from pum import pum
 from dataclasses import dataclass
 
+# Import 
+import sys
+sys.path.append("decide")
+import main as m
+
+
 @dataclass
 class PARAMETERS_T:
     length1: float = 0 # Length in LICs 0, 7, 12.
@@ -1038,7 +1044,7 @@ class TestLIC(unittest.TestCase):
     def test_main(self):
         """ Test the main function of the Assignment
 
-        Test
+        Tests
         ---
         Assert if Return True  if all LIC have passed while running through specific coordinates and parameters.
         ---
@@ -1185,6 +1191,45 @@ class TestLIC(unittest.TestCase):
         FUV_vector = PUM.compute_FUV(PUM_matrix)
         self.assertTrue(PUM.Launch(FUV_vector))
 
+
+        #False Cases
+        false_param = parameters
+
+        false_param.length1 =0
+        false_param.radius1 =0
+        false_param.epsilon =0
+        false_param.area1 = 0
+        false_param.q_Pts = 0
+        false_param.quads = 0
+        false_param.dist = 0
+        false_param.n_Pts = 0
+        false_param.k_Pts = 0
+        false_param.a_Pts = 0
+        false_param.b_Pts = 0
+        false_param.c_Pts = 0
+        false_param.d_Pts = 0
+        false_param.e_Pts = 0
+        false_param.f_Pts = 0
+        false_param.g_Pts = 0
+        false_param.length2 = 0
+        false_param.radius2 = 0
+        false_param.area2 = 0
+
+        CMV = cmv(false_param, coordinates)
+        condVect = CMV.return_cond_vector()
+
+        LCM = np.ones((15, 15))
+        PUV = np.ones(15, dtype=bool)
+        PUM = pum(condVect, LCM, PUV)
+
+        PUM_matrix = PUM.compute_PUM()
+        FUV_vector = PUM.compute_FUV(PUM_matrix)
+        self.assertFalse(PUM.Launch(FUV_vector))
+
+        #Invalid Test Case
+        coordinates = np.zeros((101,2))
+        dec = m.decide(coordinates, parameters, LCM, PUV)
+        self.assertFalse(dec)
 
 if __name__ == '__main__':
     unittest.main()

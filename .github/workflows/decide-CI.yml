@@ -46,6 +46,4 @@ jobs: # Group together jobs.
 
     - name: Run unit tests # Runs the project groups written unit test file.
       run: |
-        cd decide
-        cd modules
-        python3 tests.py
+        python3 ./decide/modules/tests.py < ./decide/resources/input.txt

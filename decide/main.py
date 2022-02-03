@@ -190,7 +190,7 @@ def input():
     PUV = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 
-def decide():
+def decide(coords, param, m_LCM, m_PUV):
     ''' Main function that will take inputs parameters and coordinates from input() function. It will then form the LCM and PUV matrices as part of its input, in order to calculate the PUM and finally the FUV vector, yielding an answer YES or NO (Launch or not). 
     
         Input
@@ -208,33 +208,33 @@ def decide():
         
         '''
 
-    # Checks that input file only contains numbers
-    try:
-        input()
-    except ValueError:
-        print("Elements in input file needs to be numbers")
-        return False
-
     # Checks if 2 <= NUMPOINTS <= 100 is satisfied
-    if len(coordinates) < 2 or len(coordinates) > 100:
+    if len(coords) < 2 or len(coords) > 100:
         print("Number of coordinates needs to be between 2 and 100")
         return False
 
     # Checks if coordinate values are floats
-    for i in range(len(coordinates)):
-        x, y = coordinates[i]
+    for i in range(len(coords)):
+        x, y = coords[i]
         if not isinstance(x, float) or not isinstance(y, float):
             print("Coordinates needs to be integers")
             return False
     
-    CMV = cmv(parameters, coordinates)
+    CMV = cmv(param, coords)
     condVect = CMV.return_cond_vector() # Calculate the CMV from LICs.
 
-    PUM = pum(condVect, LCM, PUV) # Imports the PUM class with specified input values.
+    PUM = pum(condVect, m_LCM, m_PUV) # Imports the PUM class with specified input values.
 
     PUM_matrix = PUM.compute_PUM() # Calculates the PUM.
     FUV_vector = PUM.compute_FUV(PUM_matrix) # Calculates the FUV.
 
     return PUM.Launch(FUV_vector) 
 
-print(decide())
+# Checks that input file only contains numbers
+try:
+    input()
+except ValueError:
+    print("Elements in input file needs to be numbers")
+    exit()
+
+print(decide(coordinates, parameters, LCM, PUV))
