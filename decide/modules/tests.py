@@ -1042,12 +1042,18 @@ class TestLIC(unittest.TestCase):
         self.assertFalse(CMV.LIC_14())
 
     def test_main(self):
-        """ Test the main function of the Assignment
+        """ Test the main function of the Assignment using three test cases; positive (launch occurs), negative (launch blocked), and invalid (launch blocked). The data from these test cases is based on the limitations of the program itself and aims to evaluate the functionality of the system as a whole.
 
         Tests
         ---
-        Assert if Return True  if all LIC have passed while running through specific coordinates and parameters.
-        ---
+        Test 1: Test using all positive test cases from individual LICs, should result in launch. Asserts if decide() returns True (launch).
+        Test 2: Test the same conditions (coordinates and matrices) but parameters manipulated to have LICs block launch. Asserts if decide() returns False (block).
+        Test 3: Test using invalid inputs, checks if program blocks 101 coordinates (invalid) as input. Asserts if decide() returns False (block).
+
+        See Also
+        --------
+
+        The decide() function of main.py for the complete program which is tested.
 
         """
         parameters = PARAMETERS_T()
